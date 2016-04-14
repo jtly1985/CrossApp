@@ -12,8 +12,8 @@
 #include "basics/CAObject.h"
 #include "basics/CASTLContainer.h"
 #include "platform/platform.h"
-#include <curl/curl.h>
-#include <curl/easy.h>
+//#include <curl/curl.h>
+//#include <curl/easy.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <string>
@@ -251,9 +251,9 @@ private:
 	std::string _downloadUrl;
 	std::string _downHeaders;
 
-	CURL *_curl;
+	//CURL *_curl;
 
-	curl_slist *m_headers;
+	//curl_slist *m_headers;
 
 	Helper *_schedule;
 
