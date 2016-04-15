@@ -37,3 +37,6 @@ QQ群：345156390
 
 官网：http://crossapp.9miao.com
 九秒官网：http://www.9miao.com
+
+
+**javascript版本初始提交测试
