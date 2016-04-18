@@ -217,13 +217,80 @@ bool jsval_to_std_map_string_string(JSContext* cx, JS::HandleValue v, std::map<s
 template <class T>
 bool jsval_to_calist(JSContext* cx, JS::HandleValue v, CrossApp::CAList<T>* ret)
 {
+    //创建一个js对象
+    JS::RootedObject jsobj(cx);
+    
+    //判断v是否是一个对象，如果为真，那么把v的值赋给jsobj
+    bool ok = v.isObject() && JS_ValueToObject( cx, v, &jsobj );
+    
+    //检测OK的值
+    JSB_PRECONDITION3( ok, cx, false, "Error converting value to object");
+    //判断jsobj是否是一个JS的Array对象
+    JSB_PRECONDITION3( jsobj && JS_IsArrayObject( cx, jsobj),  cx, false, "Object must be an array");
+    //取出数组的长度
+    uint32_t len = 0;
+    JS_GetArrayLength(cx, jsobj, &len);
+    
+    //顺序取出并插入到ret中
+    for (uint32_t i=0; i < len; i++)
+    {
+        JS::RootedValue value(cx);
+        if (JS_GetElement(cx, jsobj, i, &value))
+        {
+            CCAssert(value.isObject(), "the element in Vector isn't a native object.");
+            
+            js_proxy_t *proxy;
+            JSObject *tmp = value.toObjectOrNull();
+            proxy = jsb_get_js_proxy(tmp);
+            T cobj = (T)(proxy ? proxy->ptr : nullptr);
+            if (cobj)
+            {
+                ret->pushBack(cobj);
+            }
+        }
+    }
+    
+    return true;
     
 }
 //CADeque
 template <class T>
 bool jsval_to_cadeque(JSContext* cx, JS::HandleValue v, CrossApp::CADeque<T>* ret)
 {
+    //创建一个js对象
+    JS::RootedObject jsobj(cx);
     
+    //判断v是否是一个对象，如果为真，那么把v的值赋给jsobj
+    bool ok = v.isObject() && JS_ValueToObject( cx, v, &jsobj );
+    
+    //检测OK的值
+    JSB_PRECONDITION3( ok, cx, false, "Error converting value to object");
+    //判断jsobj是否是一个JS的Array对象
+    JSB_PRECONDITION3( jsobj && JS_IsArrayObject( cx, jsobj),  cx, false, "Object must be an array");
+    //取出数组的长度
+    uint32_t len = 0;
+    JS_GetArrayLength(cx, jsobj, &len);
+    
+    //顺序取出并插入到ret中
+    for (uint32_t i=0; i < len; i++)
+    {
+        JS::RootedValue value(cx);
+        if (JS_GetElement(cx, jsobj, i, &value))
+        {
+            CCAssert(value.isObject(), "the element in Vector isn't a native object.");
+            
+            js_proxy_t *proxy;
+            JSObject *tmp = value.toObjectOrNull();
+            proxy = jsb_get_js_proxy(tmp);
+            T cobj = (T)(proxy ? proxy->ptr : nullptr);
+            if (cobj)
+            {
+                ret->pushBack(cobj);
+            }
+        }
+    }
+    
+    return true;
 }
 
 //CAMap
@@ -336,15 +403,56 @@ jsval cavector_to_jsval(JSContext* cx, const CrossApp::CAVector<T>& v)
 
 //CAList
 template <class T>
-bool calist_to_jsval()
+jsval calist_to_jsval(JSContext* cx, const CrossApp::CAList<T>& v)
 {
+    //创建一个js的Array
+    JS::RootedObject jsretArr(cx, JS_NewArrayObject(cx, 0));
+    
+    int i = 0;
+    for (const auto& obj : v)
+    {
+        //创建一个临时接受变量
+        JS::RootedValue arrElement(cx);
+        //首先检查对象是否与JS对象关联。
+        js_proxy_t* jsproxy = js_get_or_create_proxy(cx, obj);
+        if (jsproxy) {
+            arrElement = OBJECT_TO_JSVAL(jsproxy->obj);
+        }
+        if (!JS_SetElement(cx, jsretArr, i, arrElement)) {
+            break;
+        }
+        ++i;
+    }
+    
+    return OBJECT_TO_JSVAL(jsretArr);
     
 }
+
 //CADeque
 template <class T>
-bool cadeque_to_jsval()
+jsval cadeque_to_jsval(JSContext* cx, const CrossApp::CADeque<T>& v)
 {
+    //创建一个js的Array
+    JS::RootedObject jsretArr(cx, JS_NewArrayObject(cx, 0));
     
+    int i = 0;
+    for (const auto& obj : v)
+    {
+        //创建一个临时接受变量
+        JS::RootedValue arrElement(cx);
+        //首先检查对象是否与JS对象关联。
+        js_proxy_t* jsproxy = js_get_or_create_proxy(cx, obj);
+        if (jsproxy) {
+            arrElement = OBJECT_TO_JSVAL(jsproxy->obj);
+        }
+        
+        if (!JS_SetElement(cx, jsretArr, i, arrElement)) {
+            break;
+        }
+        ++i;
+    }
+    
+    return OBJECT_TO_JSVAL(jsretArr);
 }
 
 //CAMap
