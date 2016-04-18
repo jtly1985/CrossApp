@@ -47,7 +47,7 @@ typedef struct jsScheduleTarget_proxy {
 
 typedef struct jsCallFuncTarget_proxy {
     void * ptr;
-    CrossApp::CAVector<CAObject>* *obj;
+    CrossApp::CAVector<CAObject*> *obj;
     UT_hash_handle hh;
 } callfuncTarget_proxy_t;
 
@@ -145,9 +145,9 @@ public:
     virtual ~JSScheduleWrapper();
 
     static void setTargetForSchedule(JS::HandleValue sched, JSScheduleWrapper *target);
-    static CrossApp::CAVector<CrossApp::CAObject*>* getTargetForSchedule(JS::HandleValue sched);
+    static CrossApp::CAVector<CAObject*> * getTargetForSchedule(JS::HandleValue sched);
     static void setTargetForJSObject(JS::HandleObject jsTargetObj, JSScheduleWrapper *target);
-    static CrossApp::CAVector<CrossApp::CAObject*>* getTargetForJSObject(JS::HandleObject jsTargetObj);
+    static CrossApp::CAVector<CAObject*> * getTargetForJSObject(JS::HandleObject jsTargetObj);
     
     // Remove all targets.
     static void removeAllTargets();
@@ -164,8 +164,8 @@ public:
     void scheduleFunc(float dt);
     void update(float dt);
     
-    CrossApp::CAObject* getTarget();
-    void setTarget(CrossApp::CAObject* pTarget);
+    CAObject* getTarget();
+    void setTarget(CAObject* pTarget);
     
     void setPureJSTarget(JS::HandleObject jstarget);
     JSObject* getPureJSTarget();
@@ -177,7 +177,7 @@ public:
     bool isUpdateSchedule();
     
 protected:
-    CrossApp::CAObject* _pTarget;
+    CAObject* _pTarget;
     mozilla::Maybe<JS::PersistentRootedObject> _pPureJSTarget;
     int _priority;
     bool _isUpdateSchedule;
@@ -221,9 +221,9 @@ private:
     typedef std::unordered_map<JSObject*, JSTouchDelegate*> TouchDelegateMap;
     typedef std::pair<JSObject*, JSTouchDelegate*> TouchDelegatePair;
     static TouchDelegateMap sTouchDelegateMap;
-    bool _needUnroot;
-//    CrossApp::CCEventListenerTouchOneByOne*  _touchListenerOneByOne;
-//    CrossApp::CCEventListenerTouchAllAtOnce* _touchListenerAllAtOnce;
+//    bool _needUnroot;
+//    cocos2d::EventListenerTouchOneByOne*  _touchListenerOneByOne;
+//    cocos2d::EventListenerTouchAllAtOnce* _touchListenerAllAtOnce;
 };
 
 
@@ -233,7 +233,7 @@ private:
 //    static __JSPlistDelegator* getInstance() {
 //        static __JSPlistDelegator* pInstance = NULL;
 //        if (pInstance == NULL) {
-// pInstance = new __JSPlistDelegator();
+//            pInstance = new __JSPlistDelegator();
 //        }
 //        return pInstance;
 //    };
@@ -262,7 +262,7 @@ bool js_cocos2dx_Node_onEnter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_Node_onExit(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_Node_onEnterTransitionDidFinish(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_Node_onExitTransitionDidStart(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_cocos2dx_Node_cleanup(JSContext *cx, uint32_t argc, jsval *vp);//**
+bool js_cocos2dx_Node_cleanup(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_Component_onEnter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_Component_onExit(JSContext *cx, uint32_t argc, jsval *vp);
 
