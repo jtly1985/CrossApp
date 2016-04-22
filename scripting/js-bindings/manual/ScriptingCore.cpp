@@ -505,12 +505,11 @@ bool ScriptingCore::runScript(const char *path, JS::HandleObject global, JSConte
             CCLog("Evaluating %s failed (evaluatedOK == JS_FALSE)", path);
             JS_ReportPendingException(cx);
         }
-        //*测试执行文本输出代码
 //        else {
+            //*测试执行文本输出代码
 //            JSString *str = rval.toString();
 //            printf("Runscript:-->%s",JS_EncodeString(cx, str));
 //        }
-//         */
     }
     
     return evaluatedOK;
@@ -617,6 +616,20 @@ void ScriptingCore::reportError(JSContext *cx, const char *message, JSErrorRepor
            (unsigned int) report->lineno,
            message);
 };
+
+void removeJSObject(JSContext* cx, void* nativeObj)
+{
+    js_proxy_t* nproxy;
+    js_proxy_t* jsproxy;
+    
+    nproxy = jsb_get_native_proxy(nativeObj);
+    if (nproxy) {
+        jsproxy = jsb_get_js_proxy(nproxy->obj);
+        RemoveObjectRoot(cx, &jsproxy->obj);
+        jsb_remove_proxy(nproxy, jsproxy);
+    }
+}
+
 //javascript的log
 bool ScriptingCore::log(JSContext* cx, uint32_t argc, jsval *vp)
 {
@@ -631,6 +644,20 @@ bool ScriptingCore::log(JSContext* cx, uint32_t argc, jsval *vp)
     }
     args.rval().setUndefined();
     return true;
+}
+
+void ScriptingCore::removeScriptObjectByObject(CAObject* pObj)
+{
+    js_proxy_t* nproxy;
+    js_proxy_t* jsproxy;
+    void *ptr = (void*)pObj;
+    nproxy = jsb_get_native_proxy(ptr);
+    if (nproxy) {
+        JSContext *cx = ScriptingCore::getInstance()->getGlobalContext();
+        jsproxy = jsb_get_js_proxy(nproxy->obj);
+        RemoveObjectRoot(cx, &jsproxy->obj);
+        jsb_remove_proxy(nproxy, jsproxy);
+    }
 }
 
 bool ScriptingCore::setReservedSpot(uint32_t i, JSObject *obj, jsval value) {
@@ -1070,6 +1097,122 @@ bool ScriptingCore::executeFunctionWithOwner(jsval owner, const char *name, cons
     return bRet;
 }
 
+static std::string getTouchFuncName(int eventCode)
+{
+    std::string funcName;
+    switch(eventCode) {
+        case CCTOUCHBEGAN:
+            funcName = "onTouchBegan";
+            break;
+        case CCTOUCHENDED:
+            funcName = "onTouchEnded";
+            break;
+        case CCTOUCHMOVED:
+            funcName = "onTouchMoved";
+            break;
+        case CCTOUCHCANCELLED:
+            funcName = "onTouchCancelled";
+            break;
+        default:
+            CCAssert(false, "Invalid event code!");
+    }
+    
+    return funcName;
+}
+
+static std::string getTouchesFuncName(int eventCode)
+{
+    std::string funcName;
+    switch(eventCode)
+    {
+        case CCTOUCHBEGAN:
+            funcName = "onTouchesBegan";
+            break;
+        case CCTOUCHENDED:
+            funcName = "onTouchesEnded";
+            break;
+        case CCTOUCHMOVED:
+            funcName = "onTouchesMoved";
+            break;
+        case CCTOUCHCANCELLED:
+            funcName = "onTouchesCancelled";
+            break;
+        default:
+            CCAssert(false, "Invalid event code!");
+            break;
+    }
+    return funcName;
+}
+
+//int ScriptingCore::executeCustomTouchesEvent(int eventType,
+//                                             const std::vector<CATouch*>& touches, JSObject *obj)
+//{
+//    std::string funcName = getTouchesFuncName(eventType);
+//    
+//    JS::RootedObject jsretArr(_cx, JS_NewArrayObject(this->_cx, 0));
+//    //    JS_AddNamedObjectRoot(this->_cx, &jsretArr, "touchArray");
+//    int count = 0;
+//    for (auto& touch : touches)
+//    {
+//        jsval jsret = getJSObject(this->_cx, touch);
+//        JS::RootedValue jsval(_cx, jsret);
+//        if (!JS_SetElement(this->_cx, jsretArr, count, jsval)) {
+//            break;
+//        }
+//        ++count;
+//    }
+//    
+//    jsval jsretArrVal = OBJECT_TO_JSVAL(jsretArr);
+//    executeFunctionWithOwner(OBJECT_TO_JSVAL(obj), funcName.c_str(), 1, &jsretArrVal);
+//    //    JS_RemoveObjectRoot(this->_cx, &jsretArr);
+//    
+//    for (auto& touch : touches)
+//    {
+//        removeJSObject(this->_cx, touch);
+//    }
+//    
+//    return 1;
+//}
+
+
+//int ScriptingCore::executeCustomTouchEvent(int eventType,
+//                                           CATouch *pTouch, JSObject *obj)
+//{
+//    JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+//    
+//    JS::RootedValue retval(_cx);
+//    std::string funcName = getTouchFuncName(eventType);
+//    
+//    jsval jsTouch = getJSObject(this->_cx, pTouch);
+//    
+//    executeFunctionWithOwner(OBJECT_TO_JSVAL(obj), funcName.c_str(), 1, &jsTouch, &retval);
+//    
+//    // Remove touch object from global hash table and unroot it.
+//    removeJSObject(this->_cx, pTouch);
+//    
+//    return 1;
+//    
+//}
+
+
+//int ScriptingCore::executeCustomTouchEvent(int eventType,
+//                                           CATouch *pTouch, JSObject *obj,
+//                                           JS::MutableHandleValue retval)
+//{
+//    JSB_AUTOCOMPARTMENT_WITH_GLOBAL_OBJCET
+//    
+//    std::string funcName = getTouchFuncName(eventType);
+//    
+//    jsval jsTouch = getJSObject(this->_cx, pTouch);
+//    
+//    executeFunctionWithOwner(OBJECT_TO_JSVAL(obj), funcName.c_str(), 1, &jsTouch, retval);
+//    
+//    // Remove touch object from global hash table and unroot it.
+//    removeJSObject(this->_cx, pTouch);
+//    
+//    return 1;
+//    
+//}
 #pragma mark - Debug
 
 void SimpleRunLoop::update(float dt)

@@ -111,7 +111,7 @@ CAView::CAView(void)
     
     this->setAnchorPoint(DPoint(0.5f, 0.5f));
     
-    //CCLog("CAView = %d\n", ++viewCount);
+    CCLog("CAView = %d\n", ++viewCount);
 }
 
 CAView::~CAView(void)

@@ -198,23 +198,17 @@ public:
     static void removeDelegateForJSObject(JSObject* pJSObj);
 
     void setJSObject(JS::HandleObject obj);
-    void registerStandardDelegate(int priority);
-    void registerTargetedDelegate(int priority, bool swallowsTouches);
-    // unregister touch delegate.
-    // Normally, developer should invoke cc.unregisterTouchDelegate() in when the scene exits.
-    // So this function need to be binded.
-    void unregisterTouchDelegate();
 
     bool onTouchBegan(CrossApp::CATouch *touch, CrossApp::CAEvent *event);
     void onTouchMoved(CrossApp::CATouch *touch, CrossApp::CAEvent *event);
     void onTouchEnded(CrossApp::CATouch *touch, CrossApp::CAEvent *event);
     void onTouchCancelled(CrossApp::CATouch *touch, CrossApp::CAEvent *event);
     
-    // optional
-    void onTouchesBegan(const std::vector<CrossApp::CATouch*>& touches, CrossApp::CAEvent *event);
-    void onTouchesMoved(const std::vector<CrossApp::CATouch*>& touches, CrossApp::CAEvent *event);
-    void onTouchesEnded(const std::vector<CrossApp::CATouch*>& touches, CrossApp::CAEvent *event);
-    void onTouchesCancelled(const std::vector<CrossApp::CATouch*>& touches, CrossApp::CAEvent *event);
+    //mouse
+    void mouseMoved(CATouch* pTouch, CAEvent* pEvent);
+    void mouseMovedOutSide(CATouch* pTouch, CAEvent* pEvent);
+    void mouseScrollWheel(CATouch* pTouch, float off_x, float off_y, CAEvent* pEvent);
+
 
 private:
     mozilla::Maybe<JS::PersistentRootedObject> _obj;
@@ -227,36 +221,6 @@ private:
 };
 
 
-//class __JSPlistDelegator: public cocos2d::SAXDelegator
-//{
-//public:
-//    static __JSPlistDelegator* getInstance() {
-//        static __JSPlistDelegator* pInstance = NULL;
-//        if (pInstance == NULL) {
-//            pInstance = new __JSPlistDelegator();
-//        }
-//        return pInstance;
-//    };
-//    
-//    ~__JSPlistDelegator();
-//    
-//    cocos2d::SAXParser* getParser();
-//    
-//    std::string parse(const std::string& path);
-//    std::string parseText(const std::string& text);
-//    
-//    // implement pure virtual methods of SAXDelegator
-//    void startElement(void *ctx, const char *name, const char **atts);
-//    void endElement(void *ctx, const char *name);
-//    void textHandler(void *ctx, const char *ch, int len);
-//
-//private:
-//    cocos2d::SAXParser _parser;
-//    JS::Heap<JSObject*> _obj;
-//    std::string _result;
-//    bool _isStoringCharacters;
-//    std::string _currentValue;
-//};
 
 bool js_cocos2dx_Node_onEnter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_cocos2dx_Node_onExit(JSContext *cx, uint32_t argc, jsval *vp);

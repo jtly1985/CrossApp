@@ -63,7 +63,7 @@ private:
 //public:
 //    JSFunctionWrapper(JSContext* cx, JSObject *jsthis, jsval fval);
 //    ~JSFunctionWrapper();
-//
+// 
 //    bool invoke(unsigned int argc, jsval *argv, JS::MutableHandleValue rval);
 //private:
 //    JSContext *_cx;

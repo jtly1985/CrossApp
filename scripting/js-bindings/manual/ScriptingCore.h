@@ -12,8 +12,9 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 #include "CrossApp.h"
-#include "spidermonkey_specifics.h"
 #include "js_bindings_config.h"
+#include "js_bindings_core.h"
+#include "spidermonkey_specifics.h"
 #include "js_manual_conversions.h"
 #include "mozilla/Maybe.h"
 #include <string>
@@ -55,14 +56,63 @@ public:
      * Gets the script type, for ScriptingCore, it will return `cocos2d::kScriptTypeJavascript`
      * @return `cocos2d::kScriptTypeJavascript`
      */
-//    virtual CrossApp::ccScriptType getScriptType() override { return CrossApp::kScriptTypeJavascript; };//**zero
+    virtual CrossApp::ccScriptType getScriptType() { return CrossApp::kScriptTypeJavascript; };//override
     
     /**
      * @brief @~english Removes the C++ object's linked JavaScript proxy object from JavaScript context
      * @param obj @~english Object to be removed
      */
-    //未实现
-//    virtual void removeScriptObjectByObject(CrossApp::CAObject* obj) override;
+    virtual void removeScriptObjectByObject(CrossApp::CAObject* obj);//override
+    
+    /**
+     * @brief @~english Useless in ScriptingCore, please use evalString
+     * @see evalString
+     */
+    virtual int executeString(const char* codes) { return 0; }; //override
+    
+    
+    //Crossapp没有Action需要修改这部分的通信 暂时注释这三个方法
+    /**
+     * @brief @~english Pause scheduled tasks and actions for an object proxy.
+     * @param p @~english The object proxy
+     */
+//    void pauseSchedulesAndActions(js_proxy_t* p);
+    /**
+     * @brief @~english Resume scheduled tasks and actions for an object proxy.
+     * @param p @~english The object proxy
+     */
+//    void resumeSchedulesAndActions(js_proxy_t* p);
+    /**
+     * @brief @~english Cleanup scheduled tasks and actions for an object proxy.
+     * @param p @~english The object proxy
+     */
+//    void cleanupSchedulesAndActions(js_proxy_t* p);
+    
+    /**
+     @brief Useless in ScriptingCore, please use runScript
+     @param filename String object holding the filename of the script file that is to be executed
+     */
+    virtual  int executeScriptFile(const char* filename)  { return 0; } //override
+    
+    /**
+     @brief @~english Useless in ScriptingCore, please use executeFunctionWithOwner
+     @param functionName String object holding the name of the function, in the global script environment, that is to be executed.
+     @return The integer value returned from the script function.
+     */
+    virtual int executeGlobalFunction(const char* functionName)  { return 0; } //override
+    
+    //这两个函数需要添加CCScriptSupport
+//    virtual int sendEvent(cocos2d::ScriptEvent* message) override;
+//    virtual bool parseConfig(ConfigType type, const std::string& str) override;
+    
+    /**
+     * @brief @~english Useless in ScriptingCore
+     * @return @~english false
+     */
+    virtual bool handleAssert(const char *msg)  { return false; } //override
+    
+    virtual void setCalledFromScript(bool callFromScript)  { _callFromScript = callFromScript; }; //override
+    virtual bool isCalledFromScript()  { return _callFromScript; }; //override
     
     /**
      * @brief @~english Execute a js function with a JavaScript caller, function name, arguments count and arguments.
@@ -205,7 +255,35 @@ public:
      */
     static void removeAllRoots(JSContext *cx);
     
-    //***发送touch事件先不写
+    //发送touch事件
+    /**@~english
+     * Simulate a touch event and dispatch it to a js object.
+     * @param eventType @~english The touch event type
+     * @param pTouch @~english The touch object
+     * @param obj @~english The js object
+     * @param retval @~english The return value of the touch event callback
+     * @return @~english Return 1 if succeed, otherwise return 0.
+     */
+//    int executeCustomTouchEvent(int eventType,
+//                                CrossApp::CATouch *pTouch, JSObject *obj, JS::MutableHandleValue retval);
+    /**@~english
+     * Simulate a touch event and dispatch it to a js object.
+     * @param eventType @~english The touch event type
+     * @param pTouch @~english The touch object
+     * @param obj @~english The js object
+     * @return @~english Return 1 if succeed, otherwise return 0.
+     */
+//    int executeCustomTouchEvent(int eventType,
+//                                CrossApp::CATouch *pTouch, JSObject *obj);
+    /**@~english
+     * Simulate a multi touch event and dispatch it to a js object.
+     * @param eventType @~english The touch event type
+     * @param touches @~english Touchs list for multitouch
+     * @param obj @~english The js object
+     * @return @~english Return 1 if succeed, otherwise return 0.
+     */
+//    int executeCustomTouchesEvent(int eventType,
+//                                  const std::vector<CrossApp::CATouch*>& touches, JSObject *obj);
     
     /**@~english
      * Gets the current global context.
@@ -322,5 +400,15 @@ js_proxy_t* jsb_new_proxy(void* nativeObj, JSObject* jsObj);
 js_proxy_t* jsb_get_native_proxy(void* nativeObj);
 js_proxy_t* jsb_get_js_proxy(JSObject* jsObj);
 void jsb_remove_proxy(js_proxy_t* nativeProxy, js_proxy_t* jsProxy);
+
+template <class T>
+jsval getJSObject(JSContext* cx, T* nativeObj)
+{
+    js_proxy_t *proxy = js_get_or_create_proxy<T>(cx, nativeObj);
+    return proxy ? OBJECT_TO_JSVAL(proxy->obj) : JSVAL_NULL;
+}
+
+void removeJSObject(JSContext* cx, void* nativeObj);
+
 
 #endif /* ScriptingCore_hpp */
