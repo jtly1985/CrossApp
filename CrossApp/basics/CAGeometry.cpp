@@ -7,12 +7,8 @@
 // implementation of DPoint
 NS_CC_BEGIN
 
-float fround(float x)//double round
-{
-    float y = 100;
-    int xx = x > FLT_EPSILON ? (x * y + 0.5) : (x * y - 0.5);
-    return xx/y;
-}
+#define F_ACCURACY 0.001f
+#define fround(_x_) (((int)(_x_ > FLT_EPSILON ? (_x_ * 1000 + 0.5) : (_x_ * 1000 - 0.5))) / 1000.0f)
 
 DPoint::DPoint(void) : x(0), y(0)
 {
@@ -79,8 +75,8 @@ void DPoint::setPoint(float x, float y)
 
 bool DPoint::equals(const DPoint& target) const
 {
-    return (fabs(this->x - target.x) < 0.001f)
-        && (fabs(this->y - target.y) < 0.001f);
+    return (fabs(this->x - target.x) < F_ACCURACY)
+        && (fabs(this->y - target.y) < F_ACCURACY);
 }
 
 bool DPoint::fuzzyEquals(const DPoint& b, float var) const
@@ -96,7 +92,7 @@ float DPoint::getAngle(const DPoint& other) const
     DPoint a2 = normalize();
     DPoint b2 = other.normalize();
     float angle = atan2f(a2.cross(b2), a2.dot(b2));
-    if( fabs(angle) < 0.001f ) return 0.f;
+    if( fabs(angle) < F_ACCURACY ) return 0.f;
     return angle;
 }
 
@@ -167,8 +163,8 @@ void DSize::setSize(float width, float height)
 
 bool DSize::equals(const DSize& target) const
 {
-    return (fabs(this->width  - target.width)  < 0.001f)
-        && (fabs(this->height - target.height) < 0.001f);
+    return (fabs(this->width  - target.width)  < F_ACCURACY)
+        && (fabs(this->height - target.height) < F_ACCURACY);
 }
 
 // implementation of DRect
@@ -222,22 +218,22 @@ DRect DRect::operator/(float a) const
 
 bool DRect::equals(const DRect& rect) const
 {
-    if (fabsf(this->getMinX() - rect.getMinX()) >= 0.001f)
+    if (fabsf(this->getMinX() - rect.getMinX()) >= F_ACCURACY)
     {
         return false;
     }
     
-    if (fabsf(this->getMaxX() - rect.getMaxX()) >= 0.001f)
+    if (fabsf(this->getMaxX() - rect.getMaxX()) >= F_ACCURACY)
     {
         return false;
     }
     
-    if (fabsf(this->getMinY() - rect.getMinY()) >= 0.001f)
+    if (fabsf(this->getMinY() - rect.getMinY()) >= F_ACCURACY)
     {
         return false;
     }
     
-    if (fabsf(this->getMaxY() - rect.getMaxY()) >= 0.001f)
+    if (fabsf(this->getMaxY() - rect.getMaxY()) >= F_ACCURACY)
     {
         return false;
     }
@@ -320,174 +316,6 @@ void DRect::InflateRect(float l, float t, float r, float b)
 		origin.x -= l;
 		origin.y -= t;
 	}
-}
-
-
-
-DRectLayout::DRectLayout()
-:left(FLOAT_NONE)
-,right(FLOAT_NONE)
-,top(FLOAT_NONE)
-,bottom(FLOAT_NONE)
-,width(FLOAT_NONE)
-,height(FLOAT_NONE)
-{
-
-}
-
-DRectLayout::DRectLayout(const DRectLayout& other)
-:left(other.left)
-,right(other.right)
-,top(other.top)
-,bottom(other.bottom)
-,width(other.width)
-,height(other.height)
-{
-
-}
-
-DRectLayout::DRectLayout(float left, float right, float top, float bottom, float width, float height)
-:left(left)
-,right(right)
-,top(top)
-,bottom(bottom)
-,width(width)
-,height(height)
-{
-
-}
-
-DRectLayout::DRectLayout(float var1, float var2, float var3, float var4, const Type& type)
-:left(FLOAT_NONE)
-,right(FLOAT_NONE)
-,top(FLOAT_NONE)
-,bottom(FLOAT_NONE)
-,width(FLOAT_NONE)
-,height(FLOAT_NONE)
-{
-    switch (type) {
-        case L_R_T_B:
-        {
-            left = var1;
-            right = var2;
-            top = var3;
-            bottom = var4;
-        }
-            break;
-        case L_R_T_H:
-        {
-            left = var1;
-            right = var2;
-            top = var3;
-            height = var4;
-        }
-            break;
-        case L_R_B_H:
-        {
-            left = var1;
-            right = var2;
-            bottom = var3;
-            height = var4;
-        }
-            break;
-        case L_W_T_B:
-        {
-            left = var1;
-            width = var2;
-            top = var3;
-            bottom = var4;
-        }
-            break;
-        case L_W_T_H:
-        {
-            left = var1;
-            width = var2;
-            top = var3;
-            height = var4;
-        }
-            break;
-        case L_W_B_H:
-        {
-            left = var1;
-            width = var2;
-            bottom = var3;
-            height = var4;
-        }
-            break;
-        case R_W_T_B:
-        {
-            right = var1;
-            width = var2;
-            top = var3;
-            bottom = var4;
-        }
-            break;
-        case R_W_T_H:
-        {
-            right = var1;
-            width = var2;
-            top = var3;
-            height = var4;
-        }
-            break;
-        case R_W_B_H:
-        {
-            right = var1;
-            width = var2;
-            bottom = var3;
-            height = var4;
-        }
-            break;
-        default:
-            break;
-    }
-    
-}
-
-DRectLayout& DRectLayout:: operator= (const DRectLayout& other)
-{
-    left    = other.left;
-    right   = other.right;
-    top     = other.top;
-    bottom  = other.bottom;
-    width   = other.width;
-    height  = other.height;
-    return *this;
-}
-
-bool DRectLayout::equals(const DRectLayout& other) const
-{
-    if (fabs(left - other.left) >= 0.001f)
-    {
-        return false;
-    }
-    
-    if (fabs(right - other.right) >= 0.001f)
-    {
-        return false;
-    }
-    
-    if (fabs(top - other.top) >= 0.001f)
-    {
-        return false;
-    }
-    
-    if (fabs(bottom - other.bottom) >= 0.001f)
-    {
-        return false;
-    }
-    
-    if (fabs(width - other.width) >= 0.001f)
-    {
-        return false;
-    }
-    
-    if (fabs(height - other.height) >= 0.001f)
-    {
-        return false;
-    }
-    
-    return  true;
 }
 
 

@@ -33,16 +33,16 @@ void CDShowNewsImage::viewDidUnload()
 void CDShowNewsImage::initNewsImageView(newsImage _image)
 {
     m_image = _image;
+    
     CAVector<CAView* > viewList;
-
-    for (int i=0; i<m_image.m_imageUrl.size(); i++) {
-        //初始化viewList
-        CommonUrlImageView* temImage = CommonUrlImageView::createWithFrame(DRect(0,0,winSize.width,winSize.height));
+    for (int i=0; i<m_image.m_imageUrl.size(); i++)
+    {
+        CommonUrlImageView* temImage = CommonUrlImageView::createWithLayout(DLayoutFill);
         temImage->setImageViewScaleType(CAImageViewScaleTypeFitImageInside);
         temImage->setImage(CAImage::create("HelloWorld.png"));
         temImage->setUrl(m_image.m_imageUrl[i]);
         
-        CAScrollView* p_ScrollView = CAScrollView::createWithFrame(DRect(0,0,winSize.width,winSize.height));
+        CAScrollView* p_ScrollView = CAScrollView::createWithLayout(DLayoutFill);
         p_ScrollView->setMinimumZoomScale(1.0f);
         p_ScrollView->setMaximumZoomScale(2.5f);
         p_ScrollView->setMultitouchGesture(CAScrollView::MultitouchGesture::Zoom);
@@ -53,18 +53,20 @@ void CDShowNewsImage::initNewsImageView(newsImage _image)
         p_ScrollView->addSubview(temImage);
         viewList.pushBack(p_ScrollView);
     }
-    p_PageView = CAPageView::createWithFrame(DRect(0, 30, winSize.width, winSize.height), CAPageViewDirectionHorizontal);
+    
+    p_PageView = CAPageView::createWithLayout(DLayoutFill, CAPageView::Horizontal);
     p_PageView->setViews(viewList);
     p_PageView->setPageViewDelegate(this);
     p_PageView->setBackgroundColor(CAColor_black);
     p_PageView->setPageViewDelegate(this);
+    p_PageView->setSpacing(40);
     this->getView()->addSubview(p_PageView);
     
     p_bg = CAView::createWithColor(ccc4(0,0,0,200));
-    p_bg->setFrame(DRect(0,winSize.height/3*2,winSize.width,winSize.height/2));
+    p_bg->setLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_B_C(0, 0.85)));
     this->getView()->addSubview(p_bg);
 
-    p_title = CALabel::createWithFrame(DRect(10,10,winSize.width-80,40));
+    p_title = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_R(10, 80), DVerticalLayout_T_H(10, 50)));
     p_title->setText(m_image.m_title);
 	p_title->setColor(CAColor_white);
     p_title->setFontSize(34);
@@ -73,19 +75,19 @@ void CDShowNewsImage::initNewsImageView(newsImage _image)
     
     char temp[10];
     sprintf(temp, "1/%lu",m_image.m_imageUrl.size());
-    p_index = CALabel::createWithFrame(DRect(winSize.width-60,10,80,30));
+    p_index = CALabel::createWithLayout(DLayout(DHorizontalLayout_R_W(0, 70), DVerticalLayout_T_H(10, 50)));
     p_index->setText(temp);
 	p_index->setColor(CAColor_white);
     p_index->setFontSize(30);
     p_index->setBold(true);
     p_bg->addSubview(p_index);
     
-    p_des = CALabel::createWithFrame(DRect(10,0,winSize.width-20,200));
+    p_des = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_R(10, 20), DVerticalLayoutFill));
     p_des->setText(m_image.m_imageDesc[4]);
 	p_des->setColor(ccc4(200, 200, 200, 255));
     p_des->setFontSize(26);
     
-    CAScrollView* ps = CAScrollView::createWithFrame(DRect(0,70,winSize.width,200));
+    CAScrollView* ps = CAScrollView::createWithLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_T_H(70, 200)));
     ps->setBackgroundColor(CAColor_clear);
     ps->setShowsVerticalScrollIndicator(false);
     ps->setShowsHorizontalScrollIndicator(false);
@@ -121,7 +123,7 @@ void CDShowNewsImage::scrollViewTouchUpWithoutMoved(CAScrollView* view, const DP
         //动画时长
         CAViewAnimation::setAnimationDuration(0.2f);
         
-        p_bg->setFrameOrigin(DPoint(0,winSize.height));
+        p_bg->setLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_B_H(0, 0)));
         
         //执行动画
         CAViewAnimation::commitAnimations();
@@ -134,7 +136,7 @@ void CDShowNewsImage::scrollViewTouchUpWithoutMoved(CAScrollView* view, const DP
         //动画时长
         CAViewAnimation::setAnimationDuration(0.2f);
         
-        p_bg->setFrameOrigin(DPoint(0,winSize.height/3*2));
+        p_bg->setLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_B_C(0, 0.85)));
         
         //执行动画
         CAViewAnimation::commitAnimations();

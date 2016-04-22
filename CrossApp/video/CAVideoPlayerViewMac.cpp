@@ -64,7 +64,7 @@ CAVideoPlayerView* CAVideoPlayerView::createWithFrame(const DRect &rect)
     return NULL;
 }
 
-CAVideoPlayerView* CAVideoPlayerView::createWithLayout(const DRectLayout& layout)
+CAVideoPlayerView* CAVideoPlayerView::createWithLayout(const DLayout& layout)
 {
     CAVideoPlayerView* view = new CAVideoPlayerView;
     if (view && view->initWithLayout(layout))
@@ -92,14 +92,12 @@ bool CAVideoPlayerView::decodeProcessThread(void* param)
 	return true;
 }
 
-void CAVideoPlayerView::initWithPath(const std::string& szPath, bool showFirstFrame)
+void CAVideoPlayerView::setFullPath(const std::string& szPath, bool showFirstFrame)
 {
-//	return 0;
 }
 
-void CAVideoPlayerView::initWithUrl(const std::string& szUrl, bool showFirstFrame)
+void CAVideoPlayerView::setUrl(const std::string& szUrl, bool showFirstFrame)
 {
-//	return 0;
 }
 
 void CAVideoPlayerView::setContentSize(const DSize& size)
@@ -123,6 +121,11 @@ void CAVideoPlayerView::visit()
 }
 
 void CAVideoPlayerView::draw()
+{
+
+}
+
+void CAVideoPlayerView::update(float fDelta)
 {
 
 }

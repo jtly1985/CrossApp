@@ -81,7 +81,7 @@ CAAutoCollectionView* CAAutoCollectionView::createWithCenter(const DRect& rect)
 	return NULL;
 }
 
-CAAutoCollectionView* CAAutoCollectionView::createWithLayout(const CrossApp::DRectLayout &layout)
+CAAutoCollectionView* CAAutoCollectionView::createWithLayout(const CrossApp::DLayout &layout)
 {
     CAAutoCollectionView* collectionView = new CAAutoCollectionView();
     if (collectionView && collectionView->initWithLayout(layout))
@@ -191,9 +191,9 @@ void CAAutoCollectionView::setShowsScrollIndicators(bool var)
     m_bShowsScrollIndicators = var;
 }
 
-CACollectionViewCell* CAAutoCollectionView::cellForRowAtIndexPath(unsigned int section, unsigned int row, unsigned int item)
+CACollectionViewCell* CAAutoCollectionView::cellForRowAtIndexPath(unsigned int section, unsigned int item)
 {
-    return m_mpUsedCollectionCells[CAIndexPath3E(section, row, item)];
+    return m_mpUsedCollectionCells[CAIndexPath3E(section, 0, item)];
 }
 
 const CAVector<CACollectionViewCell*>& CAAutoCollectionView::displayingCollectionCell()
@@ -213,6 +213,11 @@ void CAAutoCollectionView::setOrientation(const CAAutoCollectionView::Orientatio
 	setBounceHorizontal(!bVertScroll);
 	setHorizontalScrollEnabled(!bVertScroll);
 	setVerticalScrollEnabled(bVertScroll);
+    
+    if(!m_mpUsedCollectionCells.empty())
+    {
+        this->reloadData();
+    }
 }
 
 const CAAutoCollectionView::Orientation& CAAutoCollectionView::getOrientation()
@@ -373,7 +378,7 @@ void CAAutoCollectionView::mouseMoved(CATouch* pTouch, CAEvent* pEvent)
                 if (m_pHighlightedCollectionCells)
                 {
                     CAIndexPath3E index = CAIndexPath3E(m_pHighlightedCollectionCells->getSection(),
-                                                        m_pHighlightedCollectionCells->getRow(),
+                                                        0,
                                                         m_pHighlightedCollectionCells->getItem());
                     if (m_pSelectedCollectionCells.count(index))
                     {
@@ -400,7 +405,7 @@ void CAAutoCollectionView::mouseMovedOutSide(CATouch* pTouch, CAEvent* pEvent)
     if (m_pHighlightedCollectionCells)
     {
         CAIndexPath3E index = CAIndexPath3E(m_pHighlightedCollectionCells->getSection(),
-                                            m_pHighlightedCollectionCells->getRow(),
+                                            0,
                                             m_pHighlightedCollectionCells->getItem());
         if (m_pSelectedCollectionCells.count(index))
         {
@@ -551,7 +556,7 @@ void CAAutoCollectionView::clearData()
 		CC_CONTINUE_IF(cell == NULL);
 		m_mpFreedCollectionCells[cell->getReuseIdentifier()].pushBack(cell);
 		cell->removeFromSuperview();
-		cell->resetCollectionViewCell();
+		cell->resetCell();
 	}
 	m_vpUsedCollectionCells.clear();
 
@@ -588,7 +593,7 @@ int CAAutoCollectionView::calculateAllCells(CollectionViewSection& cvs, int inde
 		}
 		for (int k = 0; k < r.rItemRects.size(); k++, l++)
 		{
-			CAIndexPath3E indexPath = CAIndexPath3E(index, j, l);
+			CAIndexPath3E indexPath = CAIndexPath3E(index, 0, l);
 
 			DRect& cellRect = r.rItemRects[k];
 
@@ -811,7 +816,7 @@ void CAAutoCollectionView::recoveryCollectionCell()
 
 		m_mpFreedCollectionCells[cell->getReuseIdentifier()].pushBack(cell);
 		cell->removeFromSuperview();
-		cell->resetCollectionViewCell();
+		cell->resetCell();
 		itr->second = NULL;
         m_vpUsedCollectionCells.eraseObject(cell);
 	}
@@ -837,7 +842,7 @@ void CAAutoCollectionView::loadCollectionCell()
 		if (cell)
 		{
 			cell->m_nSection = r.section;
-			cell->m_nRow = r.row;
+			cell->m_nRow = 0;
 			cell->m_nItem = r.item;
 			cell->updateDisplayedAlpha(this->getAlpha());
 			this->addSubview(cell);

@@ -100,12 +100,11 @@ CDNewsAboutTableCell::~CDNewsAboutTableCell()
     
 }
 
-CDNewsAboutTableCell* CDNewsAboutTableCell::create(const std::string& identifier, const DRect& _rect)
+CDNewsAboutTableCell* CDNewsAboutTableCell::create(const std::string& identifier)
 {
     CDNewsAboutTableCell* tableViewCell = new CDNewsAboutTableCell();
     if(tableViewCell&&tableViewCell->initWithReuseIdentifier(identifier))
     {
-        tableViewCell->setFrame(_rect);
         tableViewCell->autorelease();
         return tableViewCell;
     }
@@ -125,21 +124,19 @@ void CDNewsAboutTableCell::selectedTableViewCell()
 
 void CDNewsAboutTableCell::initWithCell()
 {
-    DSize m_size = this->getFrame().size;
-    
-    CALabel* cellText = CALabel::createWithCenter(DRect(m_size.width/2+40, m_size.height/2, m_size.width, 40));
+    CALabel* cellText = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_R(20, 0), DVerticalLayout_T_B(0, 0)));
     cellText->setTag(100);
     cellText->setFontSize(30);
     cellText->setTextAlignment(CATextAlignmentLeft);
     cellText->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
     this->addSubview(cellText);
     
-    CAScale9ImageView* iv = CAScale9ImageView::createWithCenter(DRect(m_size.width-50,m_size.height/2,50,50));
+    CAScale9ImageView* iv = CAScale9ImageView::createWithLayout(DLayout(DHorizontalLayout_R_W(20, 50), DVerticalLayout_H_C(50, 0.5)));
     iv->setImage(CAImage::create("source_material/cell_btn_right.png"));
     iv->setTag(101);
     this->addSubview(iv);
     
-    CASwitch* sw = CASwitch::createWithCenter(DRect(m_size.width-90, m_size.height/2, 100, 50));
+    CASwitch* sw = CASwitch::createWithLayout(DLayout(DHorizontalLayout_R_W(20, 100), DVerticalLayout_H_C(50, 0.5)));
     sw->setTag(103);
     sw->setVisible(false);
     this->addSubview(sw);
@@ -157,14 +154,13 @@ CDNewsAboutController::~CDNewsAboutController()
 
 void CDNewsAboutController::viewDidLoad()
 {
-    winSize = this->getView()->getBounds().size;
     temp_Path = CCFileUtils::sharedFileUtils()->getWritablePath() + "image";
     if (p_TableView!=NULL)
     {
         this->getView()->removeSubview(p_TableView);
         p_TableView = NULL;
     }
-    p_TableView= CATableView::createWithFrame(DRect(0, -150, winSize.width, winSize.height+150));
+    p_TableView= CATableView::createWithLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_T_B(-150, 0)));
     p_TableView->setTableViewDataSource(this);
     p_TableView->setTableViewDelegate(this);
     p_TableView->setAllowsSelection(true);
@@ -173,34 +169,38 @@ void CDNewsAboutController::viewDidLoad()
     this->getView()->addSubview(p_TableView);
     p_TableView->setTableHeaderHeight(602);
     CAView* view = CAView::createWithColor(CAColor_clear);
-    view->setFrame(DRect(0,0,winSize.width,602));
+    view->setLayout(DLayoutFill);
     
-    CAImageView* head_bg = CAImageView::createWithFrame(DRect(0,0,winSize.width,602));
+    CAImageView* head_bg = CAImageView::createWithLayout(DLayoutFill);
     head_bg->setImage(CAImage::create("image/about_head_bg.png"));
     view->addSubview(head_bg);
     
-    CAImageView* head = CAImageView::createWithCenter(DRect(winSize.width/2,320,96,96));
+    CAImageView* head = CAImageView::createWithLayout(DLayout(DHorizontalLayout_W_C(144, 0.5), DVerticalLayout_H_C(144, 0.5)));
     head->setImage(CAImage::create("image/avatar_bg_70.png"));
     view->addSubview(head);
     
     CAButton* btn1 = CAButton::create(CAButtonTypeSquareRect);
-    btn1->setCenter(DRect(winSize.width/6, 600-(winSize.width/3)/9*5/2, winSize.width/3-1, (winSize.width/3)/9*5));
-    btn1->setBackgroundViewForState(CAControlStateNormal, CAScale9ImageView::createWithImage(CAImage::create("image/about_btn1_up.png")));
-    btn1->setBackgroundViewForState(CAControlStateHighlighted, CAScale9ImageView::createWithImage(CAImage::create("image/about_btn1_down.png")));
-    view->addSubview(btn1);
+    btn1->setLayout(DLayout(DHorizontalLayout_W_C(130, 0.2), DVerticalLayout_H_C(130, 0.5)));
+    btn1->setBackgroundViewForState(CAControlStateNormal, CAImageView::createWithImage(CAImage::create("image/about_btn1_up.png")));
+    btn1->setBackgroundViewForState(CAControlStateHighlighted, CAImageView::createWithImage(CAImage::create("image/about_btn1_down.png")));
     
     CAButton* btn2 = CAButton::create(CAButtonTypeSquareRect);
-    btn2->setCenter(DRect(winSize.width/2, 600-(winSize.width/3)/9*5/2, winSize.width/3-1, (winSize.width/3)/9*5));
+    btn2->setLayout(DLayout(DHorizontalLayout_W_C(130, 0.5), DVerticalLayout_H_C(130, 0.5)));
     btn2->setBackgroundViewForState(CAControlStateNormal, CAScale9ImageView::createWithImage(CAImage::create("image/about_btn2_up.png")));
-    btn2->setBackgroundViewForState(CAControlStateHighlighted, CAScale9ImageView::createWithImage(CAImage::create("image/about_btn2_down.png")));
-    view->addSubview(btn2);
+    btn2->setBackgroundViewForState(CAControlStateHighlighted, CAImageView::createWithImage(CAImage::create("image/about_btn2_down.png")));
     
     CAButton* btn3 = CAButton::create(CAButtonTypeSquareRect);
     btn3->setTag(100);
-    btn3->setCenter(DRect(winSize.width/6*5, 600-(winSize.width/3)/9*5/2, winSize.width/3-1, (winSize.width/3)/9*5));
-    btn3->setBackgroundViewForState(CAControlStateNormal, CAScale9ImageView::createWithImage(CAImage::create("image/about_btn3_up.png")));
-    btn3->setBackgroundViewForState(CAControlStateHighlighted, CAScale9ImageView::createWithImage(CAImage::create("image/about_btn3_down.png")));
-    view->addSubview(btn3);
+    btn3->setLayout(DLayout(DHorizontalLayout_W_C(130, 0.8), DVerticalLayout_H_C(130, 0.5)));
+    btn3->setBackgroundViewForState(CAControlStateNormal, CAImageView::createWithImage(CAImage::create("image/about_btn3_up.png")));
+    btn3->setBackgroundViewForState(CAControlStateHighlighted, CAImageView::createWithImage(CAImage::create("image/about_btn3_down.png")));
+    
+    CAView* view1 = CAView::createWithLayout(DLayoutFill, ccc4(210,210,210,255));
+    view1->setLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_B_C(0, 0.88)));
+    view1->addSubview(btn1);
+    view1->addSubview(btn2);
+    view1->addSubview(btn3);
+    view->addSubview(view1);
     
     p_TableView->setTableHeaderView(view);
 }
@@ -226,20 +226,27 @@ CAView* CDNewsAboutController::tableViewSectionViewForFooterInSection(CATableVie
 
 void CDNewsAboutController::tableViewDidSelectRowAtIndexPath(CATableView* table, unsigned int section, unsigned int row)
 {
-    if (section==1 && row == 5) {
+    if (section==1 && row == 5)
+    {
         _waitview = CAView::createWithColor(ccc4(0,0,0,128));
-        _waitview->setFrame(DRect(0,0,winSize.width,winSize.height));
-        CAActivityIndicatorView* p_pLoading = CAActivityIndicatorView::createWithCenter(DRect( winSize.width/2, winSize.height/2,50,50));
+        _waitview->setLayout(DLayoutFill);
+        this->getView()->insertSubview(_waitview, CAWindowZOderTop);
+        
+        CAActivityIndicatorView* p_pLoading = CAActivityIndicatorView::createWithLayout(DLayoutFill);
         p_pLoading->setStyle(CAActivityIndicatorViewStyleWhiteLarge);
         p_pLoading->startAnimating();
-        CALabel* label = CALabel::createWithCenter(DRect(winSize.width/2,winSize.height/2+100,200,50));
+        _waitview->addSubview(p_pLoading);
+        
+        DSize size = this->getView()->getBounds().size;
+        
+        CALabel* label = CALabel::createWithLayout(DLayoutFill);
         label->setText("正在清理...");
         label->setColor(CAColor_white);
         label->setFontSize(18);
-        
-        _waitview->addSubview(p_pLoading);
+        label->setTextAlignment(CATextAlignmentCenter);
+        label->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
         _waitview->addSubview(label);
-        this->getView()->insertSubview(_waitview, CAWindowZOderTop);
+        
         this->start();
         CAScheduler::schedule(schedule_selector(CDNewsAboutController::deleteCallBack), this, 0.01f);
     }
@@ -256,7 +263,7 @@ CATableViewCell* CDNewsAboutController::tableCellAtIndex(CATableView* table, con
     CDNewsAboutTableCell* cell = dynamic_cast<CDNewsAboutTableCell*>(table->dequeueReusableCellWithIdentifier("CrossApp"));
     if (cell == NULL)
     {
-        cell = CDNewsAboutTableCell::create("CrossApp", DRect(0, 0, _size.width, _size.height));
+        cell = CDNewsAboutTableCell::create("CrossApp");
         cell->initWithCell();
     }
     

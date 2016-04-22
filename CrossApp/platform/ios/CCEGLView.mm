@@ -12,6 +12,34 @@ CCEGLView::CCEGLView()
 {
     m_obScreenSize.width = m_obDesignResolutionSize.width = [[EAGLView sharedEGLView] getWidth];
     m_obScreenSize.height = m_obDesignResolutionSize.height = [[EAGLView sharedEGLView] getHeight];
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    switch (orientation)
+    {
+        case UIInterfaceOrientationPortrait:
+        {
+            this->setStatusBarOrientation(CAInterfaceOrientationPortrait);
+        }
+            break;
+        case UIInterfaceOrientationPortraitUpsideDown:
+        {
+            this->setStatusBarOrientation(CAInterfaceOrientationPortrait);
+        }
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+        {
+            this->setStatusBarOrientation(CAInterfaceOrientationLandscape);
+        }
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        {
+            this->setStatusBarOrientation(CAInterfaceOrientationLandscape);
+        }
+            break;
+        default:
+            break;
+    }
 }
 
 CCEGLView::~CCEGLView()

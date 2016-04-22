@@ -35,7 +35,7 @@ public:
 
 	static CAVideoPlayerControlView* createWithFrame(const DRect& rect);
 	static CAVideoPlayerControlView* createWithCenter(const DRect& rect);
-    static CAVideoPlayerControlView* createWithLayout(const DRectLayout& layout);
+    static CAVideoPlayerControlView* createWithLayout(const DLayout& layout);
     
 	CC_SYNTHESIZE(std::string, m_szTitle, Title);
 	CC_PROPERTY(bool, m_bShowBackButton, ShowBackButton);
@@ -47,7 +47,6 @@ public:
 
 protected:
 	virtual bool init();
-	void onSlideTouched(CAControl* control, DPoint point);
 	void onSlideChanged(CAControl* control, DPoint point);
 	void onButtonPause(CAControl* control, DPoint point);
 	void onButtonBack(CAControl* control, DPoint point);
@@ -55,7 +54,6 @@ protected:
 	void buildCtrlViews();
 	void updatePlayButton();
 	std::string formatTimeInterval(float seconds, bool isLeft);
-	void delayContinuePlay(float t);
 
 private:
 	CAVideoPlayerView *m_glView;
@@ -63,7 +61,6 @@ private:
 	CAButton *m_backButton;
 	CASlider *m_playSlider;
 	CALabel *m_playTimeLabel;
-	bool m_bWaitingSlide;
 };
 
 NS_CC_END

@@ -194,6 +194,7 @@ CATextField::CATextField()
 {
     this->setHaveNextResponder(false);
     
+    this->setPoint(DPoint(-5000, -5000));
     CGPoint point = CGPointMake(-5000, -5000);
     m_pTextField = [[IOSTextField alloc]initWithFrame:CGRectMake(point.x, point.y, 100, 40)];
     EAGLView * eaglview = [EAGLView sharedEGLView];
@@ -344,7 +345,7 @@ CATextField* CATextField::createWithCenter(const DRect& rect)
     return NULL;
 }
 
-CATextField* CATextField::createWithLayout(const DRectLayout& layout)
+CATextField* CATextField::createWithLayout(const DLayout& layout)
 {
     CATextField* textField = new CATextField();
     if (textField && textField->initWithLayout(layout))
@@ -361,11 +362,11 @@ bool CATextField::init()
     CAImage* image = CAImage::create("source_material/textField_bg.png");
     DRect capInsets = DRect(image->getPixelsWide()/2 ,image->getPixelsHigh()/2 , 1, 1);
     m_pBackgroundView = CAScale9ImageView::createWithImage(image);
-    m_pBackgroundView->setLayout(DRectLayout(0, 0, 0, 0, DRectLayout::L_R_T_B));
+    m_pBackgroundView->setLayout(DLayoutFill);
     m_pBackgroundView->setCapInsets(capInsets);
     this->insertSubview(m_pBackgroundView, -1);
     
-    m_pImgeView = CAImageView::createWithLayout(DRectLayout(0, 0, 0, 0, DRectLayout::L_R_T_B));
+    m_pImgeView = CAImageView::createWithLayout(DLayoutFill);
     this->addSubview(m_pImgeView);
     m_pImgeView->setTextTag("textField");
 
@@ -400,7 +401,10 @@ void CATextField::setContentSize(const DSize& contentSize)
     rect.size.height =  s_dip_to_px(worldContentSize.height) / scale;
     textField_iOS.frame = rect;
     
-    this->showImage();
+    if (m_bRunning)
+    {
+        this->showImage();
+    }
 }
 
 bool CATextField::ccTouchBegan(CATouch *pTouch, CAEvent *pEvent)

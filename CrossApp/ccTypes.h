@@ -346,6 +346,15 @@ typedef enum
     CAStatusBarStyleLightContent     = 1, // Light content, for use on dark backgrounds
 }CAStatusBarStyle;
 
+typedef enum
+{
+    CAInterfaceOrientationUnknown        = 0,
+    CAInterfaceOrientationPortrait       = 1,
+    CAInterfaceOrientationLandscape      = 2,
+}CAInterfaceOrientation;
+
+static const char* CAApplicationDidChangeStatusBarOrientationNotification = "CAApplicationDidChangeStatusBarOrientationNotification";
+
 /**
  * This header is used for defining event types using in CANotificationCenter
  */

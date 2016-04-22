@@ -52,7 +52,7 @@ CAImageView* CAImageView::createWithCenter(const DRect& rect)
 	return NULL;
 }
 
-CAImageView* CAImageView::createWithLayout(const CrossApp::DRectLayout &layout)
+CAImageView* CAImageView::createWithLayout(const CrossApp::DLayout &layout)
 {
     CAImageView * pRet = new CAImageView();
     if (pRet && pRet->initWithLayout(layout))
@@ -116,9 +116,9 @@ void CAImageView::updateByImageViewScaleType()
     CC_RETURN_IF(m_bUpdateByImageViewScaleType);
     m_bUpdateByImageViewScaleType = true;
     
-    DSize viewSize = DSize(m_obContentSize);
-    DRect rect = DRect(m_obRect);
+    DSize viewSize = m_obContentSize;
     DSize imageSize = m_pobImage->getContentSize();
+    DRect rect = DRect(m_obRect);
     float viewRatio = viewSize.width / viewSize.height;
     float imageRatio = imageSize.width / imageSize.height;
     
@@ -149,13 +149,17 @@ void CAImageView::updateByImageViewScaleType()
         {
             if (imageRatio > viewRatio)
             {
+                rect.size.height = imageSize.height;
                 rect.size.width = imageSize.height * viewRatio;
                 rect.origin.x = (imageSize.width - rect.size.width) / 2;
+                rect.origin.y = 0;
             }
             else if (imageRatio < viewRatio)
             {
+                rect.size.width = imageSize.width;
                 rect.size.height = imageSize.width / viewRatio;
                 rect.origin.y = (imageSize.height - rect.size.height) / 2;
+                rect.origin.x = 0;
             }
         }
             break;
@@ -185,7 +189,7 @@ void CAImageView::updateByImageViewScaleType()
             rect.size = viewSize;
             this->setFrame(rect);
         }
-        else
+        else if (m_eLayoutType == 1)
         {
             DRect rect = this->getCenter();
             rect.size = viewSize;
@@ -198,7 +202,7 @@ void CAImageView::updateByImageViewScaleType()
 void CAImageView::setContentSize(const DSize & contentSize)
 {
     if (CAViewAnimation::areAnimationsEnabled()
-         && CAViewAnimation::areBeginAnimations())
+        && CAViewAnimation::areBeginAnimations())
     {
         CAViewAnimation::getInstance()->setContentSize(contentSize, this);
     }
@@ -207,14 +211,14 @@ void CAImageView::setContentSize(const DSize & contentSize)
         m_obContentSize = contentSize;
         m_obAnchorPointInPoints.x = m_obContentSize.width * m_obAnchorPoint.x;
         m_obAnchorPointInPoints.y = m_obContentSize.height * m_obAnchorPoint.y;
-        
-        this->updateByImageViewScaleType();
-        
+
         CAVector<CAView*>::iterator itr;
         for (itr=m_obSubviews.begin(); itr!=m_obSubviews.end(); itr++)
         {
             (*itr)->reViewlayout(m_obContentSize);
         }
+        
+        this->updateByImageViewScaleType();
         this->updateDraw();
     }
 }
@@ -315,7 +319,7 @@ CAView* CAImageView::copy()
     {
         pReturn->setFrame(this->getFrame());
     }
-    else
+    else if (m_eLayoutType == 1)
     {
         pReturn->setCenter(this->getCenter());
     }

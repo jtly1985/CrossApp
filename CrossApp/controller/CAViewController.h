@@ -198,7 +198,7 @@ protected:
     
 protected:
     
-    void createWithContainer(CAViewController* viewController);
+    void createWithContainer(CAViewController* viewController, const DLayout& layout);
     
     void popBack();
     
@@ -315,11 +315,7 @@ protected:
     
     void tabBarHiddenAnimation(float delay, float now, float total);
     
-    DPoint getTabBarOpenPoint();
-    
-    DPoint getTabBarTakeBackPoint();
-    
-    DPoint getTabBarNowPoint();
+    int getTabBarNowY();
     
 protected:
     

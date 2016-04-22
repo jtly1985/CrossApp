@@ -16,7 +16,7 @@ class CDNewsAboutTableCell : public CATableViewCell
 public:
     CDNewsAboutTableCell();
     virtual ~CDNewsAboutTableCell();
-    static CDNewsAboutTableCell* create(const std::string& identifier, const DRect& _rect = DRectZero);
+    static CDNewsAboutTableCell* create(const std::string& identifier);
     virtual void highlightedTableViewCell();
     virtual void selectedTableViewCell();
 public:
@@ -45,11 +45,12 @@ public:
     virtual unsigned int tableViewHeightForRowAtIndexPath(CATableView* table, unsigned int section, unsigned int row);
     virtual unsigned int tableViewHeightForHeaderInSection(CATableView* table, unsigned int section);
     virtual unsigned int tableViewHeightForFooterInSection(CATableView* table, unsigned int section);
+    
 public:
+    
     void deleteCallBack(float dt);
     CAView* _waitview;
     CAActivityIndicatorView* p_pLoading;
-    DSize winSize;
     CATableView* p_TableView;
     float _filesize;
     float _tempfilesize;

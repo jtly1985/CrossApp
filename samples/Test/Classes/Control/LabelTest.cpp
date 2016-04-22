@@ -1,5 +1,6 @@
 
 #include "LabelTest.h"
+#include "CDUIShowAutoCollectionView.h"
 
 LabelTest::LabelTest()
 {
@@ -13,109 +14,161 @@ LabelTest::~LabelTest()
     drawer->setTouchMoved(true);
 }
 
-void LabelTest::viewDidLoad()
+int LabelNum = 0;
+
+void CDUIShowAutoCollectionView::LabelRightBtnRightcallback(CAControl* control, DPoint point)
 {
-    this->getView()->setColor(CAColor_gray);
-    
-    showNum = 2;
-    pageViewIndex = 1;
-    showIndex = 0;
-    VIEWLIST.clear();
-    
-    CALabel* label1 = CALabel::create();
-    label1->setTag(1);
-    label1->setLayout(DRectLayout(100, 100, 150, 40, DRectLayout::L_R_T_H));
-    
-    CALabel* label2 = CALabel::create();
-    label2->setTag(2);
-    label2->setLayout(DRectLayout(100, 100, 300, 40, DRectLayout::L_R_T_H));
-    
-    CALabel* label3 = CALabel::create();
-    label3->setTag(3);
-    label3->setLayout(DRectLayout(100, 100, 450, 40, DRectLayout::L_R_T_H));
-    
-    CALabel* label4 = CALabel::create();
-    label4->setTag(4);
-    label4->setLayout(DRectLayout(100, 100, 600, 40, DRectLayout::L_R_T_H));
-    
-    int tag = label1->getTag();
-    for (int i=1; i<5; i++)
+    if (showLabelNavigationBar >= 2)
     {
-        std::string s = "Hello World";
+        showLabelNavigationBar = 0;
         
-        std::u32string c;
-        StringUtils::UTF8ToUTF32(s, c);
-        c += 0x1F604;
-        
-        std::string cc;
-        StringUtils::UTF32ToUTF8(c, cc);
-        
-        if (tag==1) {
-            label1->setText(cc);
-            label1->setColor(CAColor_red);
-            label1->setFontName("c:/x.ttf");
-            label1->setFontSize(36);
-            label1->setTextAlignment(CATextAlignmentCenter);
-            label1->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
-            label1->setUnderLine(true);
-        }else if(tag==2){
-            label2->setText(cc);
-            label2->setColor(CAColor_red);
-            label2->setFontName("c:/x.ttf");
-            label2->setFontSize(36);
-            label2->setTextAlignment(CATextAlignmentCenter);
-            label2->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
-            label2->setBold(true);
-        }else if(tag==3){
-            label3->setText(cc);
-            label3->setColor(CAColor_red);
-            label3->setFontName("c:/x.ttf");
-            label3->setFontSize(36);
-            label3->setTextAlignment(CATextAlignmentCenter);
-            label3->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
-            label3->setItalics(true);
-        }else if(tag==4){
-            label4->setText(cc);
-            label4->setColor(CAColor_red);
-            label4->setFontName("c:/x.ttf");
-            label4->setFontSize(36);
-            label4->setTextAlignment(CATextAlignmentCenter);
-            label4->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
-            label4->setText("Enable Copy");
-            label4->setEnableCopy(true);
-        }
-        tag++;
+        LabelNum = showLabelNavigationBar;
+    }
+    else
+    {
+        LabelNum = ++showLabelNavigationBar;
     }
     
-    CAView* view = CAView::createWithLayout(DRectLayout(0, 0, 0, 100, DRectLayout::L_R_T_B));
-    view->addSubview(label1);
-    view->addSubview(label2);
-    view->addSubview(label3);
-    view->addSubview(label4);
-    view->setColor(CAColor_gray);
-    VIEWLIST.pushBack(view);
-    
-    CALabel* label6 = CALabel::create();
-    label6->setLayout(DRectLayout(50, 50, 300, 300, DRectLayout::L_R_T_H));
-    label6->setColor(CAColor_red);
-    label6->setFontName("c:/x.ttf");
-    label6->setFontSize(36);
-    label6->setTextAlignment(CATextAlignmentCenter);
-    label6->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
-    label6->setTag(6);
-    label6->setUnderLine(true);
-    label6->setBold(true);
-    label6->setItalics(true);
-    label6->setLineSpacing(20);
-    label6->setText("Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World");
+    LabelTest* ViewContrllerLabelTest = new LabelTest();
+    ViewContrllerLabelTest->init();
+    ViewContrllerLabelTest->setNavigationBarItem(LabelNavigationBar);
+    ViewContrllerLabelTest->autorelease();
+    RootWindow::getInstance()->getRootNavigationController()->replaceViewController(ViewContrllerLabelTest, false);
+}
 
-    CAView* view6 = CAView::createWithLayout(DRectLayout(0, 0, 0, 100, DRectLayout::L_R_T_B));
-    view6->addSubview(label6);
-    view6->setColor(CAColor_gray);
-    VIEWLIST.pushBack(view6);
+void LabelTest::viewDidLoad()
+{
+    std::string s = "Hello World";
     
-    showUI();
-    p_PageViewVec->setViews(VIEWLIST);
+    std::u32string c;
+    StringUtils::UTF8ToUTF32(s, c);
+    c += 0x1F604;
+    
+    std::string cc;
+    StringUtils::UTF32ToUTF8(c, cc);
+    
+    if (LabelNum == 0)
+    {
+        CAFont Font;
+        Font.fontSize = 36;
+        Font.color = CAColor_red;
+        Font.fontName = "c:/x.ttf";
+        
+        CALabel* label = CALabel::create();
+        label->setText(cc);
+        label->setFont(Font);
+        label->setTextAlignment(CATextAlignmentCenter);
+        label->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
+        label->setLayout(DLayout(DHorizontalLayout_L_R(100, 100), DVerticalLayout_H_C(40, 0.16)));
+    
+        CAFont Font1;
+        Font1.fontSize = 36;
+        Font1.color = CAColor_red;
+        Font1.fontName = "c:/x.ttf";
+        Font1.underLine = true;
+        
+        CALabel* label1 = CALabel::create();
+        label1->setText(cc);
+        label1->setFont(Font1);
+        label1->setTextAlignment(CATextAlignmentCenter);
+        label1->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
+        label1->setLayout(DLayout(DHorizontalLayout_L_R(100, 100), DVerticalLayout_H_C(40, 0.32)));
+        
+        CALabel* label2 = CALabel::create();
+        CAFont Font2;
+        Font2.fontSize = 36;
+        Font2.color = CAColor_red;
+        Font2.fontName = "c:/x.ttf";
+        Font2.bold = true;
+        label2->setText(cc);
+        label2->setFont(Font2);
+        label2->setTextAlignment(CATextAlignmentCenter);
+        label2->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
+        label2->setLayout(DLayout(DHorizontalLayout_L_R(100, 100), DVerticalLayout_H_C(40, 0.48)));
+    
+        CALabel* label3 = CALabel::create();
+        CAFont Font3;
+        Font3.fontSize = 36;
+        Font3.color = CAColor_red;
+        Font3.fontName = "c:/x.ttf";
+        Font3.italics = true;
+        label3->setText(cc);
+        label3->setFont(Font3);
+        label3->setTextAlignment(CATextAlignmentCenter);
+        label3->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
+        label3->setLayout(DLayout(DHorizontalLayout_L_R(100, 100), DVerticalLayout_H_C(40, 0.64)));
+    
+        CALabel* label4 = CALabel::create();
+        CAFont Font4;
+        Font4.fontSize = 36;
+        Font4.color = CAColor_red;
+        label4->setText("Enable Copy");
+        label4->setFont(Font4);
+        label4->setTextAlignment(CATextAlignmentCenter);
+        label4->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
+        label4->setLayout(DLayout(DHorizontalLayout_L_R(100, 100), DVerticalLayout_H_C(40, 0.8)));
+    
+        CAView* view = CAView::createWithLayout(DLayoutFill);
+        view->addSubview(label);
+        view->addSubview(label1);
+        view->addSubview(label2);
+        view->addSubview(label3);
+        view->addSubview(label4);
+        view->setColor(CAColor_gray);
+        
+        this->getView()->addSubview(view);
+    }
+    else if (LabelNum == 1)
+    {
+        CALabel* label5 = CALabel::create();
+        CAFont Font5;
+        Font5.fontSize = 36;
+        Font5.color = CAColor_red;
+        Font5.fontName = "c:/x.ttf";
+        Font5.bold = true;
+        Font5.italics = true;
+        Font5.underLine = true;
+        label5->setText("Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World Hello World");
+        label5->setFont(Font5);
+        label5->setLineSpacing(20);
+        label5->setTextAlignment(CATextAlignmentCenter);
+        label5->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
+        label5->setLayout(DLayout(DHorizontalLayout_L_R(50, 50), DVerticalLayout_T_H(300, 300)));
+    
+        CAView* view1 = CAView::createWithLayout(DLayoutFill);
+        view1->addSubview(label5);
+        view1->setColor(CAColor_gray);
+        
+        this->getView()->addSubview(view1);
+    }
+    else
+    {
+    
+        CARichLabel* RichLabel = CARichLabel::createWithLayout(DLayout(DHorizontalLayout_L_R(100, 100), DVerticalLayout_T_B(200, 200)));
+        CAFont RichLabelFont;
+        RichLabelFont.bold = true;
+        RichLabelFont.fontSize = 42;
+        RichLabelFont.color = CAColor_red;
+        RichLabel->appendText("Hello World Hello World Hello World Hello World Hello World Hello World ", RichLabelFont);
+        
+        CAFont RichLabelFont1;
+        RichLabelFont1.italics = true;
+        RichLabelFont1.fontSize = 42;
+        RichLabelFont1.color = CAColor_red;
+        RichLabel->appendText("Hello World Hello World Hello World Hello World Hello World Hello World ", RichLabelFont1);
+        
+        CAFont RichLabelFont2;
+        RichLabelFont2.underLine = true;
+        RichLabelFont2.fontSize = 42;
+        RichLabelFont2.color = CAColor_red;
+        RichLabel->appendText("Hello World Hello World Hello World Hello World Hello World Hello World ", RichLabelFont2);
+    
+        CAView* view2 = CAView::createWithLayout(DLayoutFill);
+        view2->addSubview(RichLabel);
+        view2->setColor(CAColor_gray);
+        
+        this->getView()->addSubview(view2);
+    }
 }
 
 void LabelTest::viewDidUnload()

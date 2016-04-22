@@ -33,12 +33,12 @@ CDListViewTest::~CDListViewTest()
 
 bool CDListViewTest::init()
 {
-    CAListView* listView = CAListView::createWithLayout(DRectLayout(0,0,0,120,DRectLayout::L_R_T_H));
+    CAListView* listView = CAListView::createWithLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_T_H(0, 120)));
     listView->setListViewDelegate(this);
     listView->setListViewDataSource(this);
     listView->setAllowsSelection(true);
     listView->setAllowsMultipleSelection(false);
-    listView->setListViewOrientation(CAListViewOrientationHorizontal);
+    listView->setOrientation(CAListView::Horizontal);
     //listView->setShowsHorizontalScrollIndicator(false);
     listView->setShowsScrollIndicators(false);
     
@@ -47,7 +47,7 @@ bool CDListViewTest::init()
     return true;
 }
 
-CDListViewTest* CDListViewTest::createWithLayout(const CrossApp::DRectLayout &layout)
+CDListViewTest* CDListViewTest::createWithLayout(const CrossApp::DLayout &layout)
 {
     CDListViewTest* pRet = new CDListViewTest();
     if (pRet && pRet->initWithLayout(layout))
@@ -85,7 +85,7 @@ CAListViewCell* CDListViewTest::listViewCellAtIndex(CAListView *listView, const 
     if (!cell)
     {
         cell = CAListViewCell::create("ListViewCell");
-        CALabel* test = CALabel::createWithLayout(DRectLayout(0,0,0,0,DRectLayout::L_R_T_B));
+        CALabel* test = CALabel::createWithLayout(DLayoutFill);
         test->setColor(ccc4(51, 204, 255, 255));
         test->setTextAlignment(CATextAlignmentCenter);
         test->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
@@ -115,19 +115,19 @@ ListViewTest::~ListViewTest()
 
 void ListViewTest::viewDidLoad()
 {
-    CDListViewTest* listview1 = CDListViewTest::createWithLayout(DRectLayout(0,0,0,120,DRectLayout::L_R_T_H));
+    CDListViewTest* listview1 = CDListViewTest::createWithLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_T_H(0, 120)));
     this->getView()->addSubview(listview1);
-    
-    this->getView()->addSubview(CAView::createWithLayout(DRectLayout(0,0,120,5,DRectLayout::L_R_T_H), CAColor_green));
-    
-    p_ListView = CAListView::createWithLayout(DRectLayout(0,0,150,0,DRectLayout::L_R_T_B));
+
+    this->getView()->addSubview(CAView::createWithLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_T_H(120, 5)), CAColor_green));
+
+    p_ListView = CAListView::createWithLayout(DLayout(DHorizontalLayoutFill, DVerticalLayout_T_B(130, 0)));
     p_ListView->setListViewDelegate(this);
     p_ListView->setListViewDataSource(this);
     p_ListView->setAllowsSelection(true);
     p_ListView->setAllowsMultipleSelection(false);
     p_ListView->setListViewOrientation(CAListViewOrientationVertical);
     p_ListView->setShowsScrollIndicators(true);
-    
+
     p_ListView->setSeparatorColor(CAColor_gray);
     this->getView()->addSubview(p_ListView);
     
@@ -160,13 +160,12 @@ unsigned int ListViewTest::listViewHeightForIndex(CAListView *listView, unsigned
 
 CAListViewCell* ListViewTest::listViewCellAtIndex(CAListView *listView, const DSize& cellSize, unsigned int index)
 {
-    DSize _size = cellSize;
     CAListViewCell* cell = (CAListViewCell*)listView->dequeueReusableCellWithIdentifier("ListViewCell");
     if (cell==NULL)
     {
         cell = CAListViewCell::create("ListViewCell");
         
-        CALabel* test = CALabel::createWithLayout(DRectLayout(0,200,0,0,DRectLayout::L_W_T_B));
+        CALabel* test = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_W(0, 200), DVerticalLayoutFill));
         test->setColor(ccc4(51, 204, 255, 255));
         test->setTextAlignment(CATextAlignmentCenter);
         test->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
@@ -174,7 +173,7 @@ CAListViewCell* ListViewTest::listViewCellAtIndex(CAListView *listView, const DS
         test->setTag(100);
         cell->addSubview(test);
         
-        CAButton* btn = CAButton::createWithLayout(DRectLayout(50,120,20,20,DRectLayout::R_W_T_B), CAButtonTypeSquareRect);
+        CAButton* btn = CAButton::createWithLayout(DLayout(DHorizontalLayout_W_C(100, 0.85), DVerticalLayout_H_C(50, 0.5)), CAButtonTypeSquareRect);
         btn->setTitleForState(CAControlStateNormal, "btn");
         btn->setTag(200);
         cell->addSubview(btn);

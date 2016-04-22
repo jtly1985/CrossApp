@@ -40,11 +40,12 @@ public:
 	static CAVideoPlayerView* create();
 	static CAVideoPlayerView* createWithFrame(const DRect& rect);
 	static CAVideoPlayerView* createWithCenter(const DRect& rect);
-    static CAVideoPlayerView* createWithLayout(const DRectLayout& layout);
+    static CAVideoPlayerView* createWithLayout(const DLayout& layout);
     
 	void setFullPath(const std::string& szPath, bool showFirstFrame = true);
 	void setUrl(const std::string& szUrl, bool showFirstFrame = true);
-	bool isDecoderInited() { return m_isDecoderInited; }
+	bool isDecoderInited() { return (m_iDecoderInited==1); }
+	bool isWaitSetPos() { return m_isSetPosWaiting; }
 	void play();
 	void pause();
 	bool isPlaying();
@@ -53,6 +54,7 @@ public:
 	float getPosition();
 	void setPosition(float position);
 	void setFirstVideoFrame();
+	
 
 	CC_SYNTHESIZE(CAVideoPlayerViewDelegate*, m_pPlayerViewDelegate, PlayerViewDelegate);
 
@@ -91,10 +93,11 @@ private:
 
 	std::string m_cszPath;
 
-	bool m_isDecoderInited;
+	int m_iDecoderInited;
 	bool m_isShowFirstFrame;
 	bool m_isPlaying;
 	bool m_isBuffered;
+	bool m_isSetPosWaiting;
 
 	float m_fMinBufferedDuration;
 	float m_fMaxBufferedDuration;

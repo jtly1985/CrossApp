@@ -7,14 +7,14 @@
 
 USING_NS_CC;
 
-class CDListViewTest : public CAView ,CAListViewDelegate,CAListViewDataSource
+class CDListViewTest : public CAView, CAListViewDelegate, CAListViewDataSource
 {
 public:
     CDListViewTest();
     virtual ~CDListViewTest();
     
     virtual bool init();
-    static CDListViewTest* createWithLayout(const DRectLayout& layout);
+    static CDListViewTest* createWithLayout(const DLayout& layout);
     
 public:
     virtual void listViewDidSelectCellAtIndex(CAListView *listView, unsigned int index);

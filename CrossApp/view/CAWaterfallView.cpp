@@ -73,7 +73,7 @@ CAWaterfallView* CAWaterfallView::createWithCenter(const DRect& rect)
 	return NULL;
 }
 
-CAWaterfallView* CAWaterfallView::createWithLayout(const CrossApp::DRectLayout &layout)
+CAWaterfallView* CAWaterfallView::createWithLayout(const CrossApp::DLayout &layout)
 {
     CAWaterfallView* pWaterfallView = new CAWaterfallView();
     if (pWaterfallView && pWaterfallView->initWithLayout(layout))
@@ -259,7 +259,7 @@ void CAWaterfallView::ccTouchEnded(CATouch *pTouch, CAEvent *pEvent)
 		CAViewAnimation::removeAnimations(m_s__StrID);
 
 		int deselectedIndex = -1;
-		int selectedIndex = m_pHighlightedWaterfallCells->getItemIndex();
+		int selectedIndex = m_pHighlightedWaterfallCells->getItem();
 
 		if (m_pSelectedWaterfallCells.count(selectedIndex) > 0 && m_bAllowsMultipleSelection)
 		{
@@ -339,7 +339,7 @@ void CAWaterfallView::mouseMoved(CATouch* pTouch, CAEvent* pEvent)
 
 				if (m_pHighlightedWaterfallCells)
 				{
-					int index = m_pHighlightedWaterfallCells->getItemIndex();
+					int index = m_pHighlightedWaterfallCells->getItem();
 					if (m_pSelectedWaterfallCells.count(index))
 					{
 						m_pHighlightedWaterfallCells->setControlStateHighlighted();
@@ -363,7 +363,7 @@ void CAWaterfallView::mouseMovedOutSide(CATouch* pTouch, CAEvent* pEvent)
 {
 	if (m_pHighlightedWaterfallCells)
 	{
-		int index = m_pHighlightedWaterfallCells->getItemIndex();
+		int index = m_pHighlightedWaterfallCells->getItem();
 		if (m_pSelectedWaterfallCells.count(index))
 		{
 			m_pHighlightedWaterfallCells->setControlStateSelected();
@@ -402,20 +402,21 @@ void CAWaterfallView::reloadViewSizeData()
 	int nItemCount = m_pWaterfallViewDataSource->numberOfItems(this);
 	for (int i = 0; i < nItemCount; i++)
 	{
-		unsigned int index = getCurColumnIndex();
-
-		int x = index*(nColumnWidth + m_nColumnMargin) + m_nColumnMargin;
-		int y = m_nColumnHeightVect[index];
-
 		unsigned int nColumnHeight = m_pWaterfallViewDataSource->waterfallViewHeightForItemAtIndex(this, i);
 
-		m_rUsedWaterfallCellRects[i] = DRect(x, y + viewHeight, nColumnWidth, nColumnHeight);
-		m_mpUsedWaterfallCells[i] = NULL;
+		unsigned int index = getCurColumnIndex();
 
 		if (m_nColumnHeightVect[index] != 0)
 		{
 			m_nColumnHeightVect[index] += m_nItemMargin;
 		}
+
+		int x = index*(nColumnWidth + m_nColumnMargin) + m_nColumnMargin;
+		int y = m_nColumnHeightVect[index];
+
+		m_rUsedWaterfallCellRects[i] = DRect(x, y + viewHeight, nColumnWidth, nColumnHeight);
+		m_mpUsedWaterfallCells[i] = NULL;
+
 		m_nColumnHeightVect[index] += nColumnHeight;
 	}
 	viewHeight += getMaxColumnValue();
@@ -423,7 +424,7 @@ void CAWaterfallView::reloadViewSizeData()
 	m_nWaterfallFooterHeight = m_pWaterfallViewDataSource->waterfallViewHeightForFooter(this);
 	if (m_nWaterfallFooterHeight > 0)
 	{
-		setWaterfallFooterView(m_pWaterfallViewDataSource->waterfallViewSectionViewForFooter(this, CCSizeMake(nColumnWidth, m_nWaterfallFooterHeight)));
+		setWaterfallFooterView(m_pWaterfallViewDataSource->waterfallViewSectionViewForFooter(this, DSize(nColumnWidth, m_nWaterfallFooterHeight)));
 		viewHeight += m_nWaterfallFooterHeight;
 		viewHeight += m_nItemMargin;
 	}
@@ -444,7 +445,7 @@ void CAWaterfallView::clearData()
 		CC_CONTINUE_IF(cell == NULL);
 		m_mpFreedWaterfallCells[cell->getReuseIdentifier()].pushBack(cell);
 		cell->removeFromSuperview();
-		cell->resetWaterfallViewCell();
+		cell->resetCell();
 	}
 	m_vpUsedWaterfallCells.clear();
 
@@ -545,7 +546,7 @@ void CAWaterfallView::recoveryWaterfallCell()
 
 		m_mpFreedWaterfallCells[cell->getReuseIdentifier()].pushBack(cell);
 		cell->removeFromSuperview();
-		cell->resetWaterfallViewCell();
+		cell->resetCell();
 		itr->second = NULL;
 		m_vpUsedWaterfallCells.eraseObject(cell);
 	}
@@ -570,7 +571,7 @@ void CAWaterfallView::loadWaterfallCell()
 		CAWaterfallViewCell* cell = m_pWaterfallViewDataSource->waterfallCellAtIndex(this, cellRect.size, r);
 		if (cell)
 		{
-			cell->m_nItemIndex = r;
+			cell->m_nItem = r;
 			cell->updateDisplayedAlpha(this->getAlpha());
 			this->addSubview(cell);
 			cell->setFrame(cellRect);
@@ -665,21 +666,15 @@ CAWaterfallViewCell* CAWaterfallView::getHighlightWaterfallCell()
 #pragma CAWaterfallViewCell
 
 CAWaterfallViewCell::CAWaterfallViewCell()
-: m_pBackgroundView(NULL)
-, m_nItemIndex(UINT_NONE)
-, m_bControlStateEffect(true)
-, m_bAllowsSelected(true)
+: m_nItem(UINT_NONE)
 {
-	this->setHaveNextResponder(true);
-	this->setDisplayRange(false);
-	this->setColor(CAColor_clear);
+
 }
 
 
 CAWaterfallViewCell::~CAWaterfallViewCell()
 {
-	CC_SAFE_RELEASE_NULL(m_pContentView);
-	CC_SAFE_RELEASE_NULL(m_pBackgroundView);
+
 }
 
 CAWaterfallViewCell* CAWaterfallViewCell::create(const std::string& reuseIdentifier)
@@ -692,67 +687,6 @@ CAWaterfallViewCell* CAWaterfallViewCell::create(const std::string& reuseIdentif
 	}
 	CC_SAFE_DELETE(cell);
 	return NULL;
-}
-
-bool CAWaterfallViewCell::initWithReuseIdentifier(const std::string& reuseIdentifier)
-{
-	m_pContentView = new CAView();
-    m_pContentView->setLayout(DRectLayout(0, 0, 0, 0));
-	this->addSubview(m_pContentView);
-
-	this->setBackgroundView(CAView::create());
-	this->setReuseIdentifier(reuseIdentifier);
-	this->normalWaterfallViewCell();
-
-	return true;
-}
-
-void CAWaterfallViewCell::setBackgroundView(CrossApp::CAView *var)
-{
-    CC_RETURN_IF(var == m_pBackgroundView);
-    m_pContentView->removeSubview(m_pBackgroundView);
-    CC_SAFE_RETAIN(var);
-    CC_SAFE_RELEASE(m_pBackgroundView);
-	m_pBackgroundView = var;
-	CC_RETURN_IF(m_pBackgroundView == NULL);
-    m_pBackgroundView->setLayout(DRectLayout(0, 0, 0, 0));
-	m_pContentView->insertSubview(m_pBackgroundView, -1);
-}
-
-CAView* CAWaterfallViewCell::getBackgroundView()
-{
-	return m_pBackgroundView;
-}
-
-void CAWaterfallViewCell::setControlState(const CAControlState& var)
-{
-	if (m_bAllowsSelected == false && var == CAControlStateSelected)
-	{
-		CAControl::setControlState(CAControlStateNormal);
-	}
-	else
-	{
-		CAControl::setControlState(var);
-	}
-
-	CC_RETURN_IF(m_bControlStateEffect == false);
-	switch (m_eControlState)
-	{
-	case CAControlStateNormal:
-		this->normalWaterfallViewCell();
-		break;
-	case CAControlStateHighlighted:
-		this->highlightedWaterfallViewCell();
-		break;
-	case CAControlStateSelected:
-		this->selectedWaterfallViewCell();
-		break;
-	case CAControlStateDisabled:
-		this->disabledWaterfallViewCell();
-		break;
-	default:
-		break;
-	}
 }
 
 void CAWaterfallViewCell::normalWaterfallViewCell()
@@ -781,15 +715,29 @@ void CAWaterfallViewCell::disabledWaterfallViewCell()
 	m_pBackgroundView->setColor(ccc4(127, 127, 127, 255));
 }
 
-void CAWaterfallViewCell::resetWaterfallViewCell()
+void CAWaterfallViewCell::normalCell()
 {
-	this->setVisible(true);
-	this->normalWaterfallViewCell();
-	this->recoveryWaterfallViewCell();
-	m_pContentView->setScale(1.0f);
-	m_pContentView->setFrame(this->getBounds());
-	m_pContentView->setRotation(0);
+    this->normalWaterfallViewCell();
 }
 
+void CAWaterfallViewCell::highlightedCell()
+{
+    this->highlightedWaterfallViewCell();
+}
+
+void CAWaterfallViewCell::selectedCell()
+{
+    this->selectedWaterfallViewCell();
+}
+
+void CAWaterfallViewCell::disabledCell()
+{
+    this->disabledWaterfallViewCell();
+}
+
+void CAWaterfallViewCell::recoveryCell()
+{
+    this->recoveryWaterfallViewCell();
+}
 
 NS_CC_END

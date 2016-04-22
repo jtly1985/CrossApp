@@ -71,7 +71,7 @@ public:
     
     static CAScrollView* createWithCenter(const DRect& rect);
     
-    static CAScrollView* createWithLayout(const DRectLayout& layout);
+    static CAScrollView* createWithLayout(const DLayout& layout);
     
     virtual bool init();
 
@@ -211,7 +211,7 @@ protected:
     
     bool isFooterRefreshing();
     
-    void setContainerFrame(const DPoint& point, const DSize& size = DSizeZero);
+    void setContainerPoint(const DPoint& point, const DSize& size = DSize(-1, -1));
     
     virtual void setContentSize(const DSize& var);
     

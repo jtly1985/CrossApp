@@ -111,7 +111,7 @@ void CATouchController::passingTouchesViews(float dt)
 {
     CAView* view = dynamic_cast<CAView*>(CAApplication::getApplication()->getTouchDispatcher()->getFirstResponder());
     bool isContainsFirstPoint = view && view->convertRectToWorldSpace(view->getBounds()).containsPoint(m_tFirstPoint);
-    if (!isContainsFirstPoint && view)
+    if (!isContainsFirstPoint && view && view->isTouchEnabled() && view->isVisible())
     {
         this->touchBeganWithResponder(view);
     }
@@ -190,7 +190,7 @@ void CATouchController::touchBegan()
 
 void CATouchController::touchMoved()
 {
-    CC_RETURN_IF(ccpDistance(m_tFirstPoint, m_pTouch->getLocation()) < 16);
+    CC_RETURN_IF(ccpDistance(m_tFirstPoint, m_pTouch->getLocation()) < 20);
     
     m_tFirstPoint = DPointZero;
 

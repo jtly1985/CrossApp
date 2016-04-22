@@ -12,33 +12,74 @@
 
 MenuViewController::MenuViewController()
 {
-
+    CANotificationCenter::sharedNotificationCenter()->addObserver(this, callfuncO_selector(MenuViewController::changeStatusBarOrientation), CAApplicationDidChangeStatusBarOrientationNotification, NULL);
 }
 
 MenuViewController::~MenuViewController()
 {
-    
+    CANotificationCenter::sharedNotificationCenter()->removeObserver(this, CAApplicationDidChangeStatusBarOrientationNotification);
 }
 
 void MenuViewController::viewDidLoad()
 {
-    this->getView()->removeAllSubviews();
     this->getView()->setColor(CAColor_clear);
     
-    tableView = CATableView::createWithLayout(DRectLayout(0,0,450,0,DRectLayout::L_R_T_B));
+    DLayout tableViewLayout;
+    DLayout logoLayout;
+    const CAInterfaceOrientation& orientation = CAApplication::getApplication()->getStatusBarOrientation();
+    if (orientation == CAInterfaceOrientationLandscape)
+    {
+        tableViewLayout = DLayout(DHorizontalLayoutFill, DVerticalLayout_B_H(0, 400));
+        logoLayout = DLayout(DHorizontalLayout_W_C(261, 0.5), DVerticalLayout_T_H(120, 258));
+    }
+    else
+    {
+        tableViewLayout = DLayout(DHorizontalLayoutFill, DVerticalLayout_T_B(450, 0));
+        logoLayout = DLayout(DHorizontalLayout_W_C(261, 0.5), DVerticalLayout_T_H(120, 258));
+    }
+    
+    
+    tableView = CATableView::createWithLayout(DLayoutFill);
+    tableView->setLayout(tableViewLayout);
     tableView->setAllowsSelection(true);
     tableView->setTableViewDelegate(this);
     tableView->setTableViewDataSource(this);
     tableView->setBackgroundColor(CAColor_clear);
     tableView->setSeparatorColor(ccc4(166, 166, 166,100));
     tableView->setShowsScrollIndicators(false);
+    tableView->setScrollEnabled(false);
     this->getView()->addSubview(tableView);
+    
+    m_pLogo = CAImageView::createWithImage(CAImage::create("image/logo.png"));
+    m_pLogo->setLayout(logoLayout);
+    this->getView()->addSubview(m_pLogo);
     
 }
 
 void MenuViewController::viewDidUnload()
 {
 
+}
+
+void MenuViewController::changeStatusBarOrientation(CAObject* obj)
+{
+    const CAInterfaceOrientation& orientation = CAApplication::getApplication()->getStatusBarOrientation();
+    
+    DLayout tableViewLayout;
+    DLayout logoLayout;
+    if (orientation == CAInterfaceOrientationLandscape)
+    {
+        tableViewLayout = DLayout(DHorizontalLayoutFill, DVerticalLayout_B_H(0, 400));
+        logoLayout = DLayout(DHorizontalLayout_W_C(261, 0.5), DVerticalLayout_T_H(120, 258));
+    }
+    else
+    {
+        tableViewLayout = DLayout(DHorizontalLayoutFill, DVerticalLayout_T_B(450, 0));
+        logoLayout = DLayout(DHorizontalLayout_W_C(261, 0.5), DVerticalLayout_T_H(120, 258));
+    }
+    
+    tableView->setLayout(tableViewLayout);
+    m_pLogo->setLayout(logoLayout);
 }
 
 void MenuViewController::tableViewDidSelectRowAtIndexPath(CATableView* table, unsigned int section, unsigned int row)
@@ -79,14 +120,12 @@ void MenuViewController::tableViewDidSelectRowAtIndexPath(CATableView* table, un
 
 CATableViewCell* MenuViewController::tableCellAtIndex(CATableView* table, const DSize& cellSize, unsigned int section, unsigned int row)
 {
-//    DSize _size = cellSize;
     CATableViewCell* cell = table->dequeueReusableCellWithIdentifier("CrossApp");
     if (cell == NULL)
     {
         cell = CATableViewCell::create("CrossApp");
         cell->setBackgroundView(NULL);
-//        CALabel* test = CALabel::createWithCenter(DRect(_size.width/2+30,_size.height/2,_size.width,_size.height));
-        CALabel* test = CALabel::createWithLayout(DRectLayout(50,0,0,0,DRectLayout::L_R_T_B));
+        CALabel* test = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_R(50, 0), DVerticalLayoutFill));
         test->setTextAlignment(CATextAlignmentLeft);
         test->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
         test->setFontSize(32);
@@ -94,8 +133,7 @@ CATableViewCell* MenuViewController::tableCellAtIndex(CATableView* table, const 
         test->setTag(100);
         cell->addSubview(test);
         
-//        CAImageView* arrow = CAImageView::createWithCenter(DRect(_size.width-64,_size.height/2,64,64));
-        CAImageView* arrow = CAImageView::createWithLayout(DRectLayout(0,64,20,64,DRectLayout::R_W_T_H));
+        CAImageView* arrow = CAImageView::createWithLayout(DLayout(DHorizontalLayout_R_W(0, 64), DVerticalLayout_T_H(20, 64)));
         arrow->setTag(101);
         cell->addSubview(arrow);
     }

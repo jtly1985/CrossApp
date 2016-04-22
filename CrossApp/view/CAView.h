@@ -11,8 +11,9 @@
 
 #include <iostream>
 #include "ccMacros.h"
-#include "shaders/CATransformation.h"
 #include "CCGL.h"
+#include "shaders/CATransformation.h"
+#include "basics/CALayout.h"
 #include "shaders/ccGLStateCache.h"
 #include "shaders/CAGLProgram.h"
 #include "kazmath/kazmath.h"
@@ -20,6 +21,7 @@
 #include "platform/CCAccelerometerDelegate.h"
 #include "basics/CAResponder.h"
 #include "images/CAImageCache.h"
+
 
 #ifdef EMSCRIPTEN
 #include "base_nodes/CCGLBufferedNode.h"
@@ -35,7 +37,9 @@ class CCComponent;
 class CAImage;
 class CAContentContainer;
 class CABatchView;
+class CAScrollView;
 class CAViewAnimation;
+class CARenderImage;
 struct transformValues_;
 
 
@@ -79,9 +83,9 @@ public:
     
     static CAView* createWithCenter(const DRect& rect, const CAColor4B& color4B);
     
-    static CAView* createWithLayout(const DRectLayout& layout);
+    static CAView* createWithLayout(const DLayout& layout);
     
-    static CAView* createWithLayout(const DRectLayout& layout, const CAColor4B& color4B);
+    static CAView* createWithLayout(const DLayout& layout, const CAColor4B& color4B);
     
     static CAView* createWithColor(const CAColor4B& color4B);
     
@@ -95,7 +99,7 @@ public:
     
     virtual bool initWithCenter(const DRect& rect);
     
-    virtual bool initWithLayout(const DRectLayout& layout);
+    virtual bool initWithLayout(const DLayout& layout);
     
     virtual bool initWithColor(const CAColor4B& color4B);
 
@@ -161,9 +165,9 @@ public:
     
     virtual DPoint getCenterOrigin();
 
-    virtual void setLayout(const DRectLayout& layout);
+    virtual void setLayout(const DLayout& layout);
     
-    const DRectLayout& getLayout();
+    const DLayout& getLayout();
     
     virtual void setVisible(bool visible);
 
@@ -295,7 +299,7 @@ public:
 
     virtual void update(float fDelta);
     
-    virtual void reViewlayout(const DSize& contentSize);
+    virtual void reViewlayout(const DSize& contentSize, bool allowAnimation = false);
     
     inline void setBlendFunc(ccBlendFunc blendFunc) { m_sBlendFunc = blendFunc; }
     
@@ -393,7 +397,7 @@ protected:
     
     DSize m_obContentSize;             ///< untransformed size of the node
     
-    DRectLayout m_obLayout;
+    DLayout m_obLayout;
     
     CATransformation m_sAdditionalTransform; ///< transform
     CATransformation m_sTransform;     ///< transform
@@ -452,6 +456,10 @@ protected:
     ccBlendFunc        m_sBlendFunc;            /// It's required for CAImageProtocol inheritance
     
     CAImage*       m_pobImage;            /// CAImage object that is used to render the sprite
+    
+    friend class CARenderImage;
+    
+    friend class CAScrollView;
     
     friend class CAViewAnimation;
 };

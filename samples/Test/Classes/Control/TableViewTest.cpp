@@ -1,10 +1,10 @@
 
 #include "TableViewTest.h"
-#include "support/device/CADevice.h"
-#include "CrossAppExt.h"
+//#include "support/device/CADevice.h"
+//#include "CrossAppExt.h"
 
 USING_NS_CC;
-USING_NS_CC_EXT;
+//USING_NS_CC_EXT;
 
 std::vector<std::string> sectionTitle;
 
@@ -42,7 +42,7 @@ void ETableViewCell::selectedTableViewCell()
 
 void ETableViewCell::initWithCell()
 {
-    CALabel* test = CALabel::createWithLayout(DRectLayout(0,0,0,0,DRectLayout::L_R_T_B));
+    CALabel* test = CALabel::createWithLayout(DLayoutFill);
     test->setColor(ccc4(34, 151, 254, 255));
     test->setTextAlignment(CATextAlignmentCenter);
     test->setVerticalTextAlignmet(CAVerticalTextAlignmentCenter);
@@ -63,19 +63,19 @@ ETableView::~ETableView(){
 bool ETableView::init(const CrossApp::DRect &rect)
 {
     size = rect.size;
-    p_TableView = CATableView::createWithLayout(DRectLayout(0,0,0,0,DRectLayout::L_R_T_B));
+    p_TableView = CATableView::createWithLayout(DLayoutFill);
     p_TableView->setAllowsSelection(true);
     p_TableView->setTableViewDelegate(this);
     p_TableView->setTableViewDataSource(this);
     p_TableView->setShowsScrollIndicators(false);
     p_TableView->setSeparatorViewHeight(0);
-    p_TableView->setScrollEnabled(false);
+    p_TableView->setScrollEnabled(true);
     p_TableView->setSeparatorColor(CAColor_clear);
     this->addSubview(p_TableView);
     return true;
 }
 
-ETableView* ETableView::createWithLayout(const CrossApp::DRectLayout &layout)
+ETableView* ETableView::createWithLayout(const CrossApp::DLayout &layout)
 {
     ETableView* tableView = new ETableView();
     if (tableView && tableView->initWithLayout(layout))
@@ -104,7 +104,7 @@ CATableViewCell* ETableView::tableCellAtIndex(CATableView* table, const DSize& c
     if (cell == NULL)
     {
         cell = ETableViewCell::create("CrossApp");
-        cell->setLayout(DRectLayout(0,0,0,0,DRectLayout::L_R_T_B));
+        cell->setLayout(DLayoutFill);
         cell->initWithCell();
     }
     char order[20] = "";
@@ -190,16 +190,17 @@ void TableViewTest::viewDidLoad()
     VIEWLIST.clear();
     this->getView()->setColor(CAColor_gray);
 
-    p_TableView = CATableView::createWithLayout(DRectLayout(0,50,0,0,DRectLayout::L_R_T_B));
+    p_TableView = CATableView::createWithLayout(DLayout(DHorizontalLayout_L_R(0, 50), DVerticalLayoutFill));
     p_TableView->setTableViewDataSource(this);
     p_TableView->setTableViewDelegate(this);
     p_TableView->setAllowsSelection(true);
     p_TableView->setAllowsMultipleSelection(false);
     p_TableView->setShowsScrollIndicators(false);
     p_TableView->setSelectRowAtIndexPath(2, 1);
+    
     this->getView()->addSubview(p_TableView);
     
-    ETableView* p_TableView1 = ETableView::createWithLayout(DRectLayout(0,50,0,0,DRectLayout::R_W_T_B));
+    ETableView* p_TableView1 = ETableView::createWithLayout(DLayout(DHorizontalLayout_R_W(0, 50), DVerticalLayoutFill));
     p_TableView1->init(this->getView()->getBounds());
     p_TableView1->setETableViewDelegate(this);
     this->getView()->addSubview(p_TableView1);
@@ -211,7 +212,7 @@ void TableViewTest::viewDidUnload()
     // e.g. self.myOutlet = nil;
 }
 
-void TableViewTest::etableViewDidSelectRowAtIndexPath(CATableView* table, unsigned int section, unsigned int row)
+void TableViewTest::etableViewDidSelectRowAtIndexPath(CATableView* table, unsigned int section, unsigned int row) //1
 {
     //CCLog("ssss====%d",row);
     p_TableView->setContentOffset(DPoint(0,313*row), false);
@@ -234,11 +235,11 @@ CATableViewCell* TableViewTest::tableCellAtIndex(CATableView* table, const DSize
     if (cell == NULL)
     {
         cell = CATableViewCell::create("CrossApp");
-        CAImageView* image = CAImageView::createWithLayout(DRectLayout(0,0,0,0,DRectLayout::L_R_T_B));
+        CAImageView* image = CAImageView::createWithLayout(DLayoutFill);
         image->setImage(CAImage::create("source_material/second_2.png"));
         cell->addSubview(image);
         
-        CALabel* cellText = CALabel::createWithLayout(DRectLayout(150,10,10,10,DRectLayout::L_R_T_B));
+        CALabel* cellText = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_R(150, 10), DVerticalLayout_T_B(10, 10)));
         cellText->setTag(100);
         cellText->setFontSize(30);
         cellText->setTextAlignment(CATextAlignmentLeft);
@@ -259,7 +260,7 @@ CAView* TableViewTest::tableViewSectionViewForHeaderInSection(CATableView* table
     CAView* view = CAView::createWithColor(CAColor_gray);
     
     DSize _size = viewSize;
-    CALabel* header = CALabel::createWithLayout(DRectLayout(50,0,0,0,DRectLayout::L_R_T_B));
+    CALabel* header = CALabel::createWithLayout(DLayout(DHorizontalLayout_L_R(50, 0), DVerticalLayoutFill));
     header->setText(head);
     header->setFontSize(30);
     header->setColor(CAColor_white);

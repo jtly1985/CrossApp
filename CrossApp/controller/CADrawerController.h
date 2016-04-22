@@ -23,8 +23,7 @@ public:
     virtual ~CADrawerController();
     
     virtual bool initWithController(CAViewController* leftViewController,
-                                    CAViewController* rightViewController,
-                                    float division);
+                                    CAViewController* rightViewController);
     
     void replaceRightViewController(CAViewController* rightViewController);
     
@@ -44,8 +43,6 @@ public:
     
     virtual void ccTouchCancelled(CATouch *pTouch, CAEvent *pEvent);
     
-    CC_PROPERTY(CAView*, m_pBackgroundView, BackgroundView);
-    
     CC_PROPERTY_IS(bool, m_bTouchMoved, TouchMoved);
     
     CC_SYNTHESIZE(bool, m_bEffect3D, Effect3D);
@@ -55,6 +52,16 @@ public:
     virtual bool isReachBoundaryLeft();
     
     virtual bool isReachBoundaryRight();
+    
+    void setBackgroundImage(CAImage* var);
+    
+    CC_DEPRECATED_ATTRIBUTE void setBackgroundView(CAView* var);
+    
+    CC_DEPRECATED_ATTRIBUTE CAView* getBackgroundView();
+    
+    CC_DEPRECATED_ATTRIBUTE virtual bool initWithController(CAViewController* leftViewController,
+                                    CAViewController* rightViewController,
+                                    float division);
     
 protected:
     
@@ -69,6 +76,10 @@ protected:
     void scheduleShowAction(float dt);
     
     void scheduleHideAction(float dt);
+    
+    void changeStatusBarOrientation(CAObject* obj);
+    
+    void achieveLayout();
     
 protected:
     
@@ -90,6 +101,8 @@ protected:
     
     CAView* m_pContainer[2];
     
+    CAView* m_pBackgroundView;
+    
     float m_fDivision;
     
     float m_fCurrDivision;
@@ -100,8 +113,8 @@ protected:
     
     bool m_bAnimation;
     
-    DRectLayout m_rShowLayout[2];
-    DRectLayout m_rHideLayout[2];
+    DLayout m_rShowLayout[2];
+    DLayout m_rHideLayout[2];
 };
 
 NS_CC_END

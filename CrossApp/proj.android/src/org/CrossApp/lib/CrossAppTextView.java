@@ -72,12 +72,10 @@ import android.widget.TextView.OnEditorActionListener;
 	private OnEditorActionListener onEditorActionListener = null;
 	private ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = null;
 	
-	//浠ｇ�����璋����瑕�
 	private boolean isSetText = false;
 	private String  beforeTextString = "";
 	private int selection = 0;
 	
-	//������寮瑰�洪�����
 	private boolean isShowKey = false;
 	private boolean isKeyAction = false;
 	
@@ -109,6 +107,18 @@ import android.widget.TextView.OnEditorActionListener;
     	}
 	}
 	
+	public static void updateImage()
+	{
+		Set<Integer> keys = (Set<Integer>) dict.keySet() ; 
+		Iterator<Integer> iterator = keys.iterator() ; 
+		while (iterator.hasNext())
+		{
+			Integer key = iterator.next();
+			CrossAppTextView textView = dict.get(key);
+			textView.getImage();
+		}
+	}
+	
 	public static void reload()
 	{
 		handler = new Handler(Looper.myLooper());
@@ -120,8 +130,8 @@ import android.widget.TextView.OnEditorActionListener;
 		while (iterator.hasNext())
 		{
 			Integer key = iterator.next();
-			CrossAppTextView textField = dict.get(key);
-			textField.initWithTextView(key);
+			CrossAppTextView textView = dict.get(key);
+			textView.initWithTextView(key);
 		}
 	}
 	
@@ -440,8 +450,8 @@ import android.widget.TextView.OnEditorActionListener;
         		textView.clearFocus();
         		
         		FrameLayout.LayoutParams params = (FrameLayout.LayoutParams)textView.getLayoutParams(); 
-            	params.leftMargin = -5000; 
-            	params.topMargin = -5000;
+        		params.leftMargin = -10000; 
+            	params.topMargin = 0;
             	textView.setLayoutParams(params);
         		
             	TimerTask task = new TimerTask()
@@ -533,8 +543,8 @@ import android.widget.TextView.OnEditorActionListener;
 		textView.setImeOptions(keyBoardReturnType);
 		
     	FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT) ; 
-    	params.leftMargin = -5000; 
-    	params.topMargin = -5000;
+    	params.leftMargin = -10000; 
+    	params.topMargin = 0;
     	params.width = contentSizeW;
     	params.height = contentSizeH;
     	layout.addView(textView, params) ;
@@ -545,7 +555,6 @@ import android.widget.TextView.OnEditorActionListener;
     		@Override
 			public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3)
 			{
-				//起始位置， 删除长度，增加长度
 				// TODO Auto-generated method stub
 				if (isSetText)
 				{
@@ -557,12 +566,10 @@ import android.widget.TextView.OnEditorActionListener;
 				String  changedText = "";
 				if (arg3 > 0) 
 				{
-					//只是添加
 					changedText = string.substring(arg1, arg1 + arg3);
 				}
 				else 
 				{
-					//只是删除
 					changedText = "";
 				}
 
@@ -578,15 +585,7 @@ import android.widget.TextView.OnEditorActionListener;
 					isSetText = true;
 					textView.setText(string);
 					textView.setSelection(selection - arg2 + arg3);
-//					context.runOnGLThread(new Runnable() 
-//	            	{
-//	                    @Override
-//	                    public void run()
-//	                    {
-//	                    	ByteBuffer textBuffer = ByteBuffer.wrap(textView.getText().toString().getBytes());
-//	    					text(mykey, textBuffer.array(), textBuffer.array().length);
-//	                    }
-//	                });
+
 					ByteBuffer textBuffer = ByteBuffer.wrap(textView.getText().toString().getBytes());
 					text(mykey, textBuffer.array(), textBuffer.array().length);
 					isSetText = false;

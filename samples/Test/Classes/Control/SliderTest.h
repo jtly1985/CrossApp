@@ -7,7 +7,7 @@
 
 USING_NS_CC;
 
-class SliderTest: public CAViewController, public CAPageViewDelegate
+class SliderTest: public CAViewController 
 {
     
 public:
@@ -24,15 +24,6 @@ protected:
     
 public:
     
-    CAPageView* p_PageViewVec;
-    
-    int showIndex;
-    int showNum;
-    int pageViewIndex;
-    
-    CAPageControl* pageControl;
-    CAVector<CAView* > VIEWLIST;
-    
     CALabel* sliderValue1;
     CALabel* sliderValue2;
     CASlider* slider;
@@ -40,16 +31,6 @@ public:
 public:
     
     void sliderValueChange(CAControl* btn, DPoint point);
-    
-    void showUI();
-    
-    void buttonControlCallBack(CAControl* btn, DPoint point);
-    
-    void pageViewDidBeginTurning(CAPageView* pageView);
-    
-    void pageViewDidEndTurning(CAPageView* pageView);
-    
-    void pageViewDidSelectPageAtIndex(CAPageView* pageView, unsigned int index, const DPoint& point);
     
 };
 

@@ -128,11 +128,14 @@
 		B039AF981BC7C52D002C1FDB /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B039AF971BC7C52D002C1FDB /* CoreAudio.framework */; };
 		B0621BE51AC3B871005EBCA7 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = B0621BDB1AC3B871005EBCA7 /* fonts */; };
 		B0621E221AC3ECB0005EBCA7 /* RootWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0621E1F1AC3ECB0005EBCA7 /* RootWindow.cpp */; };
+		B082115B1CABC472003E5EF5 /* WaterfallViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B08211581CABC472003E5EF5 /* WaterfallViewTest.cpp */; };
 		B08BBA231BC8A6A50044340B /* CDNewsImageController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B08BBA211BC8A6A50044340B /* CDNewsImageController.cpp */; };
+		B093DB4F1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B093DB4B1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.cpp */; };
+		B093DB501CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B093DB4D1CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.cpp */; };
 		B0A030081A8E071D0005CB8F /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A030071A8E071D0005CB8F /* CoreBluetooth.framework */; };
 		B0CA5A2B1A77A79900BECD89 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CA5A2A1A77A79900BECD89 /* SystemConfiguration.framework */; };
 		B0CA5A2D1A77A7A000BECD89 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0CA5A2C1A77A7A000BECD89 /* MediaPlayer.framework */; };
-		B0CF18C01CA236A1007AA1B0 /* ActivityIndicatorViewTest1111.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF188D1CA236A1007AA1B0 /* ActivityIndicatorViewTest1111.cpp */; };
+		B0CF18C01CA236A1007AA1B0 /* ActivityIndicatorViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF188D1CA236A1007AA1B0 /* ActivityIndicatorViewTest.cpp */; };
 		B0CF18C11CA236A1007AA1B0 /* AlertViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF188E1CA236A1007AA1B0 /* AlertViewTest.cpp */; };
 		B0CF18C21CA236A1007AA1B0 /* ButtonTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18901CA236A1007AA1B0 /* ButtonTest.cpp */; };
 		B0CF18C31CA236A1007AA1B0 /* CollectionViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18921CA236A1007AA1B0 /* CollectionViewTest.cpp */; };
@@ -142,7 +145,7 @@
 		B0CF18C71CA236A1007AA1B0 /* LabelTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF189A1CA236A1007AA1B0 /* LabelTest.cpp */; };
 		B0CF18C81CA236A1007AA1B0 /* ListViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF189C1CA236A1007AA1B0 /* ListViewTest.cpp */; };
 		B0CF18C91CA236A1007AA1B0 /* PageViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF189E1CA236A1007AA1B0 /* PageViewTest.cpp */; };
-		B0CF18CA1CA236A1007AA1B0 /* PickerViewTest1111.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18A11CA236A1007AA1B0 /* PickerViewTest1111.cpp */; };
+		B0CF18CA1CA236A1007AA1B0 /* PickerViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18A11CA236A1007AA1B0 /* PickerViewTest.cpp */; };
 		B0CF18CB1CA236A1007AA1B0 /* ProgressTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18A21CA236A1007AA1B0 /* ProgressTest.cpp */; };
 		B0CF18CC1CA236A1007AA1B0 /* RenderImageTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18A41CA236A1007AA1B0 /* RenderImageTest.cpp */; };
 		B0CF18CD1CA236A1007AA1B0 /* Scale9ImageViewTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0CF18A61CA236A1007AA1B0 /* Scale9ImageViewTest.cpp */; };
@@ -169,7 +172,6 @@
 		B0DB99281B14531900710982 /* information.json in Resources */ = {isa = PBXBuildFile; fileRef = B0DB99251B14531900710982 /* information.json */; };
 		B0DB99291B14531900710982 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = B0DB99261B14531900710982 /* test.html */; };
 		B0FFB61D1CA53ABF00A5CDBE /* CDUIShowAutoCollectionView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0FFB61B1CA53ABF00A5CDBE /* CDUIShowAutoCollectionView.cpp */; };
-		B0FFB6201CA54B0D00A5CDBE /* UiShow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0FFB61E1CA54B0D00A5CDBE /* UiShow.cpp */; };
 		BF171245129291EC00B8313A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB012928DE900B8313A /* OpenGLES.framework */; };
 		BF1712461292920000B8313A /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB212928DE900B8313A /* libxml2.dylib */; };
 		BF1712471292920000B8313A /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BF170DB412928DE900B8313A /* libz.dylib */; };
@@ -444,15 +446,21 @@
 		B0621BDB1AC3B871005EBCA7 /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		B0621E1F1AC3ECB0005EBCA7 /* RootWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RootWindow.cpp; path = ../Classes/RootWindow.cpp; sourceTree = "<group>"; };
 		B0621E201AC3ECB0005EBCA7 /* RootWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootWindow.h; path = ../Classes/RootWindow.h; sourceTree = "<group>"; };
+		B08211581CABC472003E5EF5 /* WaterfallViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaterfallViewTest.cpp; path = ../Classes/Control/WaterfallViewTest.cpp; sourceTree = "<group>"; };
+		B08211591CABC472003E5EF5 /* WaterfallViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaterfallViewTest.h; path = ../Classes/Control/WaterfallViewTest.h; sourceTree = "<group>"; };
 		B08BBA211BC8A6A50044340B /* CDNewsImageController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDNewsImageController.cpp; path = ../Classes/CDNewsImageController.cpp; sourceTree = "<group>"; };
 		B08BBA221BC8A6A50044340B /* CDNewsImageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDNewsImageController.h; path = ../Classes/CDNewsImageController.h; sourceTree = "<group>"; };
+		B093DB4B1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AutoCollectionViewHorizontalTest.cpp; path = ../Classes/Control/AutoCollectionViewHorizontalTest.cpp; sourceTree = "<group>"; };
+		B093DB4C1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCollectionViewHorizontalTest.h; path = ../Classes/Control/AutoCollectionViewHorizontalTest.h; sourceTree = "<group>"; };
+		B093DB4D1CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AutoCollectionViewVerticalTest.cpp; path = ../Classes/Control/AutoCollectionViewVerticalTest.cpp; sourceTree = "<group>"; };
+		B093DB4E1CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AutoCollectionViewVerticalTest.h; path = ../Classes/Control/AutoCollectionViewVerticalTest.h; sourceTree = "<group>"; };
 		B0A030071A8E071D0005CB8F /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		B0ABA50B1ACBD3FA00B0DEC5 /* libcurl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcurl.a; path = ../../../CrossApp/the_third_party/curl/prebuilt/ios/libcurl.a; sourceTree = "<group>"; };
 		B0AD93E519207CA300EA40BB /* AppMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppMacros.h; path = ../Classes/AppMacros.h; sourceTree = "<group>"; };
 		B0CA5A2A1A77A79900BECD89 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		B0CA5A2C1A77A7A000BECD89 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		B0CF188C1CA236A1007AA1B0 /* ActivityIndicatorViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActivityIndicatorViewTest.h; path = ../Classes/Control/ActivityIndicatorViewTest.h; sourceTree = "<group>"; };
-		B0CF188D1CA236A1007AA1B0 /* ActivityIndicatorViewTest1111.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActivityIndicatorViewTest1111.cpp; path = ../Classes/Control/ActivityIndicatorViewTest1111.cpp; sourceTree = "<group>"; };
+		B0CF188D1CA236A1007AA1B0 /* ActivityIndicatorViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ActivityIndicatorViewTest.cpp; path = ../Classes/Control/ActivityIndicatorViewTest.cpp; sourceTree = "<group>"; };
 		B0CF188E1CA236A1007AA1B0 /* AlertViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlertViewTest.cpp; path = ../Classes/Control/AlertViewTest.cpp; sourceTree = "<group>"; };
 		B0CF188F1CA236A1007AA1B0 /* AlertViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertViewTest.h; path = ../Classes/Control/AlertViewTest.h; sourceTree = "<group>"; };
 		B0CF18901CA236A1007AA1B0 /* ButtonTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ButtonTest.cpp; path = ../Classes/Control/ButtonTest.cpp; sourceTree = "<group>"; };
@@ -472,7 +480,7 @@
 		B0CF189E1CA236A1007AA1B0 /* PageViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PageViewTest.cpp; path = ../Classes/Control/PageViewTest.cpp; sourceTree = "<group>"; };
 		B0CF189F1CA236A1007AA1B0 /* PageViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PageViewTest.h; path = ../Classes/Control/PageViewTest.h; sourceTree = "<group>"; };
 		B0CF18A01CA236A1007AA1B0 /* PickerViewTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PickerViewTest.h; path = ../Classes/Control/PickerViewTest.h; sourceTree = "<group>"; };
-		B0CF18A11CA236A1007AA1B0 /* PickerViewTest1111.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PickerViewTest1111.cpp; path = ../Classes/Control/PickerViewTest1111.cpp; sourceTree = "<group>"; };
+		B0CF18A11CA236A1007AA1B0 /* PickerViewTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PickerViewTest.cpp; path = ../Classes/Control/PickerViewTest.cpp; sourceTree = "<group>"; };
 		B0CF18A21CA236A1007AA1B0 /* ProgressTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ProgressTest.cpp; path = ../Classes/Control/ProgressTest.cpp; sourceTree = "<group>"; };
 		B0CF18A31CA236A1007AA1B0 /* ProgressTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProgressTest.h; path = ../Classes/Control/ProgressTest.h; sourceTree = "<group>"; };
 		B0CF18A41CA236A1007AA1B0 /* RenderImageTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderImageTest.cpp; path = ../Classes/Control/RenderImageTest.cpp; sourceTree = "<group>"; };
@@ -522,8 +530,6 @@
 		B0DB99261B14531900710982 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		B0FFB61B1CA53ABF00A5CDBE /* CDUIShowAutoCollectionView.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CDUIShowAutoCollectionView.cpp; path = ../Classes/CDUIShowAutoCollectionView.cpp; sourceTree = "<group>"; };
 		B0FFB61C1CA53ABF00A5CDBE /* CDUIShowAutoCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDUIShowAutoCollectionView.h; path = ../Classes/CDUIShowAutoCollectionView.h; sourceTree = "<group>"; };
-		B0FFB61E1CA54B0D00A5CDBE /* UiShow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UiShow.cpp; path = ../Classes/Control/UiShow.cpp; sourceTree = "<group>"; };
-		B0FFB61F1CA54B0D00A5CDBE /* UiShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UiShow.h; path = ../Classes/Control/UiShow.h; sourceTree = "<group>"; };
 		BF170DB012928DE900B8313A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		BF170DB212928DE900B8313A /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		BF170DB412928DE900B8313A /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
@@ -721,10 +727,14 @@
 		3EA1531A1C9F8B3800984D91 /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				B0FFB61E1CA54B0D00A5CDBE /* UiShow.cpp */,
-				B0FFB61F1CA54B0D00A5CDBE /* UiShow.h */,
+				B093DB4B1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.cpp */,
+				B093DB4C1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.h */,
+				B093DB4D1CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.cpp */,
+				B093DB4E1CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.h */,
+				B08211581CABC472003E5EF5 /* WaterfallViewTest.cpp */,
+				B08211591CABC472003E5EF5 /* WaterfallViewTest.h */,
 				B0CF188C1CA236A1007AA1B0 /* ActivityIndicatorViewTest.h */,
-				B0CF188D1CA236A1007AA1B0 /* ActivityIndicatorViewTest1111.cpp */,
+				B0CF188D1CA236A1007AA1B0 /* ActivityIndicatorViewTest.cpp */,
 				B0CF188E1CA236A1007AA1B0 /* AlertViewTest.cpp */,
 				B0CF188F1CA236A1007AA1B0 /* AlertViewTest.h */,
 				B0CF18901CA236A1007AA1B0 /* ButtonTest.cpp */,
@@ -744,7 +754,7 @@
 				B0CF189E1CA236A1007AA1B0 /* PageViewTest.cpp */,
 				B0CF189F1CA236A1007AA1B0 /* PageViewTest.h */,
 				B0CF18A01CA236A1007AA1B0 /* PickerViewTest.h */,
-				B0CF18A11CA236A1007AA1B0 /* PickerViewTest1111.cpp */,
+				B0CF18A11CA236A1007AA1B0 /* PickerViewTest.cpp */,
 				B0CF18A21CA236A1007AA1B0 /* ProgressTest.cpp */,
 				B0CF18A31CA236A1007AA1B0 /* ProgressTest.h */,
 				B0CF18A41CA236A1007AA1B0 /* RenderImageTest.cpp */,
@@ -1144,9 +1154,9 @@
 				3EF48A4D1B7C7E0B00179E69 /* gameswf_disasm.cpp in Sources */,
 				3EF48A1F1B7C7E0B00179E69 /* tu_loadlib.cpp in Sources */,
 				3EF48A0E1B7C7E0B00179E69 /* configvars.cpp in Sources */,
-				B0CF18CA1CA236A1007AA1B0 /* PickerViewTest1111.cpp in Sources */,
+				B0CF18CA1CA236A1007AA1B0 /* PickerViewTest.cpp in Sources */,
 				3EF48A3D1B7C7E0B00179E69 /* as_netstream.cpp in Sources */,
-				B0CF18C01CA236A1007AA1B0 /* ActivityIndicatorViewTest1111.cpp in Sources */,
+				B0CF18C01CA236A1007AA1B0 /* ActivityIndicatorViewTest.cpp in Sources */,
 				3EF48A211B7C7E0B00179E69 /* tu_timer.cpp in Sources */,
 				3EF48A361B7C7E0B00179E69 /* as_loadvars.cpp in Sources */,
 				B0CF18C21CA236A1007AA1B0 /* ButtonTest.cpp in Sources */,
@@ -1178,7 +1188,9 @@
 				3EF48A3B1B7C7E0B00179E69 /* as_mouse_event.cpp in Sources */,
 				3EF48A101B7C7E0B00179E69 /* dlmalloc.c in Sources */,
 				15A3DAEB1682F8A6002FB0C5 /* CDAudioManager.m in Sources */,
+				B093DB4F1CBCDECD00E98AD6 /* AutoCollectionViewHorizontalTest.cpp in Sources */,
 				3EF48A261B7C7E0B00179E69 /* CAFlash.cpp in Sources */,
+				B093DB501CBCDECD00E98AD6 /* AutoCollectionViewVerticalTest.cpp in Sources */,
 				B0CF18C51CA236A1007AA1B0 /* GifViewTest.cpp in Sources */,
 				3EF48A4B1B7C7E0B00179E69 /* gameswf_canvas.cpp in Sources */,
 				3EF48A491B7C7E0B00179E69 /* gameswf_avm2_jit.cpp in Sources */,
@@ -1259,6 +1271,7 @@
 				3EF48A6A1B7C7E0B00179E69 /* gameswf_types.cpp in Sources */,
 				3EF48A471B7C7E0B00179E69 /* gameswf_as_sprite.cpp in Sources */,
 				3EF48A421B7C7E0B00179E69 /* as_sound.cpp in Sources */,
+				B082115B1CABC472003E5EF5 /* WaterfallViewTest.cpp in Sources */,
 				3EF48A581B7C7E0B00179E69 /* gameswf_listener.cpp in Sources */,
 				3EF48A651B7C7E0B00179E69 /* gameswf_sprite_def.cpp in Sources */,
 				B0CF18CB1CA236A1007AA1B0 /* ProgressTest.cpp in Sources */,
@@ -1267,7 +1280,6 @@
 				B0621E221AC3ECB0005EBCA7 /* RootWindow.cpp in Sources */,
 				B0DB988C1B1452EC00710982 /* CDShowNewsImage.cpp in Sources */,
 				3EF48A4C1B7C7E0B00179E69 /* gameswf_character.cpp in Sources */,
-				B0FFB6201CA54B0D00A5CDBE /* UiShow.cpp in Sources */,
 				3EF48A301B7C7E0B00179E69 /* as_date.cpp in Sources */,
 				B0CF18D31CA236A1007AA1B0 /* TabBarControllerTest.cpp in Sources */,
 				3EF48A0D1B7C7E0B00179E69 /* component_hackery.cpp in Sources */,

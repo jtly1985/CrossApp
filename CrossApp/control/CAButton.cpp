@@ -130,7 +130,7 @@ CAButton* CAButton::createWithCenter(const DRect& rect, const CAButtonType& butt
     return NULL;
 }
 
-CAButton* CAButton::createWithLayout(const CrossApp::DRectLayout &layout, const CAButtonType &buttonType)
+CAButton* CAButton::createWithLayout(const CrossApp::DLayout &layout, const CAButtonType &buttonType)
 {
     
     CAButton* btn = new CAButton(buttonType);
@@ -243,7 +243,7 @@ void CAButton::setBackgroundViewForState(const CAControlState& controlState, CAV
         CC_SAFE_RELEASE(m_pBackgroundView[controlState]);
         if (var)
         {
-            var->setLayout(DRectLayout(0, 0, 0, 0));
+            var->setLayout(DLayoutFill);
         }
         m_pBackgroundView[controlState] = var;
         this->setControlState(m_eControlState);
@@ -558,7 +558,7 @@ void CAButton::setControlState(const CAControlState& var)
     }
     else if (image && title.compare("") != 0)
     {
-        DSize size = this->getBounds().size;
+        DSize size = m_obContentSize;
         DSize iSize = image->getContentSize();
         float scaleX = size.width / iSize.width * 0.5f;
         float scaleY = size.height / iSize.height * 0.45f;
@@ -582,7 +582,7 @@ void CAButton::setControlState(const CAControlState& var)
     }
     if (m_bDefineImageOffset)
     {
-        imageViewCenter.origin = ccpMult(this->getBounds().size, 0.5f);
+        imageViewCenter.origin = ccpMult(m_obContentSize, 0.5f);
         imageViewCenter.origin = ccpAdd(imageViewCenter.origin, m_pImageOffset);
     }
     m_pImageView->setCenter(imageViewCenter);
@@ -602,7 +602,7 @@ void CAButton::setControlState(const CAControlState& var)
     
     if(m_bDefineTitleOffset)
     {
-        labelCenter.origin = ccpMult(this->getBounds().size, 0.5f);
+        labelCenter.origin = ccpMult(m_obContentSize, 0.5f);
         labelCenter.origin = ccpAdd(labelCenter.origin, m_pTitleOffset);
     }
     m_pLabel->setCenter(labelCenter);

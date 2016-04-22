@@ -27,6 +27,8 @@ protected:
     
     void viewDidUnload();
     
+    void changeStatusBarOrientation(CAObject* obj);
+    
 public:
     virtual void tableViewDidSelectRowAtIndexPath(CATableView* table, unsigned int section, unsigned int row);
     
@@ -37,6 +39,8 @@ public:
 private:
 
     CATableView* tableView;
+    
+    CAImageView* m_pLogo;
 };
 
 #endif /* defined(__Test__MenuViewController__) */
