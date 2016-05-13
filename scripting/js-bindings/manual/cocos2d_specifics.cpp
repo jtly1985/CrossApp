@@ -178,6 +178,78 @@ void JSTouchDelegate::mouseScrollWheel(CATouch* pTouch, float off_x, float off_y
 
 }
 
+//bool js_cocos2dx_Sprite_create(JSContext *cx, uint32_t argc, jsval *vp)
+//{
+//    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+//    bool ok = true;
+//
+//    do {
+//        if (argc == 1) {
+//            std::string arg0;
+//            ok &= jsval_to_std_string(cx, args.get(0), &arg0);
+//            if (!ok) { ok = true; break; }
+//            cocos2d::Sprite* ret = cocos2d::Sprite::create(arg0);
+//            jsval jsret = JSVAL_NULL;
+//            do {
+//                if (ret) {
+//                    js_proxy_t *jsProxy = js_get_or_create_proxy<cocos2d::Sprite>(cx, (cocos2d::Sprite*)ret);
+//                    jsret = OBJECT_TO_JSVAL(jsProxy->obj);
+//                } else {
+//                    jsret = JSVAL_NULL;
+//                }
+//            } while (0);
+//            args.rval().set(jsret);
+//            return true;
+//        }
+//    } while (0);
+//
+//    do {
+//        if (argc == 0) {
+//            cocos2d::Sprite* ret = cocos2d::Sprite::create();
+//            jsval jsret = JSVAL_NULL;
+//            do {
+//                if (ret) {
+//                    js_proxy_t *jsProxy = js_get_or_create_proxy<cocos2d::Sprite>(cx, (cocos2d::Sprite*)ret);
+//                    jsret = OBJECT_TO_JSVAL(jsProxy->obj);
+//                } else {
+//                    jsret = JSVAL_NULL;
+//                }
+//            } while (0);
+//            args.rval().set(jsret);
+//            return true;
+//        }
+//    } while (0);
+//
+//    do {
+//        if (argc == 2) {
+//            std::string arg0;
+//            ok &= jsval_to_std_string(cx, args.get(0), &arg0);
+//            if (!ok) { ok = true; break; }
+//            cocos2d::Rect arg1;
+//            ok &= jsval_to_ccrect(cx, args.get(1), &arg1);
+//            if (!ok) { ok = true; break; }
+//            cocos2d::Sprite* ret = cocos2d::Sprite::create(arg0, arg1);
+//            jsval jsret = JSVAL_NULL;
+//            do {
+//                if (ret) {
+//                    js_proxy_t *jsProxy = js_get_or_create_proxy<cocos2d::Sprite>(cx, (cocos2d::Sprite*)ret);
+//                    jsret = OBJECT_TO_JSVAL(jsProxy->obj);
+//                } else {
+//                    jsret = JSVAL_NULL;
+//                }
+//            } while (0);
+//            args.rval().set(jsret);
+//            return true;
+//        }
+//    } while (0);
+//    JS_ReportError(cx, "js_cocos2dx_Sprite_create : wrong number of arguments");
+//    return false;
+//}
+
+//bool js_CrossApp_CAView_create(JSContext *cx, uint32_t argc, jsval *vp){
+//    
+//}
+
 
 //// cc.EventTouch#getTouches
 //bool js_cocos2dx_EventTouch_getTouches(JSContext *cx, uint32_t argc, jsval *vp) {
@@ -2307,33 +2379,33 @@ void JSTouchDelegate::mouseScrollWheel(CATouch* pTouch, float off_x, float off_y
 //    return true;
 //}
 //
-//bool js_cocos2dx_Node_onEnter(JSContext *cx, uint32_t argc, jsval *vp)
-//{
-//    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-//    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-//    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-//    cocos2d::Node* cobj = (cocos2d::Node *)(proxy ? proxy->ptr : NULL);
-//    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_Node_onEnter : Invalid Native Object");
-//    
-//    ScriptingCore::getInstance()->setCalledFromScript(true);
-//    cobj->onEnter();
-//    args.rval().setUndefined();
-//    return true;
-//}
-//
-//bool js_cocos2dx_Node_onExit(JSContext *cx, uint32_t argc, jsval *vp)
-//{
-//    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-//    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-//    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-//    cocos2d::Node* cobj = (cocos2d::Node *)(proxy ? proxy->ptr : NULL);
-//    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_Node_onExit : Invalid Native Object");
-//    
-//    ScriptingCore::getInstance()->setCalledFromScript(true);
-//    cobj->onExit();
-//    args.rval().setUndefined();
-//    return true;
-//}
+bool js_cocos2dx_Node_onEnter(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    CrossApp::CAView* cobj = (CrossApp::CAView *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_Node_onEnter : Invalid Native Object");
+    
+    ScriptingCore::getInstance()->setCalledFromScript(true);
+    cobj->onEnter();
+    args.rval().setUndefined();
+    return true;
+}
+
+bool js_cocos2dx_Node_onExit(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    CrossApp::CAView* cobj = (CrossApp::CAView *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_Node_onExit : Invalid Native Object");
+    
+    ScriptingCore::getInstance()->setCalledFromScript(true);
+    cobj->onExit();
+    args.rval().setUndefined();
+    return true;
+}
 //
 //bool js_cocos2dx_Node_onEnterTransitionDidFinish(JSContext *cx, uint32_t argc, jsval *vp)
 //{
@@ -2368,7 +2440,7 @@ void JSTouchDelegate::mouseScrollWheel(CATouch* pTouch, float off_x, float off_y
 //    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 //    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
 //    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-//    cocos2d::Node* cobj = (cocos2d::Node *)(proxy ? proxy->ptr : NULL);
+//    CrossApp::CAView* cobj = (CrossApp::CAView *)(proxy ? proxy->ptr : NULL);
 //    JSB_PRECONDITION2( cobj, cx, false, "js_cocos2dx_Node_cleanup : Invalid Native Object");
 //    
 //    ScriptingCore::getInstance()->setCalledFromScript(true);
@@ -2376,7 +2448,7 @@ void JSTouchDelegate::mouseScrollWheel(CATouch* pTouch, float off_x, float off_y
 //    args.rval().setUndefined();
 //    return true;
 //}
-//
+
 //bool js_cocos2dx_CCNode_setPosition(JSContext *cx, uint32_t argc, jsval *vp)
 //{
 //    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);

@@ -27,12 +27,12 @@ THE SOFTWARE.
 
 /// @cond DO_NOT_SHOW
 #include <string>
-#include "basice/CAObject.h"
-#include "base/CCScriptSupport.h"
+#include "CAObject.h"
+#include "CCScriptSupport.h"
 
-NS_CC_BEGIN
+//NS_CC_BEGIN
 
-class Node;
+class CAView;
 
 enum {
     kComponentOnEnter,
@@ -61,8 +61,8 @@ public:
     const std::string& getName() const { return _name; }
     virtual void setName(const std::string& name) { _name = name; }
     
-    Node* getOwner() const { return _owner; }
-    virtual void setOwner(Node *owner);
+    CrossApp::CAView* getOwner() const { return _owner; }
+    virtual void setOwner(CrossApp::CAView *owner);
 
     virtual void update(float delta);
     virtual bool serialize(void* r);
@@ -79,7 +79,7 @@ CC_CONSTRUCTOR_ACCESS:
     Component();
 
 protected:
-    Node* _owner;
+    CrossApp::CAView* _owner;
     std::string _name;
     bool _enabled;
     
@@ -88,7 +88,7 @@ protected:
 #endif
 };
 
-NS_CC_END
+//NS_CC_END
 
 /// @endcond
 #endif  // __FUNDATION__CCCOMPONENT_H__

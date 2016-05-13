@@ -26,10 +26,10 @@ THE SOFTWARE.
 #include "CCComponentContainer.h"
 #include "CCComponent.h"
 #include "CAView.h"
+#include "CAScheduler.h"
+//NS_CC_BEGIN
 
-NS_CC_BEGIN
-
-ComponentContainer::ComponentContainer(Node* node)
+ComponentContainer::ComponentContainer(CrossApp::CAView* node)
 : _owner(node)
 {
 }
@@ -54,15 +54,15 @@ Component* ComponentContainer::get(const std::string& name) const
 bool ComponentContainer::add(Component *com)
 {
     bool ret = false;
-    CCASSERT(com != nullptr, "Component must be non-nil");
-    CCASSERT(com->getOwner() == nullptr, "Component already added. It can't be added again");
+    CCAssert(com != nullptr, "Component must be non-nil");
+    CCAssert(com->getOwner() == nullptr, "Component already added. It can't be added again");
     do
     {
         auto componentName = com->getName();
 
         if (_componentMap.find(componentName) != _componentMap.end())
         {
-            CCASSERT(true, "ComponentContainer already have this kind of component");
+            CCAssert(true, "ComponentContainer already have this kind of component");
             break;
         }
         _componentMap[componentName] = com;
@@ -114,7 +114,9 @@ void ComponentContainer::removeAll()
         }
         
         _componentMap.clear();
-        _owner->unscheduleUpdate();
+//        _owner->unscheduleUpdate();
+        CAScheduler::unscheduleAllForTarget(_owner);
+        
     }
 }
 
@@ -148,4 +150,4 @@ void ComponentContainer::onExit()
     }
 }
 
-NS_CC_END
+//NS_CC_END

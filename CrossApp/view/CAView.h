@@ -89,6 +89,7 @@ public:
     
     static CAView* createWithColor(const CAColor4B& color4B);
     
+    
     CAView();
     
     virtual ~CAView();

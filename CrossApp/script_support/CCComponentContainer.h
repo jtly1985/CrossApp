@@ -27,10 +27,10 @@ THE SOFTWARE.
 
 /// @cond DO_NOT_SHOW
 
-#include "base/CCMap.h"
+#include "CASTLContainer.h"
 #include <string>
-
-NS_CC_BEGIN
+#include <unordered_map>
+//NS_CC_BEGIN
 
 class Component;
 class CAView;
@@ -41,7 +41,7 @@ protected:
     /**
      * @js ctor
      */
-    ComponentContainer(Node* node);
+    ComponentContainer(CrossApp::CAView* node);
     
 public:
     /**
@@ -67,12 +67,12 @@ public:
     bool isEmpty() const { return _componentMap.empty(); } 
 private:
     std::unordered_map<std::string, Component*> _componentMap;
-    Node *_owner;
+    CrossApp::CAView *_owner;
     
-    friend class Node;
+    friend class CAView;
 };
 
-NS_CC_END
+//NS_CC_END
 
 /// @endcond
 #endif  // __FUNDATION__CCCOMPONENT_H__

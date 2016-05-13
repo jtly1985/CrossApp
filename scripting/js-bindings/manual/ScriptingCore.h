@@ -33,7 +33,7 @@ public:
     void update(float d);
 };
 
-class ScriptingCore //: public CCScriptEngineProtocol
+class ScriptingCore : public CCScriptEngineProtocol
 {
 private:
     JSRuntime *_rt;//运行时
@@ -56,19 +56,19 @@ public:
      * Gets the script type, for ScriptingCore, it will return `cocos2d::kScriptTypeJavascript`
      * @return `cocos2d::kScriptTypeJavascript`
      */
-    virtual CrossApp::ccScriptType getScriptType() { return CrossApp::kScriptTypeJavascript; };//override
+    virtual CrossApp::ccScriptType getScriptType() override { return CrossApp::kScriptTypeJavascript; };
     
     /**
      * @brief @~english Removes the C++ object's linked JavaScript proxy object from JavaScript context
      * @param obj @~english Object to be removed
      */
-    virtual void removeScriptObjectByObject(CrossApp::CAObject* obj);//override
+    virtual void removeScriptObjectByObject(CrossApp::CAObject* obj) override ; 
     
     /**
      * @brief @~english Useless in ScriptingCore, please use evalString
      * @see evalString
      */
-    virtual int executeString(const char* codes) { return 0; }; //override
+    virtual int executeString(const char* codes) override { return 0; };
     
     
     //Crossapp没有Action需要修改这部分的通信 暂时注释这三个方法
@@ -92,27 +92,28 @@ public:
      @brief Useless in ScriptingCore, please use runScript
      @param filename String object holding the filename of the script file that is to be executed
      */
-    virtual  int executeScriptFile(const char* filename)  { return 0; } //override
+    virtual  int executeScriptFile(const char* filename) override { return 0; }
     
     /**
      @brief @~english Useless in ScriptingCore, please use executeFunctionWithOwner
      @param functionName String object holding the name of the function, in the global script environment, that is to be executed.
      @return The integer value returned from the script function.
      */
-    virtual int executeGlobalFunction(const char* functionName)  { return 0; } //override
+    virtual int executeGlobalFunction(const char* functionName) override { return 0; } //
     
     //这两个函数需要添加CCScriptSupport
-//    virtual int sendEvent(cocos2d::ScriptEvent* message) override;
-//    virtual bool parseConfig(ConfigType type, const std::string& str) override;
+    virtual int sendEvent(ScriptEvent* message) override;
+    
+    virtual bool parseConfig(ConfigType type, const std::string& str) override;
     
     /**
      * @brief @~english Useless in ScriptingCore
      * @return @~english false
      */
-    virtual bool handleAssert(const char *msg)  { return false; } //override
+    virtual bool handleAssert(const char *msg) override  { return false; }
     
-    virtual void setCalledFromScript(bool callFromScript)  { _callFromScript = callFromScript; }; //override
-    virtual bool isCalledFromScript()  { return _callFromScript; }; //override
+    virtual void setCalledFromScript(bool callFromScript) override { _callFromScript = callFromScript; }; 
+    virtual bool isCalledFromScript() override { return _callFromScript; };
     
     /**
      * @brief @~english Execute a js function with a JavaScript caller, function name, arguments count and arguments.
@@ -389,6 +390,8 @@ public:
      */
     JSObject* getGlobalObject() { return _global.ref().get(); }
     
+    
+     void restartVM();
 private:
     void initRegister();
 };

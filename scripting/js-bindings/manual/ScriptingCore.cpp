@@ -141,6 +141,14 @@ void ScriptingCore::initRegister(){
     this->addRegisterCallback(registerDefaultClasses);
     this->_runLoop = new SimpleRunLoop();
 }
+
+void ScriptingCore::restartVM()
+{
+    cleanup();
+    initRegister();
+//    Application::getInstance()->applicationDidFinishLaunching(); //**临时注释 无重启
+}
+
 ScriptingCore::~ScriptingCore(){
     
 }
@@ -253,13 +261,13 @@ void registerDefaultClasses(JSContext* cx, JS::HandleObject global) {
     // first, try to get the ns
     JS::RootedValue nsval(cx);
     JS::RootedObject ns(cx);
-    JS_GetProperty(cx, global, "cc", &nsval);
+    JS_GetProperty(cx, global, "ca", &nsval);
     // Not exist, create it
     if (nsval == JSVAL_VOID)
     {
         ns.set(JS_NewObject(cx, NULL, JS::NullPtr(), JS::NullPtr()));
         nsval = OBJECT_TO_JSVAL(ns);
-        JS_SetProperty(cx, global, "cc", nsval);
+        JS_SetProperty(cx, global, "ca", nsval);
     }
     else
     {
@@ -735,6 +743,68 @@ bool ScriptingCore::removeRootJS(JSContext *cx, uint32_t argc, jsval *vp)
         return true;
     }
     return false;
+}
+
+// ** 未完成
+int ScriptingCore::sendEvent(ScriptEvent* evt)
+{
+    if (NULL == evt)
+        return 0;
+    
+    // special type, can't use this code after JSAutoCompartment
+    if (evt->type == kRestartGame)
+    {
+        restartVM();
+        return 0;
+    }
+    
+    JSAutoCompartment ac(_cx, _global.ref().get());
+    
+    switch (evt->type)
+    {
+        case kNodeEvent:
+        {
+//            return handleNodeEvent(evt->data); **
+        }
+            break;
+        case kScriptActionEvent:
+        {
+//            return handleActionEvent(evt->data); **
+        }
+            break;
+        case kMenuClickedEvent:
+            break;
+        case kTouchEvent:
+        {
+//            TouchScriptData* data = (TouchScriptData*)evt->data;
+//            return handleTouchEvent(data->nativeObject, data->actionType, data->touch, data->event); **
+        }
+            break;
+        case kTouchesEvent:
+        {
+//            TouchesScriptData* data = (TouchesScriptData*)evt->data; //**
+//            return handleTouchesEvent(data->nativeObject, data->actionType, data->touches, data->event); **
+        }
+            break;
+        case kComponentEvent:
+        {
+//            return handleComponentEvent(evt->data); **
+        }
+            break;
+        default:
+            CCAssert(false, "Invalid script event.");
+            break;
+    }
+    
+    return 0;
+}
+
+bool ScriptingCore::parseConfig(ConfigType type, const std::string &str)
+{
+    jsval args[2];
+    args[0] = int32_to_jsval(_cx, static_cast<int>(type));
+    args[1] = std_string_to_jsval(_cx, str);
+    return (true == executeFunctionWithOwner(OBJECT_TO_JSVAL(_global.ref().get()), "__onParseConfig", 2, args));
 }
 bool ScriptingCore::isObjectValid(JSContext *cx, uint32_t argc, jsval *vp)
 {

@@ -840,6 +840,91 @@ bool jsval_to_dsize(JSContext *cx, JS::HandleValue v, DSize* ret) {
     ret->height = h;
     return true;
 }
+bool jsval_to_dhorizontallayout(JSContext *cx, JS::HandleValue v, CrossApp::DHorizontalLayout* horizontal){
+    JS::RootedObject tmp(cx);
+    JS::RootedValue jsleft(cx);
+    JS::RootedValue jright(cx);
+    JS::RootedValue jswidth(cx);
+    JS::RootedValue jrcenter(cx);
+    double left,right,width,center;
+    bool ok = v.isObject() &&
+    JS_ValueToObject(cx, v, &tmp) &&
+    JS_GetProperty(cx, tmp, "left", &jsleft) &&
+    JS_GetProperty(cx, tmp, "right", &jright) &&
+    JS_GetProperty(cx, tmp, "width", &jswidth) &&
+    JS_GetProperty(cx, tmp, "center", &jrcenter) &&
+    JS::ToNumber(cx, jsleft, &left) &&
+    JS::ToNumber(cx, jright, &right) &&
+    JS::ToNumber(cx, jswidth, &width) &&
+    JS::ToNumber(cx, jrcenter, &center);
+    
+    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
+    
+    horizontal->left = left;
+    horizontal->right = right;
+    horizontal->width = width;
+    horizontal->center = center;
+    
+    return true;
+    
+}
+bool jsval_to_dverticallayout(JSContext *cx, JS::HandleValue v, CrossApp::DVerticalLayout* vertical){
+    
+    JS::RootedObject tmp(cx);
+    JS::RootedValue jstop(cx);
+    JS::RootedValue jsbottom(cx);
+    JS::RootedValue jsheight(cx);
+    JS::RootedValue jrcenter(cx);
+    double top,bottom,height,center;
+    bool ok = v.isObject() &&
+    JS_ValueToObject(cx, v, &tmp) &&
+    JS_GetProperty(cx, tmp, "top", &jstop) &&
+    JS_GetProperty(cx, tmp, "bottom", &jsbottom) &&
+    JS_GetProperty(cx, tmp, "height", &jsheight) &&
+    JS_GetProperty(cx, tmp, "center", &jrcenter) &&
+    JS::ToNumber(cx, jstop, &top) &&
+    JS::ToNumber(cx, jsbottom, &bottom) &&
+    JS::ToNumber(cx, jsheight, &height) &&
+    JS::ToNumber(cx, jrcenter, &center);
+    
+    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
+    
+    vertical->top = top;
+    vertical->bottom = bottom;
+    vertical->height = height;
+    vertical->center = center;
+    
+    return true;
+    
+    
+}
+//bool jsval_to_dlayout(JSContext *cx, JS::HandleValue v, CrossApp::DLayout* layout){
+//
+//    JS::RootedObject jsobj(cx);
+//    JS::RootedValue jshorizontal(cx);
+//    JS::RootedValue jsvertical(cx);
+//    
+//    bool ok = v.isObject() && JS_ValueToObject( cx, v, &jsobj );
+//    JSB_PRECONDITION3( ok, cx, false, "Error converting value to object");
+//    
+//    JS_GetProperty(cx, jsobj, "horizontal", &jshorizontal) &&
+//    JS_GetProperty(cx, jsobj, "vertical", &jsvertical);
+//    
+//    js_proxy_t *proxy1;
+//    JSObject *horizontal = jshorizontal.toObjectOrNull();
+//    proxy1 = jsb_get_js_proxy(horizontal);
+//    CrossApp::DHorizontalLayout* cohorizontal = (CrossApp::DHorizontalLayout*)(proxy1 ? proxy1->ptr : nullptr);
+//    
+//    js_proxy_t *proxy2;
+//    JSObject *vertical = jsvertical.toObjectOrNull();
+//    proxy2 = jsb_get_js_proxy(vertical);
+//    CrossApp::DVerticalLayout* covertical = (CrossApp::DVerticalLayout*)(proxy2 ? proxy2->ptr : nullptr);
+//    
+//    layout->horizontal = *cohorizontal;
+//    layout->vertical = *covertical;
+//    
+//    return true;
+//}
 
 bool jsval_to_cacolor4b(JSContext *cx, JS::HandleValue v, CAColor4B* ret) {
     JS::RootedObject tmp(cx);
@@ -2104,7 +2189,45 @@ jsval dsize_to_jsval(JSContext* cx, const DSize& v)
     }
     return JSVAL_NULL;
 }
+jsval dhorizontallayout_to_jsval( JSContext *cx, CrossApp::DHorizontalLayout& v){
+    JS::RootedObject proto(cx);
+    JS::RootedObject parent(cx);
+    JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, proto, parent));
+    if (!tmp) return JSVAL_NULL;
+    bool ok = JS_DefineProperty(cx, tmp, "left", v.left, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
+    JS_DefineProperty(cx, tmp, "right", v.right, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
+    JS_DefineProperty(cx, tmp, "width", v.width, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
+    JS_DefineProperty(cx, tmp, "center", v.center, JSPROP_ENUMERATE | JSPROP_PERMANENT);
+    if (ok) {
+        return OBJECT_TO_JSVAL(tmp);
+    }
 
+    return JSVAL_NULL;
+}
+
+jsval dverticallayout_to_jsval(JSContext *cx, CrossApp::DVerticalLayout& v){
+
+    JS::RootedObject proto(cx);
+    JS::RootedObject parent(cx);
+    JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, proto, parent));
+    if (!tmp) return JSVAL_NULL;
+    bool ok = JS_DefineProperty(cx, tmp, "top", v.top, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
+    JS_DefineProperty(cx, tmp, "bottom", v.bottom, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
+    JS_DefineProperty(cx, tmp, "height", v.height, JSPROP_ENUMERATE | JSPROP_PERMANENT) &&
+    JS_DefineProperty(cx, tmp, "center", v.center, JSPROP_ENUMERATE | JSPROP_PERMANENT);
+    if (ok) {
+        return OBJECT_TO_JSVAL(tmp);
+    }
+    return JSVAL_NULL;
+}
+//jsval dlayout_to_jsval(JSContext *cx, CrossApp::DLayout& v){
+//    JS::RootedObject proto(cx);
+//    JS::RootedObject parent(cx);
+//    JS::RootedObject tmp(cx, JS_NewObject(cx, NULL, proto, parent));
+//    if (!tmp) return JSVAL_NULL;
+//    
+//    return JSVAL_NULL;
+//}
 jsval cacolor4b_to_jsval(JSContext* cx, const CAColor4B& v)
 {
     JS::RootedObject proto(cx);

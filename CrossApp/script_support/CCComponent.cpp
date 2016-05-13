@@ -22,16 +22,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 ****************************************************************************/
 
-#include "2d/CCComponent.h"
+#include "CCComponent.h"
 
-NS_CC_BEGIN
+//NS_CC_BEGIN
 
 Component::Component()
 : _owner(nullptr)
 , _enabled(true)
 {
 #if CC_ENABLE_SCRIPT_BINDING
-    ScriptEngineProtocol* engine = ScriptEngineManager::getInstance()->getScriptEngine();
+    CCScriptEngineProtocol* engine = CCScriptEngineManager::sharedManager()->getScriptEngine();
     _scriptType = engine != nullptr ? engine->getScriptType() : kScriptTypeNone;
 #endif
 }
@@ -49,7 +49,7 @@ bool Component::init()
 
 static bool sendComponentEventToJS(Component* node, int action)
 {
-    auto scriptEngine = ScriptEngineManager::getInstance()->getScriptEngine();
+    auto scriptEngine = CCScriptEngineManager::sharedManager()->getScriptEngine();
     
     if (scriptEngine->isCalledFromScript())
     {
@@ -139,7 +139,7 @@ Component* Component::create()
     return ret;
 }
 
-void Component::setOwner(Node *owner)
+void Component::setOwner(CrossApp::CAView *owner)
 {
     _owner = owner;
 }
@@ -149,4 +149,4 @@ void Component::setEnabled(bool enabled)
     _enabled = enabled;
 }
 
-NS_CC_END
+//NS_CC_END

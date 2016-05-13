@@ -259,6 +259,10 @@
 		469A7DF416C24787006FFCB2 /* tinyxml2.h in Headers */ = {isa = PBXBuildFile; fileRef = 469A7DF216C24787006FFCB2 /* tinyxml2.h */; };
 		46A393F716E5D01B00210B16 /* CAUserDefault.h in Headers */ = {isa = PBXBuildFile; fileRef = 46A393F316E5D01B00210B16 /* CAUserDefault.h */; };
 		46A393F816E5D01B00210B16 /* CAUserDefault.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46A393F416E5D01B00210B16 /* CAUserDefault.mm */; };
+		482974981CD9E5200052B736 /* CCComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 482974941CD9E5200052B736 /* CCComponent.cpp */; };
+		482974991CD9E5200052B736 /* CCComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 482974951CD9E5200052B736 /* CCComponent.h */; };
+		4829749A1CD9E5200052B736 /* CCComponentContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 482974961CD9E5200052B736 /* CCComponentContainer.cpp */; };
+		4829749B1CD9E5200052B736 /* CCComponentContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 482974971CD9E5200052B736 /* CCComponentContainer.h */; };
 		B01D4BF819A5E8240071F6A3 /* CADrawerController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B01D4BF619A5E8240071F6A3 /* CADrawerController.cpp */; };
 		B01D4BF919A5E8240071F6A3 /* CADrawerController.h in Headers */ = {isa = PBXBuildFile; fileRef = B01D4BF719A5E8240071F6A3 /* CADrawerController.h */; };
 		B01E807C1AD5113400301FC2 /* etc1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B01E80791AD5113400301FC2 /* etc1.cpp */; };
@@ -638,6 +642,10 @@
 		469A7DF216C24787006FFCB2 /* tinyxml2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tinyxml2.h; sourceTree = "<group>"; };
 		46A393F316E5D01B00210B16 /* CAUserDefault.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAUserDefault.h; sourceTree = "<group>"; };
 		46A393F416E5D01B00210B16 /* CAUserDefault.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CAUserDefault.mm; sourceTree = "<group>"; };
+		482974941CD9E5200052B736 /* CCComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComponent.cpp; sourceTree = "<group>"; };
+		482974951CD9E5200052B736 /* CCComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComponent.h; sourceTree = "<group>"; };
+		482974961CD9E5200052B736 /* CCComponentContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCComponentContainer.cpp; sourceTree = "<group>"; };
+		482974971CD9E5200052B736 /* CCComponentContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCComponentContainer.h; sourceTree = "<group>"; };
 		487514521CC0CD7600FF2062 /* libjs_static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libjs_static.a; path = "../../scripting/js-bindings/spidermonkey/prebuilt/ios/libjs_static.a"; sourceTree = "<group>"; };
 		B01D4BF619A5E8240071F6A3 /* CADrawerController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADrawerController.cpp; sourceTree = "<group>"; };
 		B01D4BF719A5E8240071F6A3 /* CADrawerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADrawerController.h; sourceTree = "<group>"; };
@@ -1522,6 +1530,10 @@
 		EB9D561D19E8DC2D0072BE8E /* script_support */ = {
 			isa = PBXGroup;
 			children = (
+				482974941CD9E5200052B736 /* CCComponent.cpp */,
+				482974951CD9E5200052B736 /* CCComponent.h */,
+				482974961CD9E5200052B736 /* CCComponentContainer.cpp */,
+				482974971CD9E5200052B736 /* CCComponentContainer.h */,
 				EB9D561E19E8DC2D0072BE8E /* CCScriptSupport.cpp */,
 				EB9D561F19E8DC2D0072BE8E /* CCScriptSupport.h */,
 				EB9D562019E8DC2D0072BE8E /* JSViewController.cpp */,
@@ -1569,6 +1581,7 @@
 				B0ADAE741B2E7F1B00BE8FA3 /* CADrawingPrimitives.h in Headers */,
 				04EABB1F1956DAEA00198A8E /* CATouchDispatcher.cpp in Headers */,
 				EB9D562319E8DC2D0072BE8E /* CCScriptSupport.h in Headers */,
+				482974991CD9E5200052B736 /* CCComponent.h in Headers */,
 				B0A02FF81A8E04A80005CB8F /* CATempTypeFont.h in Headers */,
 				B0ADAE9A1B2E7F1B00BE8FA3 /* CAWebView.h in Headers */,
 				B0ADAE8A1B2E7F1B00BE8FA3 /* CARenderImage.h in Headers */,
@@ -1753,6 +1766,7 @@
 				0460ED1D195700EE00D13001 /* CCEGLViewProtocol.h in Headers */,
 				0460ED2D1957019600D13001 /* CCApplication.h in Headers */,
 				0460ED2F1957019600D13001 /* CCEGLView.h in Headers */,
+				4829749B1CD9E5200052B736 /* CCComponentContainer.h in Headers */,
 				0460ED361957031200D13001 /* CAGLProgram.h in Headers */,
 				0460ED381957031200D13001 /* CAShaderCache.h in Headers */,
 				B09205DC19D5645300CB99C1 /* CASyncQueue.h in Headers */,
@@ -1857,6 +1871,7 @@
 				EB9D562419E8DC2D0072BE8E /* JSViewController.cpp in Sources */,
 				1551A72B158F2ADE00E66CFE /* CCAccelerometer.mm in Sources */,
 				B0A11DBB1AE8E0B300933BF6 /* gif_font.c in Sources */,
+				4829749A1CD9E5200052B736 /* CCComponentContainer.cpp in Sources */,
 				B0ADAE731B2E7F1B00BE8FA3 /* CADrawingPrimitives.cpp in Sources */,
 				1551A72E158F2ADE00E66CFE /* CCCommon.mm in Sources */,
 				1551A730158F2ADE00E66CFE /* CAApplicationCaller.mm in Sources */,
@@ -1923,6 +1938,7 @@
 				3E19F2A71B8B0ED100720027 /* CAAlbumController.mm in Sources */,
 				3E0F75561B7DD0C4004CFD41 /* json_writer.cpp in Sources */,
 				04EA9FEB1956CE2500198A8E /* CAButton.cpp in Sources */,
+				482974981CD9E5200052B736 /* CCComponent.cpp in Sources */,
 				B01E807C1AD5113400301FC2 /* etc1.cpp in Sources */,
 				04EA9FED1956CE2500198A8E /* CAControl.cpp in Sources */,
 				04EA9FF11956CE2500198A8E /* CAProgress.cpp in Sources */,

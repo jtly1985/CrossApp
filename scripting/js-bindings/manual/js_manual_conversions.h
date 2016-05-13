@@ -99,10 +99,15 @@ bool jsval_to_ulong( JSContext *cx, JS::HandleValue vp, unsigned long *out);
 bool jsval_to_long_long(JSContext *cx, JS::HandleValue v, long long* ret);
 bool jsval_to_std_string(JSContext *cx, JS::HandleValue v, std::string* ret);
 
+
 //修改部分
 bool jsval_to_dpoint(JSContext *cx, JS::HandleValue v, CrossApp::DPoint* ret);
 bool jsval_to_drect(JSContext *cx, JS::HandleValue v, CrossApp::DRect* ret);
 bool jsval_to_dsize(JSContext *cx, JS::HandleValue v, CrossApp::DSize* ret);
+bool jsval_to_dhorizontallayout(JSContext *cx, JS::HandleValue v, CrossApp::DHorizontalLayout* horizontal);
+bool jsval_to_dverticallayout(JSContext *cx, JS::HandleValue v, CrossApp::DVerticalLayout* vertical);
+//bool jsval_to_dlayout(JSContext *cx, JS::HandleValue v, CrossApp::DLayout* layout);
+
 bool jsval_to_cacolor4b(JSContext *cx, JS::HandleValue v, CrossApp::CAColor4B* ret);
 bool jsval_to_cacolor4f(JSContext *cx, JS::HandleValue v, CrossApp::CAColor4F* ret);
 bool jsval_cacolor_to_opacity(JSContext *cx, JS::HandleValue v, int32_t* ret);
@@ -349,6 +354,10 @@ bool jsval_to_ccmap_string_key(JSContext *cx, JS::HandleValue v, CrossApp::CAMap
     return true;
 }
 
+//DHorizontalLayout horizontal;
+
+//DVerticalLayout vertical;
+//DLayout
 // from native
 jsval int32_to_jsval( JSContext *cx, int32_t l);
 jsval uint32_to_jsval( JSContext *cx, uint32_t number );
@@ -361,6 +370,9 @@ jsval c_string_to_jsval(JSContext* cx, const char* v, size_t length = -1);
 jsval dpoint_to_jsval(JSContext* cx, const CrossApp::DPoint& v);
 jsval drect_to_jsval(JSContext* cx, const CrossApp::DRect& v);
 jsval dsize_to_jsval(JSContext* cx, const CrossApp::DSize& v);
+jsval dhorizontallayout_to_jsval( JSContext *cx, CrossApp::DHorizontalLayout& v);
+jsval dverticallayout_to_jsval(JSContext *cx, CrossApp::DVerticalLayout& v);
+//jsval dlayout_to_jsval(JSContext *cx, CrossApp::DLayout& v);
 jsval cacolor4b_to_jsval(JSContext* cx, const CrossApp::CAColor4B& v);
 jsval cacolor4f_to_jsval(JSContext* cx, const CrossApp::CAColor4F& v);
 //jsval cccolor3b_to_jsval(JSContext* cx, const cocos2d::Color3B& v);//**
