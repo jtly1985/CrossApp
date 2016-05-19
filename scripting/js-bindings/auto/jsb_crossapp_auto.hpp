@@ -103,7 +103,6 @@ bool js_autogentestbindings_js_CAView_getGLServerState(JSContext *cx, uint32_t a
 bool js_autogentestbindings_js_CAView_create(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAView_createWithFrame(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAView_createWithColor(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_CAView_createWithLayout(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAView_createWithCenter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAView_CAView(JSContext *cx, uint32_t argc, jsval *vp);
 
@@ -115,6 +114,7 @@ void js_autogentestbindings_js_CAApplication_finalize(JSContext *cx, JSObject *o
 void js_register_autogentestbindings_js_CAApplication(JSContext *cx, JS::HandleObject global);
 void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
 bool js_autogentestbindings_js_CAApplication_setDefaultValues(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAApplication_getStatusBarOrientation(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getDeltaTime(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_setGLDefaultValues(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_setAlphaBlending(JSContext *cx, uint32_t argc, jsval *vp);
@@ -123,13 +123,12 @@ bool js_autogentestbindings_js_CAApplication_getKeypadDispatcher(JSContext *cx, 
 bool js_autogentestbindings_js_CAApplication_getWinSize(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_end(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_runWindow(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_CAApplication_getAnimationInterval(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAApplication_getNotificationView(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getVisibleOrigin(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_mainLoop(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_isDrawing(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_setDepthTest(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getSecondsPerFrame(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_CAApplication_setAccelerometer(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getStatusBarStyle(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_init(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_reshapeProjection(JSContext *cx, uint32_t argc, jsval *vp);
@@ -156,12 +155,11 @@ bool js_autogentestbindings_js_CAApplication_setProjection(JSContext *cx, uint32
 bool js_autogentestbindings_js_CAApplication_getTouchDispatcher(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getZEye(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_setNextDeltaTimeZero(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_CAApplication_getAccelerometer(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getVisibleSize(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_setNotificationView(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getRootWindow(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getClassTypeInfo(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_CAApplication_getNotificationView(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAApplication_getAnimationInterval(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_isPaused(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getCurrentNumberOfDraws(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_setDisplayStats(JSContext *cx, uint32_t argc, jsval *vp);

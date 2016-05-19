@@ -587,6 +587,16 @@ bool js_autogentestbindings_js_CAView_reViewlayout(JSContext *cx, uint32_t argc,
         args.rval().setUndefined();
         return true;
     }
+    if (argc == 2) {
+        CrossApp::DSize arg0;
+        bool arg1;
+        ok &= jsval_to_dsize(cx, args.get(0), &arg0);
+        arg1 = JS::ToBoolean(args.get(1));
+        JSB_PRECONDITION2(ok, cx, false, "js_autogentestbindings_js_CAView_reViewlayout : Error processing arguments");
+        cobj->reViewlayout(arg0, arg1);
+        args.rval().setUndefined();
+        return true;
+    }
 
     JS_ReportError(cx, "js_autogentestbindings_js_CAView_reViewlayout : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
@@ -1959,72 +1969,6 @@ bool js_autogentestbindings_js_CAView_createWithColor(JSContext *cx, uint32_t ar
     return false;
 }
 
-bool js_autogentestbindings_js_CAView_createWithLayout(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true;
-    
-    do {
-        if (argc == 2) {
-            CrossApp::DRectLayout arg0;
-            do {
-                if (args.get(0).isNull()) { arg0 = nullptr; break; }
-                if (!args.get(0).isObject()) { ok = false; break; }
-                js_proxy_t *jsProxy;
-                JSObject *tmpObj = args.get(0).toObjectOrNull();
-                jsProxy = jsb_get_js_proxy(tmpObj);
-                arg0 = (const CrossApp::DRectLayout&)(jsProxy ? jsProxy->ptr : NULL);
-                JSB_PRECONDITION2( arg0, cx, false, "Invalid Native Object");
-            } while (0);
-            if (!ok) { ok = true; break; }
-            CrossApp::CAColor4B arg1;
-            ok &= jsval_to_cacolor4b(cx, args.get(1), &arg1);
-            if (!ok) { ok = true; break; }
-            CrossApp::CAView* ret = CrossApp::CAView::createWithLayout(arg0, arg1);
-            jsval jsret = JSVAL_NULL;
-            do {
-                if (ret) {
-                    js_proxy_t *jsProxy = js_get_or_create_proxy<CrossApp::CAView>(cx, (CrossApp::CAView*)ret);
-                    jsret = OBJECT_TO_JSVAL(jsProxy->obj);
-                } else {
-                    jsret = JSVAL_NULL;
-                }
-            } while (0);
-            args.rval().set(jsret);
-            return true;
-        }
-    } while (0);
-    
-    do {
-        if (argc == 1) {
-            CrossApp::DRectLayout arg0;
-            do {
-                if (args.get(0).isNull()) { arg0 = nullptr; break; }
-                if (!args.get(0).isObject()) { ok = false; break; }
-                js_proxy_t *jsProxy;
-                JSObject *tmpObj = args.get(0).toObjectOrNull();
-                jsProxy = jsb_get_js_proxy(tmpObj);
-                arg0 = (const CrossApp::DRectLayout&)(jsProxy ? jsProxy->ptr : NULL);
-                JSB_PRECONDITION2( arg0, cx, false, "Invalid Native Object");
-            } while (0);
-            if (!ok) { ok = true; break; }
-            CrossApp::CAView* ret = CrossApp::CAView::createWithLayout(arg0);
-            jsval jsret = JSVAL_NULL;
-            do {
-                if (ret) {
-                    js_proxy_t *jsProxy = js_get_or_create_proxy<CrossApp::CAView>(cx, (CrossApp::CAView*)ret);
-                    jsret = OBJECT_TO_JSVAL(jsProxy->obj);
-                } else {
-                    jsret = JSVAL_NULL;
-                }
-            } while (0);
-            args.rval().set(jsret);
-            return true;
-        }
-    } while (0);
-    JS_ReportError(cx, "js_autogentestbindings_js_CAView_createWithLayout : wrong number of arguments");
-    return false;
-}
 bool js_autogentestbindings_js_CAView_createWithCenter(JSContext *cx, uint32_t argc, jsval *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
@@ -2229,7 +2173,6 @@ void js_register_autogentestbindings_js_CAView(JSContext *cx, JS::HandleObject g
         JS_FN("create", js_autogentestbindings_js_CAView_create, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("createWithFrame", js_autogentestbindings_js_CAView_createWithFrame, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("createWithColor", js_autogentestbindings_js_CAView_createWithColor, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("createWithLayout", js_autogentestbindings_js_CAView_createWithLayout, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("createWithCenter", js_autogentestbindings_js_CAView_createWithCenter, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FS_END
     };
@@ -2280,6 +2223,25 @@ bool js_autogentestbindings_js_CAApplication_setDefaultValues(JSContext *cx, uin
     }
 
     JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_setDefaultValues : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
+bool js_autogentestbindings_js_CAApplication_getStatusBarOrientation(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    CrossApp::CAApplication* cobj = (CrossApp::CAApplication *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_getStatusBarOrientation : Invalid Native Object");
+    if (argc == 0) {
+        int ret = (int)cobj->getStatusBarOrientation();
+        jsval jsret = JSVAL_NULL;
+        jsret = int32_to_jsval(cx, ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getStatusBarOrientation : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_autogentestbindings_js_CAApplication_getDeltaTime(JSContext *cx, uint32_t argc, jsval *vp)
@@ -2447,23 +2409,30 @@ bool js_autogentestbindings_js_CAApplication_runWindow(JSContext *cx, uint32_t a
     JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_runWindow : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_autogentestbindings_js_CAApplication_getAnimationInterval(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_autogentestbindings_js_CAApplication_getNotificationView(JSContext *cx, uint32_t argc, jsval *vp)
 {
     
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
     CrossApp::CAApplication* cobj = (CrossApp::CAApplication *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_getAnimationInterval : Invalid Native Object");
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_getNotificationView : Invalid Native Object");
     if (argc == 0) {
-        double ret = cobj->getAnimationInterval();
+        CrossApp::CAView* ret = cobj->getNotificationView();
         jsval jsret = JSVAL_NULL;
-        jsret = DOUBLE_TO_JSVAL(ret);
+        do {
+            if (ret) {
+                js_proxy_t *jsProxy = js_get_or_create_proxy<CrossApp::CAView>(cx, (CrossApp::CAView*)ret);
+                jsret = OBJECT_TO_JSVAL(jsProxy->obj);
+            } else {
+                jsret = JSVAL_NULL;
+            }
+        } while (0);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getAnimationInterval : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getNotificationView : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_autogentestbindings_js_CAApplication_getVisibleOrigin(JSContext *cx, uint32_t argc, jsval *vp)
@@ -2559,35 +2528,6 @@ bool js_autogentestbindings_js_CAApplication_getSecondsPerFrame(JSContext *cx, u
     }
 
     JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getSecondsPerFrame : wrong number of arguments: %d, was expecting %d", argc, 0);
-    return false;
-}
-bool js_autogentestbindings_js_CAApplication_setAccelerometer(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    bool ok = true;
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    CrossApp::CAApplication* cobj = (CrossApp::CAApplication *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_setAccelerometer : Invalid Native Object");
-    if (argc == 1) {
-        CrossApp::CCAccelerometer* arg0 = nullptr;
-        do {
-            if (args.get(0).isNull()) { arg0 = nullptr; break; }
-            if (!args.get(0).isObject()) { ok = false; break; }
-            js_proxy_t *jsProxy;
-            JSObject *tmpObj = args.get(0).toObjectOrNull();
-            jsProxy = jsb_get_js_proxy(tmpObj);
-            arg0 = (CrossApp::CCAccelerometer*)(jsProxy ? jsProxy->ptr : NULL);
-            JSB_PRECONDITION2( arg0, cx, false, "Invalid Native Object");
-        } while (0);
-        JSB_PRECONDITION2(ok, cx, false, "js_autogentestbindings_js_CAApplication_setAccelerometer : Error processing arguments");
-        cobj->setAccelerometer(arg0);
-        args.rval().setUndefined();
-        return true;
-    }
-
-    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_setAccelerometer : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
 bool js_autogentestbindings_js_CAApplication_getStatusBarStyle(JSContext *cx, uint32_t argc, jsval *vp)
@@ -3131,32 +3071,6 @@ bool js_autogentestbindings_js_CAApplication_setNextDeltaTimeZero(JSContext *cx,
     JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_setNextDeltaTimeZero : wrong number of arguments: %d, was expecting %d", argc, 1);
     return false;
 }
-bool js_autogentestbindings_js_CAApplication_getAccelerometer(JSContext *cx, uint32_t argc, jsval *vp)
-{
-    
-    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
-    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
-    js_proxy_t *proxy = jsb_get_js_proxy(obj);
-    CrossApp::CAApplication* cobj = (CrossApp::CAApplication *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_getAccelerometer : Invalid Native Object");
-    if (argc == 0) {
-        CrossApp::CCAccelerometer* ret = cobj->getAccelerometer();
-        jsval jsret = JSVAL_NULL;
-        do {
-            if (ret) {
-                js_proxy_t *jsProxy = js_get_or_create_proxy<CrossApp::CCAccelerometer>(cx, (CrossApp::CCAccelerometer*)ret);
-                jsret = OBJECT_TO_JSVAL(jsProxy->obj);
-            } else {
-                jsret = JSVAL_NULL;
-            }
-        } while (0);
-        args.rval().set(jsret);
-        return true;
-    }
-
-    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getAccelerometer : wrong number of arguments: %d, was expecting %d", argc, 0);
-    return false;
-}
 bool js_autogentestbindings_js_CAApplication_getVisibleSize(JSContext *cx, uint32_t argc, jsval *vp)
 {
     
@@ -3250,30 +3164,23 @@ bool js_autogentestbindings_js_CAApplication_getClassTypeInfo(JSContext *cx, uin
     JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getClassTypeInfo : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
-bool js_autogentestbindings_js_CAApplication_getNotificationView(JSContext *cx, uint32_t argc, jsval *vp)
+bool js_autogentestbindings_js_CAApplication_getAnimationInterval(JSContext *cx, uint32_t argc, jsval *vp)
 {
     
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
     js_proxy_t *proxy = jsb_get_js_proxy(obj);
     CrossApp::CAApplication* cobj = (CrossApp::CAApplication *)(proxy ? proxy->ptr : NULL);
-    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_getNotificationView : Invalid Native Object");
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAApplication_getAnimationInterval : Invalid Native Object");
     if (argc == 0) {
-        CrossApp::CAView* ret = cobj->getNotificationView();
+        double ret = cobj->getAnimationInterval();
         jsval jsret = JSVAL_NULL;
-        do {
-            if (ret) {
-                js_proxy_t *jsProxy = js_get_or_create_proxy<CrossApp::CAView>(cx, (CrossApp::CAView*)ret);
-                jsret = OBJECT_TO_JSVAL(jsProxy->obj);
-            } else {
-                jsret = JSVAL_NULL;
-            }
-        } while (0);
+        jsret = DOUBLE_TO_JSVAL(ret);
         args.rval().set(jsret);
         return true;
     }
 
-    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getNotificationView : wrong number of arguments: %d, was expecting %d", argc, 0);
+    JS_ReportError(cx, "js_autogentestbindings_js_CAApplication_getAnimationInterval : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
 bool js_autogentestbindings_js_CAApplication_isPaused(JSContext *cx, uint32_t argc, jsval *vp)
@@ -3380,6 +3287,7 @@ void js_register_autogentestbindings_js_CAApplication(JSContext *cx, JS::HandleO
 
     static JSFunctionSpec funcs[] = {
         JS_FN("setDefaultValues", js_autogentestbindings_js_CAApplication_setDefaultValues, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("getStatusBarOrientation", js_autogentestbindings_js_CAApplication_getStatusBarOrientation, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getDeltaTime", js_autogentestbindings_js_CAApplication_getDeltaTime, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setGLDefaultValues", js_autogentestbindings_js_CAApplication_setGLDefaultValues, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setAlphaBlending", js_autogentestbindings_js_CAApplication_setAlphaBlending, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -3388,13 +3296,12 @@ void js_register_autogentestbindings_js_CAApplication(JSContext *cx, JS::HandleO
         JS_FN("getWinSize", js_autogentestbindings_js_CAApplication_getWinSize, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("end", js_autogentestbindings_js_CAApplication_end, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("runWindow", js_autogentestbindings_js_CAApplication_runWindow, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("getAnimationInterval", js_autogentestbindings_js_CAApplication_getAnimationInterval, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("getNotificationView", js_autogentestbindings_js_CAApplication_getNotificationView, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getVisibleOrigin", js_autogentestbindings_js_CAApplication_getVisibleOrigin, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("mainLoop", js_autogentestbindings_js_CAApplication_mainLoop, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("isDrawing", js_autogentestbindings_js_CAApplication_isDrawing, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setDepthTest", js_autogentestbindings_js_CAApplication_setDepthTest, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getSecondsPerFrame", js_autogentestbindings_js_CAApplication_getSecondsPerFrame, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("setAccelerometer", js_autogentestbindings_js_CAApplication_setAccelerometer, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getStatusBarStyle", js_autogentestbindings_js_CAApplication_getStatusBarStyle, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("init", js_autogentestbindings_js_CAApplication_init, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("reshapeProjection", js_autogentestbindings_js_CAApplication_reshapeProjection, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -3421,12 +3328,11 @@ void js_register_autogentestbindings_js_CAApplication(JSContext *cx, JS::HandleO
         JS_FN("getTouchDispatcher", js_autogentestbindings_js_CAApplication_getTouchDispatcher, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getZEye", js_autogentestbindings_js_CAApplication_getZEye, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setNextDeltaTimeZero", js_autogentestbindings_js_CAApplication_setNextDeltaTimeZero, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("getAccelerometer", js_autogentestbindings_js_CAApplication_getAccelerometer, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getVisibleSize", js_autogentestbindings_js_CAApplication_getVisibleSize, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setNotificationView", js_autogentestbindings_js_CAApplication_setNotificationView, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getRootWindow", js_autogentestbindings_js_CAApplication_getRootWindow, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getClassTypeInfo", js_autogentestbindings_js_CAApplication_getClassTypeInfo, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
-        JS_FN("getNotificationView", js_autogentestbindings_js_CAApplication_getNotificationView, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("getAnimationInterval", js_autogentestbindings_js_CAApplication_getAnimationInterval, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("isPaused", js_autogentestbindings_js_CAApplication_isPaused, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getCurrentNumberOfDraws", js_autogentestbindings_js_CAApplication_getCurrentNumberOfDraws, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setDisplayStats", js_autogentestbindings_js_CAApplication_setDisplayStats, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),

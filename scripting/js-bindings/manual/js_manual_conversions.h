@@ -107,7 +107,7 @@ bool jsval_to_dsize(JSContext *cx, JS::HandleValue v, CrossApp::DSize* ret);
 bool jsval_to_dhorizontallayout(JSContext *cx, JS::HandleValue v, CrossApp::DHorizontalLayout* horizontal);
 bool jsval_to_dverticallayout(JSContext *cx, JS::HandleValue v, CrossApp::DVerticalLayout* vertical);
 //bool jsval_to_dlayout(JSContext *cx, JS::HandleValue v, CrossApp::DLayout* layout);
-
+//bool jsval_to_cafont(JSContext *cx, JS::HandleValue v, CrossApp::DSize* ret);
 bool jsval_to_cacolor4b(JSContext *cx, JS::HandleValue v, CrossApp::CAColor4B* ret);
 bool jsval_to_cacolor4f(JSContext *cx, JS::HandleValue v, CrossApp::CAColor4F* ret);
 bool jsval_cacolor_to_opacity(JSContext *cx, JS::HandleValue v, int32_t* ret);
