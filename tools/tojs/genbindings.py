@@ -136,7 +136,8 @@ def main():
 
     try:
         tojs_root = '%s/tools/tojs' % project_root
-        output_dir = '%s/cross/scripting/js-bindings/auto' % project_root
+        #output_dir = '%s/cross/scripting/js-bindings/auto' % project_root
+        output_dir = '%s/scripting/js-bindings/auto' % project_root
 
         cmd_args = {'CrossApp.ini' : ('CrossApp', 'jsb_crossapp_auto'), #\
                     #'cocos2dx_audioengine.ini' : ('cocos2dx_audioengine', 'jsb_cocos2dx_audioengine_auto'), \

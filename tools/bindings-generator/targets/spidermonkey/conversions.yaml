@@ -53,6 +53,10 @@ conversions:
     "@vector<int.*>": "ok &= jsval_to_std_vector_int(cx, ${in_value}, &${out_value})"
     "CAAcceleration": "ok &= jsval_to_caacceleration(cx, ${in_value}, &${out_value})"
 
+    #自己加发方法
+    "DHorizontalLayout":  "ok &= jsval_to_dhorizontallayout(cx, ${in_value}, &${out_value})"
+    "DVerticalLayout":  "ok &= jsval_to_dverticallayout(cx, ${in_value}, &${out_value})"
+
     object: |
       do {
       ${($level + 1) * '    '}if (${in_value}.isNull()) { ${out_value} = nullptr; break; }
@@ -86,6 +90,12 @@ conversions:
     "DSize": "${out_value} = dsize_to_jsval(cx, ${in_value})"
     "CAColor4B": "${out_value} = cacolor4b_to_jsval(cx, ${in_value})"
     "CAColor4F": "${out_value} = cacolor4f_to_jsval(cx, ${in_value})"
+
+
+    #自己加的
+    "DHorizontalLayout": "${out_value} = dhorizontallayout_to_jsval(cx, ${in_value})"
+    "DVerticalLayout": "${out_value} =  dverticallayout_to_jsval(cx, ${in_value})"
+
 
     "String*": "${out_value} = std_string_to_jsval(cx, ${in_value}->getCString())"
     "@Vector<.*>": "${out_value} = ccvector_to_jsval(cx, ${in_value})"
