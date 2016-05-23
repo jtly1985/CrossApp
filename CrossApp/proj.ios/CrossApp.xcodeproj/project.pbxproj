@@ -2087,6 +2087,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CrossApp;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
@@ -2130,6 +2131,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = CrossApp;
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
