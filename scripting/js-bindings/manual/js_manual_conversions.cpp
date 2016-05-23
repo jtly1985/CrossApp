@@ -813,6 +813,7 @@ bool jsval_to_drect(JSContext *cx, JS::HandleValue v, DRect* ret) {
     JS::ToNumber(cx, jsy, &y) &&
     JS::ToNumber(cx, jswidth, &width) &&
     JS::ToNumber(cx, jsheight, &height);
+
     
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
     
@@ -925,7 +926,24 @@ bool jsval_to_dverticallayout(JSContext *cx, JS::HandleValue v, CrossApp::DVerti
 //    
 //    return true;
 //}
-
+//bool jsval_to_cafont(JSContext *cx, JS::HandleValue v, CrossApp::DSize* ret){
+//    JS::RootedObject tmp(cx);
+//    JS::RootedValue jsbold;
+//    
+//    JS::RootedValue jsunderLine;
+//    
+//    JS::RootedValue jsdeleteLine;
+//    
+//    JS::RootedValue jsitalics;
+//    
+//    JS::RootedValue jsfontSize;
+//    
+//    CAColor4B color;
+//    
+//    std::string fontName;
+//
+//    return true;
+//}
 bool jsval_to_cacolor4b(JSContext *cx, JS::HandleValue v, CAColor4B* ret) {
     JS::RootedObject tmp(cx);
     JS::RootedValue jsr(cx);

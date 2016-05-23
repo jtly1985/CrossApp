@@ -2,10 +2,13 @@
 #include "cocos2d_specifics.hpp"
 #include "CrossApp.h"
 #include "ExtensionMacros.h"
+<<<<<<< HEAD
 #include "SimpleAudioEngine.h"
 #include "CrossAppExt.h"
 #include "ZipUtils.h"
 #include "CADevice.h"
+=======
+>>>>>>> 9ca7f36cbf9eadd1bdc11175309a963564ff30f7
 
 template<class T>
 static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
