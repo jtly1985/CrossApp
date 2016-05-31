@@ -3174,6 +3174,108 @@ getApplication : function (
 };
 
 /**
+ * @class CAThread
+ */
+ca.CAThread = {
+
+/**
+ * @method setMaxMsgCount
+ * @param {int} arg0
+ */
+setMaxMsgCount : function (
+int 
+)
+{
+},
+
+/**
+ * @method closeAtOnce
+ */
+closeAtOnce : function (
+)
+{
+},
+
+/**
+ * @method isRunning
+ * @return {bool}
+ */
+isRunning : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method OnRunning
+ */
+OnRunning : function (
+)
+{
+},
+
+/**
+ * @method clear
+ */
+clear : function (
+)
+{
+},
+
+/**
+ * @method OnExitInstance
+ */
+OnExitInstance : function (
+)
+{
+},
+
+/**
+ * @method start
+ */
+start : function (
+)
+{
+},
+
+/**
+ * @method OnInitInstance
+ */
+OnInitInstance : function (
+)
+{
+},
+
+/**
+ * @method close
+ */
+close : function (
+)
+{
+},
+
+/**
+ * @method notifyRun
+ * @param {void} arg0
+ */
+notifyRun : function (
+void 
+)
+{
+},
+
+/**
+ * @method CAThread
+ * @constructor
+ */
+CAThread : function (
+)
+{
+},
+
+};
+
+/**
  * @class CAButton
  */
 ca.CAButton = {
@@ -6498,6 +6600,466 @@ CAViewController : function (
 };
 
 /**
+ * @class CANavigationController
+ */
+ca.CANavigationController = {
+
+/**
+ * @method setNavigationBarTitleColor
+ * @param {cc._Color4B} arg0
+ */
+setNavigationBarTitleColor : function (
+_color4b 
+)
+{
+},
+
+/**
+ * @method setNavigationBarButtonColor
+ * @param {cc._Color4B} arg0
+ */
+setNavigationBarButtonColor : function (
+_color4b 
+)
+{
+},
+
+/**
+ * @method updateItem
+ * @param {cc.CAViewController} arg0
+ */
+updateItem : function (
+caviewcontroller 
+)
+{
+},
+
+/**
+ * @method getBackViewController
+ * @return {cc.CAViewController}
+ */
+getBackViewController : function (
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method getNavigationBarBackgroundColor
+ * @return {cc._Color4B}
+ */
+getNavigationBarBackgroundColor : function (
+)
+{
+    return cc._Color4B;
+},
+
+/**
+ * @method getViewControllerCount
+ * @return {unsigned long}
+ */
+getViewControllerCount : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setNavigationBarHidden
+ * @param {bool} arg0
+ * @param {bool} arg1
+ */
+setNavigationBarHidden : function (
+bool, 
+bool 
+)
+{
+},
+
+/**
+ * @method replaceViewController
+ * @param {cc.CAViewController} arg0
+ * @param {bool} arg1
+ */
+replaceViewController : function (
+caviewcontroller, 
+bool 
+)
+{
+},
+
+/**
+ * @method popToRootViewControllerAnimated
+ * @param {bool} arg0
+ */
+popToRootViewControllerAnimated : function (
+bool 
+)
+{
+},
+
+/**
+ * @method pushViewController
+ * @param {cc.CAViewController} arg0
+ * @param {bool} arg1
+ */
+pushViewController : function (
+caviewcontroller, 
+bool 
+)
+{
+},
+
+/**
+ * @method isReachBoundaryDown
+ * @return {bool}
+ */
+isReachBoundaryDown : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setTouchMoved
+ * @param {bool} arg0
+ */
+setTouchMoved : function (
+bool 
+)
+{
+},
+
+/**
+ * @method initWithRootViewController
+ * @param {cc.CAViewController} arg0
+ * @return {bool}
+ */
+initWithRootViewController : function (
+caviewcontroller 
+)
+{
+    return false;
+},
+
+/**
+ * @method isReachBoundaryRight
+ * @return {bool}
+ */
+isReachBoundaryRight : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method popViewControllerAnimated
+ * @param {bool} arg0
+ * @return {cc.CAViewController}
+ */
+popViewControllerAnimated : function (
+bool 
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method getNavigationBarButtonColor
+ * @return {cc._Color4B}
+ */
+getNavigationBarButtonColor : function (
+)
+{
+    return cc._Color4B;
+},
+
+/**
+ * @method isTouchMoved
+ * @return {bool}
+ */
+isTouchMoved : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getNavigationBarTitleColor
+ * @return {cc._Color4B}
+ */
+getNavigationBarTitleColor : function (
+)
+{
+    return cc._Color4B;
+},
+
+/**
+ * @method isReachBoundaryUp
+ * @return {bool}
+ */
+isReachBoundaryUp : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isReachBoundaryLeft
+ * @return {bool}
+ */
+isReachBoundaryLeft : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setNavigationBarBackgroundColor
+ * @param {cc._Color4B} arg0
+ */
+setNavigationBarBackgroundColor : function (
+_color4b 
+)
+{
+},
+
+/**
+ * @method isNavigationBarHidden
+ * @return {bool}
+ */
+isNavigationBarHidden : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getNavigationBarBackgroundImage
+ * @return {cc.CAImage}
+ */
+getNavigationBarBackgroundImage : function (
+)
+{
+    return cc.CAImage;
+},
+
+/**
+ * @method getViewControllerAtIndex
+ * @param {int} arg0
+ * @return {cc.CAViewController}
+ */
+getViewControllerAtIndex : function (
+int 
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method setNavigationBarBackgroundImage
+ * @param {cc.CAImage} arg0
+ */
+setNavigationBarBackgroundImage : function (
+caimage 
+)
+{
+},
+
+/**
+ * @method popFirstViewController
+ * @return {cc.CAViewController}
+ */
+popFirstViewController : function (
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method popViewControllerAtIndex
+ * @param {int} arg0
+ * @return {cc.CAViewController}
+ */
+popViewControllerAtIndex : function (
+int 
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method CANavigationController
+ * @constructor
+ */
+CANavigationController : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CADrawerController
+ */
+ca.CADrawerController = {
+
+/**
+ * @method hideLeftViewController
+ * @param {bool} arg0
+ */
+hideLeftViewController : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isReachBoundaryLeft
+ * @return {bool}
+ */
+isReachBoundaryLeft : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method showLeftViewController
+ * @param {bool} arg0
+ */
+showLeftViewController : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setBackgroundImage
+ * @param {cc.CAImage} arg0
+ */
+setBackgroundImage : function (
+caimage 
+)
+{
+},
+
+/**
+ * @method setTouchMoved
+ * @param {bool} arg0
+ */
+setTouchMoved : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getEffect3D
+ * @return {bool}
+ */
+getEffect3D : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getRightViewController
+ * @return {cc.CAViewController}
+ */
+getRightViewController : function (
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method isShowLeftViewController
+ * @return {bool}
+ */
+isShowLeftViewController : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method initWithController
+ * @param {cc.CAViewController} arg0
+ * @param {cc.CAViewController} arg1
+ * @return {bool}
+ */
+initWithController : function (
+caviewcontroller, 
+caviewcontroller 
+)
+{
+    return false;
+},
+
+/**
+ * @method setEffect3D
+ * @param {bool} arg0
+ */
+setEffect3D : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isReachBoundaryRight
+ * @return {bool}
+ */
+isReachBoundaryRight : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method replaceRightViewController
+ * @param {cc.CAViewController} arg0
+ */
+replaceRightViewController : function (
+caviewcontroller 
+)
+{
+},
+
+/**
+ * @method getLeftViewController
+ * @return {cc.CAViewController}
+ */
+getLeftViewController : function (
+)
+{
+    return cc.CAViewController;
+},
+
+/**
+ * @method isTouchMoved
+ * @return {bool}
+ */
+isTouchMoved : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method CADrawerController
+ * @constructor
+ */
+CADrawerController : function (
+)
+{
+},
+
+};
+
+/**
  * @class CAGif
  */
 ca.CAGif = {
@@ -7792,6 +8354,223 @@ CAAutoCollectionView : function (
 };
 
 /**
+ * @class CCFileUtils
+ */
+ca.CCFileUtils = {
+
+/**
+ * @method isFileExist
+ * @param {String} arg0
+ * @return {bool}
+ */
+isFileExist : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method removeSearchPath
+ * @param {char} arg0
+ */
+removeSearchPath : function (
+char 
+)
+{
+},
+
+/**
+ * @method fullPathForFilename
+ * @param {String} arg0
+ * @return {String}
+ */
+fullPathForFilename : function (
+str 
+)
+{
+    return ;
+},
+
+/**
+ * @method fullPathFromRelativeFile
+ * @param {char} arg0
+ * @param {char} arg1
+ * @return {char}
+ */
+fullPathFromRelativeFile : function (
+char, 
+char 
+)
+{
+    return 0;
+},
+
+/**
+ * @method getFileData
+ * @param {char} arg0
+ * @param {char} arg1
+ * @param {unsigned long} arg2
+ * @return {unsigned char}
+ */
+getFileData : function (
+char, 
+char, 
+long 
+)
+{
+    return 0;
+},
+
+/**
+ * @method isPopupNotify
+ * @return {bool}
+ */
+isPopupNotify : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method addSearchResolutionsOrder
+ * @param {char} arg0
+ */
+addSearchResolutionsOrder : function (
+char 
+)
+{
+},
+
+/**
+ * @method getFileDataFromZip
+ * @param {char} arg0
+ * @param {char} arg1
+ * @param {unsigned long} arg2
+ * @return {unsigned char}
+ */
+getFileDataFromZip : function (
+char, 
+char, 
+long 
+)
+{
+    return 0;
+},
+
+/**
+ * @method getClassTypeInfo
+ * @return {long}
+ */
+getClassTypeInfo : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method removeAllPaths
+ */
+removeAllPaths : function (
+)
+{
+},
+
+/**
+ * @method purgeCachedEntries
+ */
+purgeCachedEntries : function (
+)
+{
+},
+
+/**
+ * @method isAbsolutePath
+ * @param {String} arg0
+ * @return {bool}
+ */
+isAbsolutePath : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method getWritablePath
+ * @return {String}
+ */
+getWritablePath : function (
+)
+{
+    return ;
+},
+
+/**
+ * @method addSearchPath
+ * @param {char} arg0
+ */
+addSearchPath : function (
+char 
+)
+{
+},
+
+/**
+ * @method createDirectory
+ * @param {char} arg0
+ * @return {bool}
+ */
+createDirectory : function (
+char 
+)
+{
+    return false;
+},
+
+/**
+ * @method getFileString
+ * @param {char} arg0
+ * @return {String}
+ */
+getFileString : function (
+char 
+)
+{
+    return ;
+},
+
+/**
+ * @method setPopupNotify
+ * @param {bool} arg0
+ */
+setPopupNotify : function (
+bool 
+)
+{
+},
+
+/**
+ * @method purgeFileUtils
+ */
+purgeFileUtils : function (
+)
+{
+},
+
+/**
+ * @method sharedFileUtils
+ * @return {cc.CCFileUtils}
+ */
+sharedFileUtils : function (
+)
+{
+    return cc.CCFileUtils;
+},
+
+};
+
+/**
  * @class CAAlertView
  */
 ca.CAAlertView = {
@@ -8177,6 +8956,154 @@ drect
  * @constructor
  */
 CAPickerView : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAHttpResponse
+ */
+ca.CAHttpResponse = {
+
+/**
+ * @method getRequest
+ * @return {cc.CAHttpRequest}
+ */
+getRequest : function (
+)
+{
+    return cc.CAHttpRequest;
+},
+
+/**
+ * @method setErrorBuffer
+ * @param {char} arg0
+ */
+setErrorBuffer : function (
+char 
+)
+{
+},
+
+/**
+ * @method getErrorBuffer
+ * @return {char}
+ */
+getErrorBuffer : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method isSucceed
+ * @return {bool}
+ */
+isSucceed : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getResponseCode
+ * @return {int}
+ */
+getResponseCode : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getHttpRequest
+ * @return {cc.CAHttpRequest}
+ */
+getHttpRequest : function (
+)
+{
+    return cc.CAHttpRequest;
+},
+
+/**
+ * @method setResponseData
+ * @param {Array} arg0
+ */
+setResponseData : function (
+array 
+)
+{
+},
+
+/**
+ * @method autorelease
+ * @return {cc.CAObject}
+ */
+autorelease : function (
+)
+{
+    return cc.CAObject;
+},
+
+/**
+ * @method setResponseHeader
+ * @param {Array} arg0
+ */
+setResponseHeader : function (
+array 
+)
+{
+},
+
+/**
+ * @method setSucceed
+ * @param {bool} arg0
+ */
+setSucceed : function (
+bool 
+)
+{
+},
+
+/**
+ * @method getResponseHeader
+ * @return {Array}
+ */
+getResponseHeader : function (
+)
+{
+    return new Array();
+},
+
+/**
+ * @method getResponseData
+ * @return {Array}
+ */
+getResponseData : function (
+)
+{
+    return new Array();
+},
+
+/**
+ * @method setResponseCode
+ * @param {long} arg0
+ */
+setResponseCode : function (
+long 
+)
+{
+},
+
+/**
+ * @method CAHttpResponse
+ * @constructor
+ * @param {cc.CAHttpRequest} arg0
+ */
+CAHttpResponse : function (
+cahttprequest 
 )
 {
 },
@@ -8803,6 +9730,693 @@ drect
  * @constructor
  */
 CATextView : function (
+)
+{
+},
+
+};
+
+/**
+ * @class SimpleAudioEngine
+ */
+ca.SimpleAudioEngine = {
+
+/**
+ * @method stopAllEffects
+ */
+stopAllEffects : function (
+)
+{
+},
+
+/**
+ * @method getEffectsVolume
+ * @return {float}
+ */
+getEffectsVolume : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method stopEffect
+ * @param {unsigned int} arg0
+ */
+stopEffect : function (
+int 
+)
+{
+},
+
+/**
+ * @method getBackgroundMusicVolume
+ * @return {float}
+ */
+getBackgroundMusicVolume : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method willPlayBackgroundMusic
+ * @return {bool}
+ */
+willPlayBackgroundMusic : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setBackgroundMusicVolume
+ * @param {float} arg0
+ */
+setBackgroundMusicVolume : function (
+float 
+)
+{
+},
+
+/**
+ * @method stopBackgroundMusic
+* @param {bool} bool
+*/
+stopBackgroundMusic : function(
+bool 
+)
+{
+},
+
+/**
+ * @method pauseBackgroundMusic
+ */
+pauseBackgroundMusic : function (
+)
+{
+},
+
+/**
+ * @method isBackgroundMusicPlaying
+ * @return {bool}
+ */
+isBackgroundMusicPlaying : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method resumeAllEffects
+ */
+resumeAllEffects : function (
+)
+{
+},
+
+/**
+ * @method pauseAllEffects
+ */
+pauseAllEffects : function (
+)
+{
+},
+
+/**
+ * @method preloadBackgroundMusic
+ * @param {char} arg0
+ */
+preloadBackgroundMusic : function (
+char 
+)
+{
+},
+
+/**
+ * @method playBackgroundMusic
+* @param {char|char} char
+* @param {bool} bool
+*/
+playBackgroundMusic : function(
+char,
+bool 
+)
+{
+},
+
+/**
+ * @method playEffect
+* @param {char|char} char
+* @param {bool} bool
+* @return {unsigned int|unsigned int}
+*/
+playEffect : function(
+char,
+bool 
+)
+{
+    return 0;
+},
+
+/**
+ * @method preloadEffect
+ * @param {char} arg0
+ */
+preloadEffect : function (
+char 
+)
+{
+},
+
+/**
+ * @method unloadEffect
+ * @param {char} arg0
+ */
+unloadEffect : function (
+char 
+)
+{
+},
+
+/**
+ * @method rewindBackgroundMusic
+ */
+rewindBackgroundMusic : function (
+)
+{
+},
+
+/**
+ * @method pauseEffect
+ * @param {unsigned int} arg0
+ */
+pauseEffect : function (
+int 
+)
+{
+},
+
+/**
+ * @method getClassTypeInfo
+ * @return {long}
+ */
+getClassTypeInfo : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method resumeBackgroundMusic
+ */
+resumeBackgroundMusic : function (
+)
+{
+},
+
+/**
+ * @method setEffectsVolume
+ * @param {float} arg0
+ */
+setEffectsVolume : function (
+float 
+)
+{
+},
+
+/**
+ * @method resumeEffect
+ * @param {unsigned int} arg0
+ */
+resumeEffect : function (
+int 
+)
+{
+},
+
+/**
+ * @method end
+ */
+end : function (
+)
+{
+},
+
+/**
+ * @method sharedEngine
+ * @return {CocosDenshion::SimpleAudioEngine}
+ */
+sharedEngine : function (
+)
+{
+    return CocosDenshion::SimpleAudioEngine;
+},
+
+/**
+ * @method SimpleAudioEngine
+ * @constructor
+ */
+SimpleAudioEngine : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAFlash
+ */
+ca.CAFlash = {
+
+/**
+ * @method getIndex
+ * @return {int}
+ */
+getIndex : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method advance
+ * @param {float} arg0
+ */
+advance : function (
+float 
+)
+{
+},
+
+/**
+ * @method initWithFilePath
+ * @param {String} arg0
+ * @return {bool}
+ */
+initWithFilePath : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method getScaleY
+ * @return {float}
+ */
+getScaleY : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getScaleX
+ * @return {float}
+ */
+getScaleX : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getLocalScaleY
+ * @return {float}
+ */
+getLocalScaleY : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getCounts
+ * @return {int}
+ */
+getCounts : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getHeight
+ * @return {float}
+ */
+getHeight : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setIndex
+ * @param {int} arg0
+ */
+setIndex : function (
+int 
+)
+{
+},
+
+/**
+ * @method getFrameCount
+ * @return {float}
+ */
+getFrameCount : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getWidth
+ * @return {float}
+ */
+getWidth : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method getLocalScaleX
+ * @return {float}
+ */
+getLocalScaleX : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method playRun
+ */
+playRun : function (
+)
+{
+},
+
+/**
+ * @method display
+ * @param {kmMat4} arg0
+ */
+display : function (
+kmmat4 
+)
+{
+},
+
+/**
+ * @method createWithFilePath
+ * @param {String} arg0
+ * @return {cc.extension::CAFlash}
+ */
+createWithFilePath : function (
+str 
+)
+{
+    return cc.extension::CAFlash;
+},
+
+/**
+ * @method CAFlash
+ * @constructor
+ */
+CAFlash : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAFlashView
+ */
+ca.CAFlashView = {
+
+/**
+ * @method isRunning
+ * @return {bool}
+ */
+isRunning : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setFlash
+ * @param {cc.extension::CAFlash} arg0
+ */
+setFlash : function (
+caflash 
+)
+{
+},
+
+/**
+ * @method isRepeatForever
+ * @return {bool}
+ */
+isRepeatForever : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method init
+ * @return {bool}
+ */
+init : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method runAnimation
+ */
+runAnimation : function (
+)
+{
+},
+
+/**
+ * @method initWithFlash
+ * @param {cc.extension::CAFlash} arg0
+ * @return {bool}
+ */
+initWithFlash : function (
+caflash 
+)
+{
+    return false;
+},
+
+/**
+ * @method setRunning
+ * @param {bool} arg0
+ */
+setRunning : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setRepeatForever
+ * @param {bool} arg0
+ */
+setRepeatForever : function (
+bool 
+)
+{
+},
+
+/**
+ * @method stopAnimation
+ */
+stopAnimation : function (
+)
+{
+},
+
+/**
+ * @method createWithFlash
+ * @param {cc.extension::CAFlash} arg0
+ * @return {cc.extension::CAFlashView}
+ */
+createWithFlash : function (
+caflash 
+)
+{
+    return cc.extension::CAFlashView;
+},
+
+/**
+ * @method CAFlashView
+ * @constructor
+ */
+CAFlashView : function (
+)
+{
+},
+
+};
+
+/**
+ * @class ZipUtils
+ */
+ca.ZipUtils = {
+
+/**
+ * @method ccInflateGZipFile
+ * @param {char} arg0
+ * @param {unsigned char} arg1
+ * @return {int}
+ */
+ccInflateGZipFile : function (
+char, 
+char 
+)
+{
+    return 0;
+},
+
+/**
+ * @method ccInflateMemoryWithHint
+ * @param {unsigned char} arg0
+ * @param {unsigned int} arg1
+ * @param {unsigned char} arg2
+ * @param {unsigned int} arg3
+ * @return {int}
+ */
+ccInflateMemoryWithHint : function (
+char, 
+int, 
+char, 
+int 
+)
+{
+    return 0;
+},
+
+/**
+ * @method ccSetPvrEncryptionKey
+ * @param {unsigned int} arg0
+ * @param {unsigned int} arg1
+ * @param {unsigned int} arg2
+ * @param {unsigned int} arg3
+ */
+ccSetPvrEncryptionKey : function (
+int, 
+int, 
+int, 
+int 
+)
+{
+},
+
+/**
+ * @method ccInflateMemory
+ * @param {unsigned char} arg0
+ * @param {unsigned int} arg1
+ * @param {unsigned char} arg2
+ * @return {int}
+ */
+ccInflateMemory : function (
+char, 
+int, 
+char 
+)
+{
+    return 0;
+},
+
+/**
+ * @method ccSetPvrEncryptionKeyPart
+ * @param {int} arg0
+ * @param {unsigned int} arg1
+ */
+ccSetPvrEncryptionKeyPart : function (
+int, 
+int 
+)
+{
+},
+
+/**
+ * @method ccInflateCCZFile
+ * @param {char} arg0
+ * @param {unsigned char} arg1
+ * @return {int}
+ */
+ccInflateCCZFile : function (
+char, 
+char 
+)
+{
+    return 0;
+},
+
+};
+
+/**
+ * @class ZipFile
+ */
+ca.ZipFile = {
+
+/**
+ * @method fileExists
+ * @param {String} arg0
+ * @return {bool}
+ */
+fileExists : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method setFilter
+ * @param {String} arg0
+ * @return {bool}
+ */
+setFilter : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method getFileData
+ * @param {String} arg0
+ * @param {unsigned long} arg1
+ * @return {unsigned char}
+ */
+getFileData : function (
+str, 
+long 
+)
+{
+    return 0;
+},
+
+/**
+ * @method ZipFile
+ * @constructor
+ * @param {String} arg0
+ * @param {String} arg1
+ */
+ZipFile : function (
+str, 
+str 
 )
 {
 },

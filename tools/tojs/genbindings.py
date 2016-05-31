@@ -139,8 +139,8 @@ def main():
         #output_dir = '%s/cross/scripting/js-bindings/auto' % project_root
         output_dir = '%s/scripting/js-bindings/auto' % project_root
 
-        cmd_args = {'CrossApp.ini' : ('CrossApp', 'jsb_crossapp_auto'), #\
-                    #'cocos2dx_audioengine.ini' : ('cocos2dx_audioengine', 'jsb_cocos2dx_audioengine_auto'), \
+        cmd_args = {'CrossApp.ini' : ('CrossApp', 'jsb_crossapp_auto'),
+                    #'CrossApp_CocosDenshion.ini' : ('CrossApp_CocosDenshion', 'jsb_cocos2dx_audioengine_CrossDenshion_auto'), #\
                     #'cocos2dx_extension.ini' : ('cocos2dx_extension', 'jsb_cocos2dx_extension_auto'), \
                     #'cocos2dx_builder.ini' : ('cocos2dx_builder', 'jsb_cocos2dx_builder_auto'), \
                     #'cocos2dx_ui.ini' : ('cocos2dx_ui', 'jsb_cocos2dx_ui_auto'), \

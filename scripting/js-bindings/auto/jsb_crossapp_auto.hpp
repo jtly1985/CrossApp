@@ -375,6 +375,25 @@ bool js_autogentestbindings_js_CAApplication_getCurrentNumberOfDraws(JSContext *
 bool js_autogentestbindings_js_CAApplication_setDisplayStats(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAApplication_getApplication(JSContext *cx, uint32_t argc, jsval *vp);
 
+extern JSClass  *jsb_CrossApp_CAThread_class;
+extern JSObject *jsb_CrossApp_CAThread_prototype;
+
+bool js_autogentestbindings_js_CAThread_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAThread_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAThread(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAThread_setMaxMsgCount(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_closeAtOnce(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_isRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_OnRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_clear(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_OnExitInstance(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_start(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_OnInitInstance(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_close(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_notifyRun(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAThread_CAThread(JSContext *cx, uint32_t argc, jsval *vp);
+
 extern JSClass  *jsb_CrossApp_CAButton_class;
 extern JSObject *jsb_CrossApp_CAButton_prototype;
 
@@ -1017,6 +1036,33 @@ bool js_autogentestbindings_js_CAAutoCollectionView_createWithFrame(JSContext *c
 bool js_autogentestbindings_js_CAAutoCollectionView_createWithCenter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAAutoCollectionView_CAAutoCollectionView(JSContext *cx, uint32_t argc, jsval *vp);
 
+extern JSClass  *jsb_CrossApp_CCFileUtils_class;
+extern JSObject *jsb_CrossApp_CCFileUtils_prototype;
+
+bool js_autogentestbindings_js_CCFileUtils_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CCFileUtils_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CCFileUtils(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CCFileUtils_isFileExist(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_removeSearchPath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_fullPathForFilename(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_fullPathFromRelativeFile(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_getFileData(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_isPopupNotify(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_addSearchResolutionsOrder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_getFileDataFromZip(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_getClassTypeInfo(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_removeAllPaths(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_purgeCachedEntries(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_isAbsolutePath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_getWritablePath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_addSearchPath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_createDirectory(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_getFileString(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_setPopupNotify(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_purgeFileUtils(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CCFileUtils_sharedFileUtils(JSContext *cx, uint32_t argc, jsval *vp);
+
 extern JSClass  *jsb_CrossApp_CAAlertView_class;
 extern JSObject *jsb_CrossApp_CAAlertView_prototype;
 
@@ -1069,6 +1115,28 @@ bool js_autogentestbindings_js_CAPickerView_create(JSContext *cx, uint32_t argc,
 bool js_autogentestbindings_js_CAPickerView_createWithFrame(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPickerView_createWithCenter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPickerView_CAPickerView(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CAHttpResponse_class;
+extern JSObject *jsb_CrossApp_CAHttpResponse_prototype;
+
+bool js_autogentestbindings_js_CAHttpResponse_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAHttpResponse_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAHttpResponse(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAHttpResponse_getRequest(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_setErrorBuffer(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_getErrorBuffer(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_isSucceed(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_getResponseCode(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_getHttpRequest(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_setResponseData(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_autorelease(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_setResponseHeader(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_setSucceed(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_getResponseHeader(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_getResponseData(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_setResponseCode(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAHttpResponse_CAHttpResponse(JSContext *cx, uint32_t argc, jsval *vp);
 
 extern JSClass  *jsb_CrossApp_CATextField_class;
 extern JSObject *jsb_CrossApp_CATextField_prototype;
@@ -1146,5 +1214,107 @@ bool js_autogentestbindings_js_CATextView_getTextViewAlign(JSContext *cx, uint32
 bool js_autogentestbindings_js_CATextView_createWithFrame(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATextView_createWithCenter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATextView_CATextView(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CocosDenshion_SimpleAudioEngine_class;
+extern JSObject *jsb_CocosDenshion_SimpleAudioEngine_prototype;
+
+bool js_autogentestbindings_js_SimpleAudioEngine_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_SimpleAudioEngine_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_SimpleAudioEngine(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_SimpleAudioEngine_stopAllEffects(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_getEffectsVolume(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_stopEffect(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_getBackgroundMusicVolume(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_willPlayBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_setBackgroundMusicVolume(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_stopBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_pauseBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_isBackgroundMusicPlaying(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_resumeAllEffects(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_pauseAllEffects(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_preloadBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_playBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_playEffect(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_preloadEffect(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_unloadEffect(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_rewindBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_pauseEffect(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_getClassTypeInfo(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_resumeBackgroundMusic(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_setEffectsVolume(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_resumeEffect(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_end(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_sharedEngine(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_SimpleAudioEngine_SimpleAudioEngine(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_extension_CAFlash_class;
+extern JSObject *jsb_CrossApp_extension_CAFlash_prototype;
+
+bool js_autogentestbindings_js_CAFlash_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAFlash_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAFlash(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAFlash_getIndex(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_advance(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_initWithFilePath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getScaleY(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getScaleX(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getLocalScaleY(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getCounts(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getHeight(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_setIndex(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getFrameCount(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getWidth(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_getLocalScaleX(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_playRun(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_display(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_createWithFilePath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlash_CAFlash(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_extension_CAFlashView_class;
+extern JSObject *jsb_CrossApp_extension_CAFlashView_prototype;
+
+bool js_autogentestbindings_js_CAFlashView_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAFlashView_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAFlashView(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAFlashView_isRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_setFlash(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_isRepeatForever(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_init(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_runAnimation(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_initWithFlash(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_setRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_setRepeatForever(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_stopAnimation(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_createWithFlash(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAFlashView_CAFlashView(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_ZipUtils_class;
+extern JSObject *jsb_CrossApp_ZipUtils_prototype;
+
+bool js_autogentestbindings_js_ZipUtils_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_ZipUtils_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_ZipUtils(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_ZipUtils_ccInflateGZipFile(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipUtils_ccInflateMemoryWithHint(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipUtils_ccSetPvrEncryptionKey(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipUtils_ccInflateMemory(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipUtils_ccSetPvrEncryptionKeyPart(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipUtils_ccInflateCCZFile(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_ZipFile_class;
+extern JSObject *jsb_CrossApp_ZipFile_prototype;
+
+bool js_autogentestbindings_js_ZipFile_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_ZipFile_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_ZipFile(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_ZipFile_fileExists(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipFile_setFilter(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipFile_getFileData(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_ZipFile_ZipFile(JSContext *cx, uint32_t argc, jsval *vp);
 
 #endif // __autogentestbindings_js_h__
