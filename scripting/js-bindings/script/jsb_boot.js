@@ -779,8 +779,8 @@ ca.director = ca.CAApplication.getApplication();
 ca.winSize = ca.director.getWinSize();
 
 // File utils (Temporary, won't be accessible)
-//ca.fileUtils = CCFileUtils::sharedFileUtils(); //**占时注释掉
-//ca.fileUtils.setPopupNotify(false); //**占时注释掉
+ca.fileUtils = CCFileUtils::sharedFileUtils();
+ca.fileUtils.setPopupNotify(false);
 
 ca.screen = {
     init: function() {},
@@ -805,9 +805,9 @@ ca.screen = {
  * please refer to Cocos2d-x API to know how to use it.
  * Only available in JSB
  */
-//jsb.fileUtils = ca.fileUtils; //**占时注释掉
-//delete ca.FileUtils; //**占时注释掉
-//delete ca.fileUtils; //**占时注释掉
+jsb.fileUtils = ca.fileUtils;
+delete ca.FileUtils;
+delete ca.fileUtils;
 
 /**
  * @type {Object}

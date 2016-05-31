@@ -26,6 +26,7 @@
 #include <typeinfo>
 #include "js_bindings_config.h"
 #include "jsb_crossapp_auto.hpp"
+
 //#include "jsb_event_dispatcher_manual.h" //触摸、键盘、鼠标事件等
 //#include "navmesh/CCNavMesh.h" //3d
 //#include "component/CCComponentJS.h" //内存管理 临时注释掉

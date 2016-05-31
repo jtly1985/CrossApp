@@ -1,5 +1,5 @@
 /****************************************************************************
- Copyright (c) 2015 Chukong Technologies Inc.
+ Copyright (c) 2010 cocos2d-x.org
  
  http://www.cocos2d-x.org
  
@@ -22,43 +22,9 @@
  THE SOFTWARE.
  ****************************************************************************/
 
-#pragma once
+#import <Cocoa/Cocoa.h>
 
-#include <string>
-#include "2d/CCComponent.h"
-
-NS_CC_BEGIN
-
-class ComponentJS : public Component
+int main(int argc, char *argv[])
 {
-public:
-    static ComponentJS* create(const std::string& scriptFileName);
-    
-    ComponentJS(const std::string& scriptFileName);
-    ~ComponentJS();
-    
-    /**
-     * This function is used to be invoked from JS side to get the corresponding script object of this component.
-     */
-    void* getScriptObject() const;
-    
-    virtual void update(float dt);
-    virtual void onEnter();
-    virtual void onExit();
-    
-private:
-    // Script file path
-    std::string _scriptFileName;
-    
-    // The returned value from require
-    void* _jsObj;
-    
-    bool _succeedLoadingScript;
-    
-    static const std::string ON_ENTER;
-    static const std::string ON_EXIT;
-    static const std::string UPDATE;
-};
-
-NS_CC_END
-
+	return NSApplicationMain(argc, (const char **)argv);
+}

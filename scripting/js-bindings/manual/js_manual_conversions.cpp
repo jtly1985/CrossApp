@@ -27,7 +27,7 @@
 #include "js_manual_conversions.h"
 //#include "cocos2d_specifics.hpp"
 //#include "math/TransformUtils.h"
-
+#include <cmath>
 USING_NS_CC;
 
 // JSStringWrapper
@@ -89,7 +89,7 @@ const char* JSStringWrapper::get()
     return _buffer ? _buffer : "";
 }
 
-/*下面全注释*/
+
 //
 //// JSFunctionWrapper
 //JSFunctionWrapper::JSFunctionWrapper(JSContext* cx, JSObject *jsthis, jsval fval)
@@ -430,7 +430,7 @@ bool jsval_to_ushort( JSContext *cx, JS::HandleValue vp, unsigned short *outval 
     double dp;
     ok &= JS::ToNumber(cx, vp, &dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
-    ok &= !isnan(dp);
+    ok &= !isnan((float)dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
 
     *outval = (unsigned short)dp;
@@ -444,7 +444,7 @@ bool jsval_to_int32( JSContext *cx, JS::HandleValue vp, int32_t *outval )
     double dp;
     ok &= JS::ToNumber(cx, vp, &dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
-    ok &= !isnan(dp);
+    ok &= !isnan((float)dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
     
     *outval = (int32_t)dp;
@@ -458,7 +458,7 @@ bool jsval_to_uint32( JSContext *cx, JS::HandleValue vp, uint32_t *outval )
     double dp;
     ok &= JS::ToNumber(cx, vp, &dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
-    ok &= !isnan(dp);
+    ok &= !isnan((float)dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
     
     *outval = (uint32_t)dp;
@@ -472,7 +472,7 @@ bool jsval_to_uint16( JSContext *cx, JS::HandleValue vp, uint16_t *outval )
     double dp;
     ok &= JS::ToNumber(cx, vp, &dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
-    ok &= !isnan(dp);
+    ok &= !isnan((float)dp);
     JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
     
     *outval = (uint16_t)dp;
@@ -623,7 +623,7 @@ bool jsval_to_ccacceleration(JSContext* cx, JS::HandleValue v, CCAcceleration* r
 //        JS::ToNumber(cx, y, &yy) &&
 //        JS::ToNumber(cx, z, &zz) &&
 //        JS::ToNumber(cx, w, &ww) &&
-//        !isnan(xx) && !isnan(yy) && !isnan(zz) && !isnan(ww);
+//        !isnan((float)xx) && !isnan((float)yy) && !isnan((float)zz) && !isnan((float)ww);
 //    
 //    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
 //
@@ -1594,7 +1594,7 @@ bool jsval_cacolor_to_opacity(JSContext *cx, JS::HandleValue v, int32_t* ret) {
 //    JS_GetProperty(cx, tmp, "y", &jsy) &&
 //    JS::ToNumber(cx, jsx, &x) &&
 //    JS::ToNumber(cx, jsy, &y) &&
-//    !isnan(x) && !isnan(y);
+//    !isnan((float)x) && !isnan((float)y);
 //    
 //    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
 //    
@@ -1618,7 +1618,7 @@ bool jsval_cacolor_to_opacity(JSContext *cx, JS::HandleValue v, int32_t* ret) {
 //    JS::ToNumber(cx, jsx, &x) &&
 //    JS::ToNumber(cx, jsy, &y) &&
 //    JS::ToNumber(cx, jsz, &z) &&
-//    !isnan(x) && !isnan(y) && !isnan(z);
+//    !isnan((float)x) && !isnan((float)y) && !isnan((float)z);
 //    
 //    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
 //    
@@ -1646,7 +1646,7 @@ bool jsval_cacolor_to_opacity(JSContext *cx, JS::HandleValue v, int32_t* ret) {
 //    JS::ToNumber(cx, jsy, &y) &&
 //    JS::ToNumber(cx, jsz, &z) &&
 //    JS::ToNumber(cx, jsw, &w) &&
-//    !isnan(x) && !isnan(y) && !isnan(z) && !isnan(w);
+//    !isnan((float)x) && !isnan((float)y) && !isnan((float)z) && !isnan((float)w);
 //    
 //    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
 //    
@@ -1713,7 +1713,7 @@ bool jsval_cacolor_to_opacity(JSContext *cx, JS::HandleValue v, int32_t* ret) {
 //    JS_GetProperty(cx, tmp, "y", &jsy) &&
 //    JS::ToNumber(cx, jsx, &x) &&
 //    JS::ToNumber(cx, jsy, &y) &&
-//    !isnan(x) && !isnan(y);
+//    !isnan((float)x) && !isnan((float)y);
 //    
 //    JSB_PRECONDITION3(ok, cx, false, "Error processing arguments");
 //    
@@ -2111,7 +2111,7 @@ jsval std_string_to_jsval(JSContext* cx, const std::string& v)
     return c_string_to_jsval(cx, v.c_str(), v.size());
 }
 
-jsval c_string_to_jsval(JSContext* cx, const char* v, size_t length /* = -1 */)
+jsval c_string_to_jsval(JSContext* cx, const char* v, size_t length)
 {
     if (v == NULL)
     {

@@ -2,8 +2,8 @@
 //  ScriptingCore.cpp
 //  MyTest
 //
-//  Created by 张磊 on 16/1/19.
-//  Copyright © 2016年 张磊. All rights reserved.
+//  Created by Lei.zhang on 16/1/19.
+//  Copyright © 2016 Lei.zhang All rights reserved.
 //
 
 #include "ScriptingCore.h"
@@ -26,7 +26,7 @@
 #include <iostream>
 #include <sstream>
 #include <stdio.h>
-
+#include <mutex>
 
 #ifdef ANDROID
 #define  LOG_TAG    "ScriptingCore.cpp"
@@ -57,10 +57,11 @@ std::unordered_map<std::string, js_type_class_t*> _js_global_type_map;
 
 static char *_js_log_buf = NULL;
 
-static std::vector<sc_register_sth> registrationList; //存放注册函数的列表
+static std::vector<sc_register_sth> registrationList;
 // name ~> JSScript map
 static std::unordered_map<std::string, JSScript*> filename_script;
 
+/*
 static void cc_closesocket(int fd)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
@@ -69,13 +70,14 @@ static void cc_closesocket(int fd)
     close(fd);
 #endif
 }
-static ScriptingCore* instance = nullptr; //单例对象
+*/
+static ScriptingCore* instance = nullptr; 
 typedef void (*sc_register_sth)(JSContext* cx, JS::HandleObject global);
 
 
 
 /// The max length of CCLog message.
-static const int MAX_LOG_LENGTH = 16*1024; //临时放这里，cocos2d中属于Console头文件
+static const int MAX_LOG_LENGTH = 16*1024; 
 void js_log(const char *format, ...) {
     if (_js_log_buf == NULL)
     {
@@ -104,7 +106,7 @@ static void ReportException(JSContext *cx)
     }
 }
 
-//全局函数
+
 static const JSClass global_class = {
     "global", JSCLASS_GLOBAL_FLAGS,
     JS_PropertyStub,
@@ -146,12 +148,11 @@ void ScriptingCore::restartVM()
 {
     cleanup();
     initRegister();
-//    Application::getInstance()->applicationDidFinishLaunching(); //**临时注释 无重启
+//    Application::getInstance()->applicationDidFinishLaunching(); 
 }
 
-ScriptingCore::~ScriptingCore(){
-    
-}
+ScriptingCore::~ScriptingCore(){}
+
 bool JSBCore_platform(JSContext *cx, uint32_t argc, jsval *vp)
 {
     if (argc!=0)
@@ -307,7 +308,7 @@ void registerDefaultClasses(JSContext* cx, JS::HandleObject global) {
     JS_DefineFunction(cx, global, "__isObjectValid", ScriptingCore::isObjectValid, 1, JSPROP_READONLY | JSPROP_PERMANENT);
 }
 
-//单例
+
 ScriptingCore* ScriptingCore::getInstance()
 {
     if (!instance) {
@@ -327,10 +328,10 @@ static JSSecurityCallbacks securityCallbacks = {
     CheckObjectAccess,
     NULL
 };
- //创建全局类和上下文
+
 void ScriptingCore::createGlobalContext(){
     if (_cx && _rt) {
-        //释放所有资源
+        
         ScriptingCore::removeAllRoots(_cx);
         JS_DestroyContext(_cx);
         JS_DestroyRuntime(_rt);
@@ -338,40 +339,40 @@ void ScriptingCore::createGlobalContext(){
         _cx = nullptr;
     }
     
-    // 初始化引擎，这个方法是SpiderMonkey的v25版本开始启用的
+    
     if (!JS_Init()) {
         return;
     }
-    //初始化运行时runtime 设置为8M
+    
     _rt = JS_NewRuntime(8L * 1024L * 1024L);
-    //调整垃圾回收机制的参数及性能
+    
     JS_SetGCParameter(_rt, JSGC_MAX_BYTES, 0xffffffff);
     
-    JS_SetTrustedPrincipals(_rt, &shellTrustedPrincipals);//运行大校长转码回调
+    JS_SetTrustedPrincipals(_rt, &shellTrustedPrincipals);
     JS_SetSecurityCallbacks(_rt, &securityCallbacks);
     JS_SetNativeStackQuota(_rt, JSB_MAX_STACK_QUOTA);
     
-    //初始化上下文
+    
     _cx = JS_NewContext(_rt, 8192);
     
-    //**没搞明白具体做了什么**
+    
     JS::RuntimeOptionsRef(_rt).setIon(true);
     JS::RuntimeOptionsRef(_rt).setBaseline(true);
     
     JS_SetErrorReporter(_cx, ScriptingCore::reportError);
-    //初始化_global
+    
     _global.construct(_cx);
     _global.ref() = NewGlobalObject(_cx);
-    //RALL助手开启 管理内存
+    
     JSAutoCompartment ac(_cx,_global.ref());
     
-    //设置默认的
+    
     js::SetDefaultObjectForContext(_cx, _global.ref());
     
-    //配置默认的javascript脚本  先注释掉
+    
     runScript("script/jsb_prepare.js");
 
-    //迭代器 在引擎中注册当前类的方法
+    
     for (std::vector<sc_register_sth>::iterator it = registrationList.begin(); it != registrationList.end(); it++) {
         sc_register_sth callback = *it;
         callback(_cx, _global.ref());
@@ -388,9 +389,9 @@ bool ScriptingCore::evalString(const char *string,JS::RootedValue *outVal, const
     }
     JSAutoCompartment ac(cx,global);
     JS::RootedObject cc(cx, global);
-    JS::RootedValue rval(cx);//执行结果
+    JS::RootedValue rval(cx);
     bool ok =  JS_EvaluateScript(cx, cc, string, strlen(string), "ScriptingCore::evalString", 1,&rval);
-    /*测试执行文本输出代码
+    /*
     if (ok) {
         JSString *str = rval.toString();
         printf("javascript:-->%s",JS_EncodeString(cx, str));
@@ -451,14 +452,14 @@ void ScriptingCore::compileScript(const char *path, JSObject* global, JSContext*
     
     // Check whether '.jsc' files exist to avoid outputing log which says 'couldn't find .jsc file'.
     if (futil->isFileExist(byteCodePath)) {
-        /*cocos 这样写的 由于Crossapp中没有Data数据类型
+        /*cocos
         Data data = futil->getDataFromFile(byteCodePath);
         if (!data.isNull())
         {
             script = JS_DecodeScript(cx, data.getBytes(), static_cast<uint32_t>(data.getSize()), nullptr);
         }
         */
-        //我的修改
+        
         std::string data = futil->getFileString(byteCodePath.c_str());
         if (data.empty()) {
             script = JS_DecodeScript(cx, data.c_str(), static_cast<uint32_t>(data.size()), nullptr);
@@ -479,6 +480,7 @@ void ScriptingCore::compileScript(const char *path, JSObject* global, JSContext*
         bool ok = false;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
         std::string jsFileContent = futil->getFileString(fullPath);
+
         if (!jsFileContent.empty())
         {
             ok = JS::Compile(cx, obj, op, jsFileContent.c_str(), jsFileContent.size(), &script);
@@ -515,7 +517,7 @@ bool ScriptingCore::runScript(const char *path, JS::HandleObject global, JSConte
             JS_ReportPendingException(cx);
         }
 //        else {
-            //*测试执行文本输出代码
+           
 //            JSString *str = rval.toString();
 //            printf("Runscript:-->%s",JS_EncodeString(cx, str));
 //        }
@@ -549,7 +551,7 @@ bool ScriptingCore::requireScript(const char *path, JS::HandleObject global, JSC
     }
     return evaluateOK;
 }
-//清理指定路径的脚步
+
 void ScriptingCore::cleanScript(const char *path)
 {
     std::string byteCodePath = RemoveFileExt(std::string(path)) + BYTE_CODE_FILE_EXT ;
@@ -564,23 +566,23 @@ void ScriptingCore::cleanScript(const char *path)
         filename_script.erase(it);
     }
 }
-//缓存脚本对应的映射
+
 std::unordered_map<std::string, JSScript*>  &ScriptingCore::getFileScript()
 {
     return filename_script;
 }
-//清楚所有的脚本
+
 void ScriptingCore::cleanAllScript()
 {
     filename_script.clear();
 }
-//初始化所有，包括js的context和global对象
+
 void ScriptingCore::start()
 {
     // for now just this
     createGlobalContext();
 }
-//清除所有，包括js的context和global对象
+
 void ScriptingCore::cleanup()
 {
     localStorageFree();
@@ -613,11 +615,11 @@ void ScriptingCore::cleanup()
 }
 void ScriptingCore::reset()
 {
-      //Crossapp没有重启的功能
+  
 //    Director::getInstance()->restart();
     
 }
-//在JS中错误报告
+
 void ScriptingCore::reportError(JSContext *cx, const char *message, JSErrorReport *report)
 {
     js_log("%s:%u:%s\n",
@@ -639,14 +641,14 @@ void removeJSObject(JSContext* cx, void* nativeObj)
     }
 }
 
-//javascript的log
+
 bool ScriptingCore::log(JSContext* cx, uint32_t argc, jsval *vp)
 {
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     if (argc > 0) {
         JSString *string = JS::ToString(cx, args.get(0));
         if (string) {
-            //错误临时注释
+            
             JSStringWrapper wrapper(string);
             js_log("%s", wrapper.get());
         }
@@ -745,7 +747,7 @@ bool ScriptingCore::removeRootJS(JSContext *cx, uint32_t argc, jsval *vp)
     return false;
 }
 
-// ** 未完成
+// **
 int ScriptingCore::sendEvent(ScriptEvent* evt)
 {
     if (NULL == evt)
@@ -836,12 +838,14 @@ void ScriptingCore::debugProcessInput(const std::string& str)
     JS_CallFunctionName(_cx, JS::RootedObject(_cx, _debugGlobal.ref()), "processInput", JS::HandleValueArray::fromMarkedLocation(1, &argv), &outval);
 }
 //#pragma mark - Debugger
-
+/*
 static void _clientSocketWriteAndClearString(std::string& s)
 {
     ::send(clientSocket, s.c_str(), s.length(), 0);
     s.clear();
 }
+*/
+
 bool JSBDebug_BufferWrite(JSContext* cx, unsigned argc, jsval* vp)
 {
     if (argc == 1) {
@@ -849,7 +853,7 @@ bool JSBDebug_BufferWrite(JSContext* cx, unsigned argc, jsval* vp)
         JSStringWrapper strWrapper(args.get(0));
         // this is safe because we're already inside a lock (from clearBuffers)
         outData.append(strWrapper.get());
-        _clientSocketWriteAndClearString(outData);
+        //_clientSocketWriteAndClearString(outData);
     }
     return true;
 }
@@ -934,9 +938,11 @@ static void clearBuffers() {
         inData.clear();
     }
     if (outData.length() > 0) {
-        _clientSocketWriteAndClearString(outData);
+       // _clientSocketWriteAndClearString(outData);
     }
 }
+
+/*
 static void serverEntryPoint(unsigned int port)
 {
     // start a server, accept the connection and keep reading data from it
@@ -1029,6 +1035,7 @@ static void serverEntryPoint(unsigned int port)
         }
     } // while(true)
 }
+*/
 void ScriptingCore::enableDebugger(unsigned int port)
 {
     if (_debugGlobal.empty())
@@ -1064,15 +1071,15 @@ void ScriptingCore::enableDebugger(unsigned int port)
         }
         
         // start bg thread
-        auto t = std::thread(&serverEntryPoint,port);
-        t.detach();
+//        auto t = std::thread(&serverEntryPoint,port);
+//        t.detach();
         
 //        CAScheduler* scheduler = Director::getInstance()->getScheduler();
 //        scheduler->scheduleUpdate(this->_runLoop, 0, false);
         CAScheduler::schedule(schedule_selector(SimpleRunLoop::update), this->_runLoop, 0,false);
     }
 }
-//删除所有根对象绑定的JS上下文，但根对象不会给释放
+
 void ScriptingCore::removeAllRoots(JSContext *cx) {
     js_proxy_t *current, *tmp;
     HASH_ITER(hh, _js_native_global_ht, current, tmp) {
@@ -1091,7 +1098,7 @@ void ScriptingCore::removeAllRoots(JSContext *cx) {
 JSObject* NewGlobalObject(JSContext* cx, bool debug)
 {
     JS::CompartmentOptions options;
-    //设置Javascript解析的版本为ECMA_5
+    
     options.setVersion(JSVERSION_LATEST);
     
     JS::RootedObject glob(cx, JS_NewGlobalObject(cx, &global_class, &shellTrustedPrincipals, JS::DontFireOnNewGlobalHook, options));
@@ -1099,7 +1106,7 @@ JSObject* NewGlobalObject(JSContext* cx, bool debug)
     if (!glob) {
         return NULL;
     }
-    //RALL助手开启 管理内存
+    
     JSAutoCompartment ac(cx,glob);
     bool ok = true;
     ok = JS_InitStandardClasses(cx, glob);

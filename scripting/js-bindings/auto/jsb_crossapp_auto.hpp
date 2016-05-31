@@ -796,6 +796,65 @@ bool js_autogentestbindings_js_CAViewController_setKeypadEnabled(JSContext *cx, 
 bool js_autogentestbindings_js_CAViewController_keyMenuClicked(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAViewController_CAViewController(JSContext *cx, uint32_t argc, jsval *vp);
 
+extern JSClass  *jsb_CrossApp_CANavigationController_class;
+extern JSObject *jsb_CrossApp_CANavigationController_prototype;
+
+bool js_autogentestbindings_js_CANavigationController_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CANavigationController_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CANavigationController(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CANavigationController_setNavigationBarTitleColor(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_setNavigationBarButtonColor(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_updateItem(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getBackViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getNavigationBarBackgroundColor(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getViewControllerCount(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_setNavigationBarHidden(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_replaceViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_popToRootViewControllerAnimated(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_pushViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_isReachBoundaryDown(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_setTouchMoved(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_initWithRootViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_isReachBoundaryRight(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_popViewControllerAnimated(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getNavigationBarButtonColor(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_isTouchMoved(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getNavigationBarTitleColor(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_isReachBoundaryUp(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_isReachBoundaryLeft(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_setNavigationBarBackgroundColor(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_isNavigationBarHidden(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getNavigationBarBackgroundImage(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_getViewControllerAtIndex(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_setNavigationBarBackgroundImage(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_popFirstViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_popViewControllerAtIndex(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CANavigationController_CANavigationController(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CADrawerController_class;
+extern JSObject *jsb_CrossApp_CADrawerController_prototype;
+
+bool js_autogentestbindings_js_CADrawerController_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CADrawerController_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CADrawerController(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CADrawerController_hideLeftViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_isReachBoundaryLeft(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_showLeftViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_setBackgroundImage(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_setTouchMoved(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_getEffect3D(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_getRightViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_isShowLeftViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_initWithController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_setEffect3D(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_isReachBoundaryRight(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_replaceRightViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_getLeftViewController(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_isTouchMoved(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CADrawerController_CADrawerController(JSContext *cx, uint32_t argc, jsval *vp);
+
 extern JSClass  *jsb_CrossApp_CAGif_class;
 extern JSObject *jsb_CrossApp_CAGif_prototype;
 

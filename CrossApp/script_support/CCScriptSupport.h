@@ -3,10 +3,10 @@
 #ifndef __SCRIPT_SUPPORT_H__
 #define __SCRIPT_SUPPORT_H__
 
-#include "platform/CCCommon.h"  //多国语言
-#include "dispatcher/CATouch.h" //事件
-#include "dispatcher/CATouchDispatcher.h" //触摸和鼠标事件
-#include "dispatcher/CAKeypadDelegate.h" //键盘事件 
+#include "platform/CCCommon.h"
+#include "dispatcher/CATouch.h"
+#include "dispatcher/CATouchDispatcher.h"
+#include "dispatcher/CAKeypadDelegate.h"
 #include <map>
 #include <string>
 #include <list>
@@ -144,7 +144,7 @@ private:
     bool    m_bSwallowsTouches;
 };
 
-/** ScriptEventType enum*/  //**事件类型需要修改
+/** ScriptEventType enum*/
 enum ScriptEventType
 {
     kNodeEvent = 0,
@@ -412,7 +412,7 @@ public:
      * @lua NA
      * @js NA
      */
-//   static bool sendActionEventToJS(Action* actionObject, int eventType, void* param);//没有Action
+//   static bool sendActionEventToJS(Action* actionObject, int eventType, void* param);
     /**
      *
      *
@@ -436,7 +436,7 @@ public:
      * @lua NA
      * @js NA
      */
-//    static void sendNodeEventToLua(Node* node, int action); //lua占时不考虑
+//    static void sendNodeEventToLua(Node* node, int action); 
     
     CC_DEPRECATED_ATTRIBUTE static void purgeSharedManager(void);
     
