@@ -718,6 +718,7 @@ bool js_autogentestbindings_js_CAScrollView_setShowsVerticalScrollIndicator(JSCo
 bool js_autogentestbindings_js_CAScrollView_init(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScrollView_isShowsVerticalScrollIndicator(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScrollView_startPullToHeaderRefreshView(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScrollView_getSubviews(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScrollView_getMultitouchGesture(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScrollView_setHeaderRefreshView(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScrollView_getScrollViewDelegate(JSContext *cx, uint32_t argc, jsval *vp);
@@ -768,6 +769,7 @@ void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
 bool js_autogentestbindings_js_CAPageView_setPageViewDelegate(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPageView_setSpacing(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPageView_setShowsScrollIndicators(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAPageView_setViews(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPageView_getOrientation(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPageView_getSpacing(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAPageView_getCurrPage(JSContext *cx, uint32_t argc, jsval *vp);
@@ -960,6 +962,7 @@ bool js_autogentestbindings_js_CATableView_setAllowsMultipleSelection(JSContext 
 bool js_autogentestbindings_js_CATableView_getTableFooterHeight(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATableView_setShowsScrollIndicators(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATableView_cellForRowAtIndexPath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATableView_displayingTableCell(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATableView_getTableHeaderView(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATableView_setAlwaysBottomSectionFooter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CATableView_onExitTransitionDidStart(JSContext *cx, uint32_t argc, jsval *vp);
@@ -1013,6 +1016,7 @@ bool js_autogentestbindings_js_CAAutoCollectionView_setCollectionViewDataSource(
 bool js_autogentestbindings_js_CAAutoCollectionView_setAlwaysTopSectionHeader(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAAutoCollectionView_setShowsScrollIndicators(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAAutoCollectionView_cellForRowAtIndexPath(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAAutoCollectionView_displayingCollectionCell(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAAutoCollectionView_getCollectionViewDataSource(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAAutoCollectionView_setAlwaysBottomSectionFooter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAAutoCollectionView_onExitTransitionDidStart(JSContext *cx, uint32_t argc, jsval *vp);

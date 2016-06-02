@@ -47,6 +47,9 @@ conversions:
     "CAColor4F": "ok &= jsval_to_cacolor4f(cx, ${in_value}, &${out_value})"
     "String*": "std::string ${out_value}_tmp; ok &= jsval_to_std_string(cx, ${in_value}, &${out_value}_tmp)"
     "@CAVector<.*>": "ok &= jsval_to_cavector(cx, ${in_value}, &${out_value})"
+    #加
+    "@CADeque<.*>": "ok &= jsval_to_cadeque(cx, ${in_value}, &${out_value})"
+    "@CAList<.*>": "ok &= jsval_to_calist(cx, ${in_value}, &${out_value})"
     "@CAMap<std::basic_string.*>": "ok &= jsval_to_camap_string_key(cx, ${in_value}, &${out_value})"
     "@map<std::basic_string.*,\\s*std::basic_string.*>": "ok &= jsval_to_std_map_string_string(cx, ${in_value}, &${out_value})"
     "@vector<std::basic_string.*>": "ok &= jsval_to_std_vector_string(cx, ${in_value}, &${out_value})"
@@ -98,7 +101,11 @@ conversions:
 
 
     "String*": "${out_value} = std_string_to_jsval(cx, ${in_value}->getCString())"
-    "@Vector<.*>": "${out_value} = ccvector_to_jsval(cx, ${in_value})"
+    #加
+    "@CAVector<.*>": "${out_value} = cavector_to_jsval(cx, ${in_value})"
+    "@CADeque<.*>": "${out_value} = cadeque_to_jsval(cx, ${in_value})"
+    "@CAList<.*>": "${out_value} = calist_to_jsval(cx, ${in_value})"
+
     "@Map<std::basic_string.*>": "${out_value} = ccmap_string_key_to_jsval(cx, ${in_value})"
     "@map<std::basic_string.*,\\s*std::basic_string.*>": "${out_value} = std_map_string_string_to_jsval(cx, ${in_value})"
 

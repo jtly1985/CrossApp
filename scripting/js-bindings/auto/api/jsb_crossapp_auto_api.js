@@ -5781,6 +5781,16 @@ startPullToHeaderRefreshView : function (
 },
 
 /**
+ * @method getSubviews
+ * @return {Array}
+ */
+getSubviews : function (
+)
+{
+    return cc.CAVector<cc.CAView >;
+},
+
+/**
  * @method getMultitouchGesture
  * @return {cc.CAScrollView::MultitouchGesture}
  */
@@ -6202,6 +6212,16 @@ int
  */
 setShowsScrollIndicators : function (
 bool 
+)
+{
+},
+
+/**
+ * @method setViews
+* @param {Array|cc.CADeque<cc.CAView >} array
+*/
+setViews : function(
+cadeque<crossapp::caview > 
 )
 {
 },
@@ -7661,6 +7681,16 @@ int
 },
 
 /**
+ * @method displayingTableCell
+ * @return {Array}
+ */
+displayingTableCell : function (
+)
+{
+    return cc.CAVector<cc.CATableViewCell >;
+},
+
+/**
  * @method getTableHeaderView
  * @return {cc.CAView}
  */
@@ -8126,6 +8156,16 @@ int
 )
 {
     return cc.CACollectionViewCell;
+},
+
+/**
+ * @method displayingCollectionCell
+ * @return {Array}
+ */
+displayingCollectionCell : function (
+)
+{
+    return cc.CAVector<cc.CACollectionViewCell >;
 },
 
 /**

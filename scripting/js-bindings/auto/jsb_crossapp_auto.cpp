@@ -2,13 +2,10 @@
 #include "cocos2d_specifics.hpp"
 #include "CrossApp.h"
 #include "ExtensionMacros.h"
-<<<<<<< HEAD
 #include "SimpleAudioEngine.h"
 #include "CrossAppExt.h"
 #include "ZipUtils.h"
 #include "CADevice.h"
-=======
->>>>>>> 9ca7f36cbf9eadd1bdc11175309a963564ff30f7
 
 template<class T>
 static bool dummy_constructor(JSContext *cx, uint32_t argc, jsval *vp) {
@@ -14546,6 +14543,25 @@ bool js_autogentestbindings_js_CAScrollView_startPullToHeaderRefreshView(JSConte
     JS_ReportError(cx, "js_autogentestbindings_js_CAScrollView_startPullToHeaderRefreshView : wrong number of arguments: %d, was expecting %d", argc, 0);
     return false;
 }
+bool js_autogentestbindings_js_CAScrollView_getSubviews(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    CrossApp::CAScrollView* cobj = (CrossApp::CAScrollView *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAScrollView_getSubviews : Invalid Native Object");
+    if (argc == 0) {
+        const CrossApp::CAVector<CrossApp::CAView *>& ret = cobj->getSubviews();
+        jsval jsret = JSVAL_NULL;
+        jsret = cavector_to_jsval(cx, ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_autogentestbindings_js_CAScrollView_getSubviews : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
 bool js_autogentestbindings_js_CAScrollView_getMultitouchGesture(JSContext *cx, uint32_t argc, jsval *vp)
 {
     
@@ -15451,6 +15467,7 @@ void js_register_autogentestbindings_js_CAScrollView(JSContext *cx, JS::HandleOb
         JS_FN("init", js_autogentestbindings_js_CAScrollView_init, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("isShowsVerticalScrollIndicator", js_autogentestbindings_js_CAScrollView_isShowsVerticalScrollIndicator, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("startPullToHeaderRefreshView", js_autogentestbindings_js_CAScrollView_startPullToHeaderRefreshView, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("getSubviews", js_autogentestbindings_js_CAScrollView_getSubviews, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getMultitouchGesture", js_autogentestbindings_js_CAScrollView_getMultitouchGesture, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setHeaderRefreshView", js_autogentestbindings_js_CAScrollView_setHeaderRefreshView, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getScrollViewDelegate", js_autogentestbindings_js_CAScrollView_getScrollViewDelegate, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -15596,6 +15613,42 @@ bool js_autogentestbindings_js_CAPageView_setShowsScrollIndicators(JSContext *cx
     }
 
     JS_ReportError(cx, "js_autogentestbindings_js_CAPageView_setShowsScrollIndicators : wrong number of arguments: %d, was expecting %d", argc, 1);
+    return false;
+}
+bool js_autogentestbindings_js_CAPageView_setViews(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    bool ok = true;
+    CAPageView* cobj = nullptr;
+
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx);
+    obj = args.thisv().toObjectOrNull();
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    cobj = (CAPageView *)(proxy ? proxy->ptr : nullptr);
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAPageView_setViews : Invalid Native Object");
+    do {
+        if (argc == 1) {
+            CrossApp::CAVector<CrossApp::CAView *> arg0;
+            ok &= jsval_to_cavector(cx, args.get(0), &arg0);
+            if (!ok) { ok = true; break; }
+            cobj->setViews(arg0);
+            args.rval().setUndefined();
+            return true;
+        }
+    } while(0);
+
+    do {
+        if (argc == 1) {
+            CrossApp::CADeque<CrossApp::CAView *> arg0;
+            ok &= jsval_to_cadeque(cx, args.get(0), &arg0);
+            if (!ok) { ok = true; break; }
+            cobj->setViews(arg0);
+            args.rval().setUndefined();
+            return true;
+        }
+    } while(0);
+
+    JS_ReportError(cx, "js_autogentestbindings_js_CAPageView_setViews : wrong number of arguments");
     return false;
 }
 bool js_autogentestbindings_js_CAPageView_getOrientation(JSContext *cx, uint32_t argc, jsval *vp)
@@ -15905,6 +15958,7 @@ void js_register_autogentestbindings_js_CAPageView(JSContext *cx, JS::HandleObje
         JS_FN("setPageViewDelegate", js_autogentestbindings_js_CAPageView_setPageViewDelegate, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setSpacing", js_autogentestbindings_js_CAPageView_setSpacing, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setShowsScrollIndicators", js_autogentestbindings_js_CAPageView_setShowsScrollIndicators, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("setViews", js_autogentestbindings_js_CAPageView_setViews, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getOrientation", js_autogentestbindings_js_CAPageView_getOrientation, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getSpacing", js_autogentestbindings_js_CAPageView_getSpacing, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getCurrPage", js_autogentestbindings_js_CAPageView_getCurrPage, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -19356,6 +19410,25 @@ bool js_autogentestbindings_js_CATableView_cellForRowAtIndexPath(JSContext *cx, 
     JS_ReportError(cx, "js_autogentestbindings_js_CATableView_cellForRowAtIndexPath : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
+bool js_autogentestbindings_js_CATableView_displayingTableCell(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    CrossApp::CATableView* cobj = (CrossApp::CATableView *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CATableView_displayingTableCell : Invalid Native Object");
+    if (argc == 0) {
+        const CrossApp::CAVector<CrossApp::CATableViewCell *>& ret = cobj->displayingTableCell();
+        jsval jsret = JSVAL_NULL;
+        jsret = cavector_to_jsval(cx, ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_autogentestbindings_js_CATableView_displayingTableCell : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
 bool js_autogentestbindings_js_CATableView_getTableHeaderView(JSContext *cx, uint32_t argc, jsval *vp)
 {
     
@@ -19864,6 +19937,7 @@ void js_register_autogentestbindings_js_CATableView(JSContext *cx, JS::HandleObj
         JS_FN("getTableFooterHeight", js_autogentestbindings_js_CATableView_getTableFooterHeight, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setShowsScrollIndicators", js_autogentestbindings_js_CATableView_setShowsScrollIndicators, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("cellForRowAtIndexPath", js_autogentestbindings_js_CATableView_cellForRowAtIndexPath, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("displayingTableCell", js_autogentestbindings_js_CATableView_displayingTableCell, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getTableHeaderView", js_autogentestbindings_js_CATableView_getTableHeaderView, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setAlwaysBottomSectionFooter", js_autogentestbindings_js_CATableView_setAlwaysBottomSectionFooter, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("onExitTransitionDidStart", js_autogentestbindings_js_CATableView_onExitTransitionDidStart, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
@@ -20499,6 +20573,25 @@ bool js_autogentestbindings_js_CAAutoCollectionView_cellForRowAtIndexPath(JSCont
     JS_ReportError(cx, "js_autogentestbindings_js_CAAutoCollectionView_cellForRowAtIndexPath : wrong number of arguments: %d, was expecting %d", argc, 2);
     return false;
 }
+bool js_autogentestbindings_js_CAAutoCollectionView_displayingCollectionCell(JSContext *cx, uint32_t argc, jsval *vp)
+{
+    
+    JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
+    JS::RootedObject obj(cx, args.thisv().toObjectOrNull());
+    js_proxy_t *proxy = jsb_get_js_proxy(obj);
+    CrossApp::CAAutoCollectionView* cobj = (CrossApp::CAAutoCollectionView *)(proxy ? proxy->ptr : NULL);
+    JSB_PRECONDITION2( cobj, cx, false, "js_autogentestbindings_js_CAAutoCollectionView_displayingCollectionCell : Invalid Native Object");
+    if (argc == 0) {
+        const CrossApp::CAVector<CrossApp::CACollectionViewCell *>& ret = cobj->displayingCollectionCell();
+        jsval jsret = JSVAL_NULL;
+        jsret = cavector_to_jsval(cx, ret);
+        args.rval().set(jsret);
+        return true;
+    }
+
+    JS_ReportError(cx, "js_autogentestbindings_js_CAAutoCollectionView_displayingCollectionCell : wrong number of arguments: %d, was expecting %d", argc, 0);
+    return false;
+}
 bool js_autogentestbindings_js_CAAutoCollectionView_getCollectionViewDataSource(JSContext *cx, uint32_t argc, jsval *vp)
 {
     
@@ -21043,6 +21136,7 @@ void js_register_autogentestbindings_js_CAAutoCollectionView(JSContext *cx, JS::
         JS_FN("setAlwaysTopSectionHeader", js_autogentestbindings_js_CAAutoCollectionView_setAlwaysTopSectionHeader, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setShowsScrollIndicators", js_autogentestbindings_js_CAAutoCollectionView_setShowsScrollIndicators, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("cellForRowAtIndexPath", js_autogentestbindings_js_CAAutoCollectionView_cellForRowAtIndexPath, 2, JSPROP_PERMANENT | JSPROP_ENUMERATE),
+        JS_FN("displayingCollectionCell", js_autogentestbindings_js_CAAutoCollectionView_displayingCollectionCell, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("getCollectionViewDataSource", js_autogentestbindings_js_CAAutoCollectionView_getCollectionViewDataSource, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("setAlwaysBottomSectionFooter", js_autogentestbindings_js_CAAutoCollectionView_setAlwaysBottomSectionFooter, 1, JSPROP_PERMANENT | JSPROP_ENUMERATE),
         JS_FN("onExitTransitionDidStart", js_autogentestbindings_js_CAAutoCollectionView_onExitTransitionDidStart, 0, JSPROP_PERMANENT | JSPROP_ENUMERATE),
