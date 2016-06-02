@@ -2,8 +2,8 @@
 //  ScriptingCore.hpp
 //  MyTest
 //
-//  Created by 张磊 on 16/1/19.
-//  Copyright © 2016年 张磊. All rights reserved.
+//  Created by Lei.zhang on 16/1/19.
+//  Copyright © 2016年 Lei.zhang All rights reserved.
 //
 
 #ifndef ScriptingCore_hpp
@@ -20,6 +20,8 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <memory>
+
 
 void js_log(const char *format, ...);
 
@@ -36,10 +38,10 @@ public:
 class ScriptingCore : public CCScriptEngineProtocol
 {
 private:
-    JSRuntime *_rt;//运行时
-    JSContext *_cx;//上下文
-    mozilla::Maybe<JS::PersistentRootedObject> _global; //全局根对象
-    mozilla::Maybe<JS::PersistentRootedObject> _debugGlobal; //全局Debug对象
+    JSRuntime *_rt;
+    JSContext *_cx;
+    mozilla::Maybe<JS::PersistentRootedObject> _global; 
+    mozilla::Maybe<JS::PersistentRootedObject> _debugGlobal; 
     SimpleRunLoop* _runLoop;
     
     bool _callFromScript;
@@ -71,7 +73,7 @@ public:
     virtual int executeString(const char* codes) override { return 0; };
     
     
-    //Crossapp没有Action需要修改这部分的通信 暂时注释这三个方法
+   
     /**
      * @brief @~english Pause scheduled tasks and actions for an object proxy.
      * @param p @~english The object proxy
@@ -101,7 +103,7 @@ public:
      */
     virtual int executeGlobalFunction(const char* functionName) override { return 0; } //
     
-    //这两个函数需要添加CCScriptSupport
+
     virtual int sendEvent(ScriptEvent* message) override;
     
     virtual bool parseConfig(ConfigType type, const std::string& str) override;
@@ -159,7 +161,7 @@ public:
     
 
 
-    //运行传入的字Javascript脚本（字符串）
+    
     bool evalString(const char *string,JS::RootedValue *outVal, const char *filename = NULL, JSContext *cx = NULL, JSObject* global = NULL);
     
     /**
@@ -256,7 +258,6 @@ public:
      */
     static void removeAllRoots(JSContext *cx);
     
-    //发送touch事件
     /**@~english
      * Simulate a touch event and dispatch it to a js object.
      * @param eventType @~english The touch event type
@@ -396,7 +397,7 @@ private:
     void initRegister();
 };
 
-//创建新的全局对象
+
 JSObject* NewGlobalObject(JSContext* cx, bool debug = false);
 
 js_proxy_t* jsb_new_proxy(void* nativeObj, JSObject* jsObj);

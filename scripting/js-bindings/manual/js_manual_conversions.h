@@ -34,6 +34,14 @@
 
 #define JSB_COMPATIBLE_WITH_COCOS2D_HTML5_BASIC_TYPES
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32 || CC_TARGET_PLATFORM == CC_PLATFORM_WINRT)
+#ifndef __SSIZE_T
+#define __SSIZE_T
+typedef SSIZE_T ssize_t;
+#endif // __SSIZE_T
+#endif
+
+
 // just a simple utility to avoid mem leaking when using JSString
 class JSStringWrapper
 {
@@ -55,7 +63,7 @@ private:
 };
 
 
-//** 用于事件与函数回到
+//** 
 
 //// wraps a function and "this" object
 //class JSFunctionWrapper
@@ -100,7 +108,7 @@ bool jsval_to_long_long(JSContext *cx, JS::HandleValue v, long long* ret);
 bool jsval_to_std_string(JSContext *cx, JS::HandleValue v, std::string* ret);
 
 
-//修改部分
+
 bool jsval_to_dpoint(JSContext *cx, JS::HandleValue v, CrossApp::DPoint* ret);
 bool jsval_to_drect(JSContext *cx, JS::HandleValue v, CrossApp::DRect* ret);
 bool jsval_to_dsize(JSContext *cx, JS::HandleValue v, CrossApp::DSize* ret);
@@ -123,7 +131,7 @@ bool jsval_to_ccacceleration(JSContext* cx, JS::HandleValue v, CrossApp::CCAccel
 // forward declaration
 js_proxy_t* jsb_get_js_proxy(JSObject* jsObj);
 
-//template <class T> //数据结构和方法名有修改
+//template <class T> 
 //bool jsvals_variadic_to_ccvector( JSContext *cx, /*jsval *vp, int argc,*/const JS::CallArgs& args, CrossApp::CAVector<T>* ret)
 //{
 //    bool ok = true;
@@ -151,8 +159,8 @@ js_proxy_t* jsb_get_js_proxy(JSObject* jsObj);
 //bool jsval_to_FontDefinition( JSContext *cx, JS::HandleValue vp, cocos2d::FontDefinition* ret );//**
 //
 
-//CAVector<<#class T#>>
-template <class T> //数据结构和方法名有修改
+
+template <class T>
 bool jsval_to_cavector(JSContext* cx, JS::HandleValue v, CrossApp::CAVector<T>* ret)
 {
     JS::RootedObject jsobj(cx);
@@ -184,6 +192,7 @@ bool jsval_to_cavector(JSContext* cx, JS::HandleValue v, CrossApp::CAVector<T>* 
 
     return true;
 }
+
 //
 //bool jsval_to_ccvalue(JSContext* cx, JS::HandleValue v, cocos2d::Value* ret);//**
 //bool jsval_to_ccvaluemap(JSContext* cx, JS::HandleValue v, cocos2d::ValueMap* ret);//**
@@ -207,36 +216,24 @@ bool jsval_to_std_map_string_string(JSContext* cx, JS::HandleValue v, std::map<s
 
 
 
-
-//bool jsval_to_cavector();
-//bool jsval_to_camap();
-
-
-//
-//bool cavector_to_jsval();
-//bool camap_to_jsval();
-
-
-
-//CAList
 template <class T>
 bool jsval_to_calist(JSContext* cx, JS::HandleValue v, CrossApp::CAList<T>* ret)
 {
-    //创建一个js对象
+   
     JS::RootedObject jsobj(cx);
     
-    //判断v是否是一个对象，如果为真，那么把v的值赋给jsobj
+    
     bool ok = v.isObject() && JS_ValueToObject( cx, v, &jsobj );
     
-    //检测OK的值
+    
     JSB_PRECONDITION3( ok, cx, false, "Error converting value to object");
-    //判断jsobj是否是一个JS的Array对象
+    
     JSB_PRECONDITION3( jsobj && JS_IsArrayObject( cx, jsobj),  cx, false, "Object must be an array");
-    //取出数组的长度
+    
     uint32_t len = 0;
     JS_GetArrayLength(cx, jsobj, &len);
     
-    //顺序取出并插入到ret中
+    
     for (uint32_t i=0; i < len; i++)
     {
         JS::RootedValue value(cx);
@@ -258,7 +255,7 @@ bool jsval_to_calist(JSContext* cx, JS::HandleValue v, CrossApp::CAList<T>* ret)
     return true;
     
 }
-//CADeque
+
 template <class T>
 bool jsval_to_cadeque(JSContext* cx, JS::HandleValue v, CrossApp::CADeque<T>* ret)
 {
@@ -298,7 +295,7 @@ bool jsval_to_cadeque(JSContext* cx, JS::HandleValue v, CrossApp::CADeque<T>* re
     return true;
 }
 
-//CAMap
+
 template <class T>
 bool jsval_to_ccmap_string_key(JSContext *cx, JS::HandleValue v, CrossApp::CAMap<std::string, T>* ret)
 {
@@ -388,7 +385,6 @@ jsval ccacceleration_to_jsval(JSContext* cx, const CrossApp::CCAcceleration& v);
 template<class T>
 js_proxy_t *js_get_or_create_proxy(JSContext *cx, T *native_obj);
 
-//CAVector<<#class T#>>
 template <class T>
 jsval cavector_to_jsval(JSContext* cx, const CrossApp::CAVector<T>& v)
 {
@@ -413,7 +409,7 @@ jsval cavector_to_jsval(JSContext* cx, const CrossApp::CAVector<T>& v)
     return OBJECT_TO_JSVAL(jsretArr);
 }
 
-//CAList
+
 template <class T>
 jsval calist_to_jsval(JSContext* cx, const CrossApp::CAList<T>& v)
 {
@@ -440,7 +436,7 @@ jsval calist_to_jsval(JSContext* cx, const CrossApp::CAList<T>& v)
     
 }
 
-//CADeque
+
 template <class T>
 jsval cadeque_to_jsval(JSContext* cx, const CrossApp::CADeque<T>& v)
 {
@@ -467,7 +463,7 @@ jsval cadeque_to_jsval(JSContext* cx, const CrossApp::CADeque<T>& v)
     return OBJECT_TO_JSVAL(jsretArr);
 }
 
-//CAMap
+
 template <class T>
 jsval ccmap_string_key_to_jsval(JSContext* cx, const CrossApp::CAMap<std::string, T>& v)
 {

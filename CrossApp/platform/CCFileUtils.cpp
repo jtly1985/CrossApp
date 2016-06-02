@@ -115,12 +115,12 @@ unsigned char* CCFileUtils::getFileDataFromZip(const char* pszZipFilePath, const
     return pBuffer;
 }
 
-std::string CCFileUtils::getFileString(const char* pszFilePath)
+std::string CCFileUtils::getFileString(const std::string pszFilePath)
 {
     std::string data;
     
     unsigned long pSize = 0;
-    unsigned char* pData = this->getFileData(pszFilePath, "rb", &pSize);
+    unsigned char* pData = this->getFileData(pszFilePath.c_str(), "rb", &pSize);
 
 	if (pSize > 0)
 	{

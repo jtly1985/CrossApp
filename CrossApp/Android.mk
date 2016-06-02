@@ -85,7 +85,6 @@ support/Json/lib_json/json_reader.cpp \
 support/Json/lib_json/json_writer.cpp \
 support/sqlite3/sqlite3.c \
 support/device/Device_android/CADevice.cpp \
-
 view/CAView.cpp \
 view/CAWindow.cpp \
 view/CAImageView.cpp \
