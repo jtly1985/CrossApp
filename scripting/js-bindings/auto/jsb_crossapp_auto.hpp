@@ -5,6 +5,25 @@
 #include "jsapi.h"
 #include "jsfriendapi.h"
 
+extern JSClass  *jsb_CrossApp_CAScheduler_class;
+extern JSObject *jsb_CrossApp_CAScheduler_prototype;
+
+bool js_autogentestbindings_js_CAScheduler_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAScheduler_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAScheduler(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAScheduler_isTargetPaused(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_update(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_resumeTarget(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_pauseAllTargets(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_resumeTargets(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_pauseTarget(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_pauseAllTargetsWithMinPriority(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_unscheduleAllForTarget(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_unscheduleAll(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_getScheduler(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAScheduler_CAScheduler(JSContext *cx, uint32_t argc, jsval *vp);
+
 extern JSClass  *jsb_CrossApp_CAImage_class;
 extern JSObject *jsb_CrossApp_CAImage_prototype;
 
@@ -75,6 +94,73 @@ bool js_autogentestbindings_js_CAImage_createWithRawDataNoCache(JSContext *cx, u
 bool js_autogentestbindings_js_CAImage_reloadAllImages(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAImage_createWithString(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAImage_CAImage(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CATouch_class;
+extern JSObject *jsb_CrossApp_CATouch_prototype;
+
+bool js_autogentestbindings_js_CATouch_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CATouch_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CATouch(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CATouch_getLocation(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_getDelta(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_getStartLocation(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_getID(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_isDelta(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_setTouchInfo(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_getDeltaFromAToZ(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_getPreviousLocation(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CATouch_CATouch(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CAEvent_class;
+extern JSObject *jsb_CrossApp_CAEvent_prototype;
+
+bool js_autogentestbindings_js_CAEvent_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAEvent_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAEvent(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAEvent_getEventType(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAEvent_setEventType(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAEvent_CAEvent(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CAResponder_class;
+extern JSObject *jsb_CrossApp_CAResponder_prototype;
+
+bool js_autogentestbindings_js_CAResponder_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAResponder_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAResponder(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAResponder_setReachBoundaryHandOverToSuperview(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setMouseScrollWheelEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setMouseMovedEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isScrollEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isHaveNextResponder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setHorizontalScrollEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isVerticalScrollEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setPriorityScroll(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isFirstResponder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isTouchEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setTouchEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setScrollEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isPriorityScroll(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isHorizontalScrollEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setVerticalScrollEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setHaveNextResponder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_nextResponder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isReachBoundaryRight(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isReachBoundaryDown(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isTouchEventScrollHandOverToSuperview(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isReachBoundaryHandOverToSuperview(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isReachBoundaryUp(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isReachBoundaryLeft(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_getScrollRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isMouseScrollWheelEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_resignFirstResponder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_setTouchEventScrollHandOverToSuperview(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_isMouseMovedEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_becomeFirstResponder(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_getZLevel(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAResponder_CAResponder(JSContext *cx, uint32_t argc, jsval *vp);
 
 extern JSClass  *jsb_CrossApp_CAView_class;
 extern JSObject *jsb_CrossApp_CAView_prototype;
@@ -237,6 +323,38 @@ bool js_autogentestbindings_js_CAScale9ImageView_create(JSContext *cx, uint32_t 
 bool js_autogentestbindings_js_CAScale9ImageView_createWithImage(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScale9ImageView_createWithCenter(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAScale9ImageView_CAScale9ImageView(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CAViewAnimationModule_class;
+extern JSObject *jsb_CrossApp_CAViewAnimationModule_prototype;
+
+bool js_autogentestbindings_js_CAViewAnimationModule_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAViewAnimationModule_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAViewAnimationModule(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAViewAnimationModule_setAlreadyRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimationModule_isAlreadyRunning(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimationModule_CAViewAnimationModule(JSContext *cx, uint32_t argc, jsval *vp);
+
+extern JSClass  *jsb_CrossApp_CAViewAnimation_class;
+extern JSObject *jsb_CrossApp_CAViewAnimation_prototype;
+
+bool js_autogentestbindings_js_CAViewAnimation_constructor(JSContext *cx, uint32_t argc, jsval *vp);
+void js_autogentestbindings_js_CAViewAnimation_finalize(JSContext *cx, JSObject *obj);
+void js_register_autogentestbindings_js_CAViewAnimation(JSContext *cx, JS::HandleObject global);
+void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
+bool js_autogentestbindings_js_CAViewAnimation_setAnimationsEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_beginAnimations(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_areBeginAnimationsWithID(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_setAnimationDelay(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_areAnimationsEnabled(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_removeAnimationsWithView(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_setAnimationDuration(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_removeAnimations(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_commitAnimations(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_setAnimationRepeatAutoreverses(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_setAnimationCurve(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_areBeginAnimations(JSContext *cx, uint32_t argc, jsval *vp);
+bool js_autogentestbindings_js_CAViewAnimation_setAnimationRepeatCount(JSContext *cx, uint32_t argc, jsval *vp);
 
 extern JSClass  *jsb_CrossApp_CAControl_class;
 extern JSObject *jsb_CrossApp_CAControl_prototype;
@@ -1294,31 +1412,5 @@ bool js_autogentestbindings_js_CAFlashView_setRepeatForever(JSContext *cx, uint3
 bool js_autogentestbindings_js_CAFlashView_stopAnimation(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAFlashView_createWithFlash(JSContext *cx, uint32_t argc, jsval *vp);
 bool js_autogentestbindings_js_CAFlashView_CAFlashView(JSContext *cx, uint32_t argc, jsval *vp);
-
-extern JSClass  *jsb_CrossApp_ZipUtils_class;
-extern JSObject *jsb_CrossApp_ZipUtils_prototype;
-
-bool js_autogentestbindings_js_ZipUtils_constructor(JSContext *cx, uint32_t argc, jsval *vp);
-void js_autogentestbindings_js_ZipUtils_finalize(JSContext *cx, JSObject *obj);
-void js_register_autogentestbindings_js_ZipUtils(JSContext *cx, JS::HandleObject global);
-void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
-bool js_autogentestbindings_js_ZipUtils_ccInflateGZipFile(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipUtils_ccInflateMemoryWithHint(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipUtils_ccSetPvrEncryptionKey(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipUtils_ccInflateMemory(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipUtils_ccSetPvrEncryptionKeyPart(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipUtils_ccInflateCCZFile(JSContext *cx, uint32_t argc, jsval *vp);
-
-extern JSClass  *jsb_CrossApp_ZipFile_class;
-extern JSObject *jsb_CrossApp_ZipFile_prototype;
-
-bool js_autogentestbindings_js_ZipFile_constructor(JSContext *cx, uint32_t argc, jsval *vp);
-void js_autogentestbindings_js_ZipFile_finalize(JSContext *cx, JSObject *obj);
-void js_register_autogentestbindings_js_ZipFile(JSContext *cx, JS::HandleObject global);
-void register_all_autogentestbindings_js(JSContext* cx, JS::HandleObject obj);
-bool js_autogentestbindings_js_ZipFile_fileExists(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipFile_setFilter(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipFile_getFileData(JSContext *cx, uint32_t argc, jsval *vp);
-bool js_autogentestbindings_js_ZipFile_ZipFile(JSContext *cx, uint32_t argc, jsval *vp);
 
 #endif // __autogentestbindings_js_h__

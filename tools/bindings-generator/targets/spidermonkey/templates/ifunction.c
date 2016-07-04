@@ -1,7 +1,7 @@
 ## ===== instance function implementation template
 bool ${signature_name}(JSContext *cx, uint32_t argc, jsval *vp)
 {
-    
+
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
 #if len($arguments) > 0
     bool ok = true;
@@ -50,7 +50,7 @@ bool ${signature_name}(JSContext *cx, uint32_t argc, jsval *vp)
         #if $is_constructor
         ${namespaced_class_name}* cobj = new (std::nothrow) ${namespaced_class_name}($arg_list);
 #if not $generator.script_control_cpp
-        cocos2d::Ref *_ccobj = dynamic_cast<cocos2d::Ref *>(cobj);
+        CrossApp::CAObject *_ccobj = dynamic_cast<CrossApp::CAObject *>(cobj);
         if (_ccobj) {
             _ccobj->autorelease();
         }
@@ -67,7 +67,7 @@ bool ${signature_name}(JSContext *cx, uint32_t argc, jsval *vp)
         JS::RootedObject proto(cx, typeClass->proto.get());
         JS::RootedObject parent(cx, typeClass->parentProto.get());
         JS::RootedObject obj(cx, JS_NewObject(cx, typeClass->jsclass, proto, parent));
-        
+
         args.rval().set(OBJECT_TO_JSVAL(obj));
         // link the native object with the javascript object
         js_proxy_t* p = jsb_new_proxy(cobj, obj);

@@ -4,6 +4,124 @@
 var ca = ca || {};
 
 /**
+ * @class CAScheduler
+ */
+ca.CAScheduler = {
+
+/**
+ * @method isTargetPaused
+ * @param {cc.CAObject} arg0
+ * @return {bool}
+ */
+isTargetPaused : function (
+caobject 
+)
+{
+    return false;
+},
+
+/**
+ * @method update
+ * @param {float} arg0
+ */
+update : function (
+float 
+)
+{
+},
+
+/**
+ * @method resumeTarget
+ * @param {cc.CAObject} arg0
+ */
+resumeTarget : function (
+caobject 
+)
+{
+},
+
+/**
+ * @method pauseAllTargets
+ * @return {cc.CCSet}
+ */
+pauseAllTargets : function (
+)
+{
+    return cc.CCSet;
+},
+
+/**
+ * @method resumeTargets
+ * @param {cc.CCSet} arg0
+ */
+resumeTargets : function (
+ccset 
+)
+{
+},
+
+/**
+ * @method pauseTarget
+ * @param {cc.CAObject} arg0
+ */
+pauseTarget : function (
+caobject 
+)
+{
+},
+
+/**
+ * @method pauseAllTargetsWithMinPriority
+ * @param {int} arg0
+ * @return {cc.CCSet}
+ */
+pauseAllTargetsWithMinPriority : function (
+int 
+)
+{
+    return cc.CCSet;
+},
+
+/**
+ * @method unscheduleAllForTarget
+ * @param {cc.CAObject} arg0
+ */
+unscheduleAllForTarget : function (
+caobject 
+)
+{
+},
+
+/**
+ * @method unscheduleAll
+ */
+unscheduleAll : function (
+)
+{
+},
+
+/**
+ * @method getScheduler
+ * @return {cc.CAScheduler}
+ */
+getScheduler : function (
+)
+{
+    return cc.CAScheduler;
+},
+
+/**
+ * @method CAScheduler
+ * @constructor
+ */
+CAScheduler : function (
+)
+{
+},
+
+};
+
+/**
  * @class CAImage
  */
 ca.CAImage = {
@@ -787,6 +905,458 @@ bool
  * @constructor
  */
 CAImage : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CATouch
+ */
+ca.CATouch = {
+
+/**
+ * @method getLocation
+ * @return {point_object}
+ */
+getLocation : function (
+)
+{
+    return cc.DPoint;
+},
+
+/**
+ * @method getDelta
+ * @return {point_object}
+ */
+getDelta : function (
+)
+{
+    return cc.DPoint;
+},
+
+/**
+ * @method getStartLocation
+ * @return {point_object}
+ */
+getStartLocation : function (
+)
+{
+    return cc.DPoint;
+},
+
+/**
+ * @method getID
+ * @return {int}
+ */
+getID : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method isDelta
+ * @return {bool}
+ */
+isDelta : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setTouchInfo
+ * @param {int} arg0
+ * @param {float} arg1
+ * @param {float} arg2
+ */
+setTouchInfo : function (
+int, 
+float, 
+float 
+)
+{
+},
+
+/**
+ * @method getDeltaFromAToZ
+ * @return {point_object}
+ */
+getDeltaFromAToZ : function (
+)
+{
+    return cc.DPoint;
+},
+
+/**
+ * @method getPreviousLocation
+ * @return {point_object}
+ */
+getPreviousLocation : function (
+)
+{
+    return cc.DPoint;
+},
+
+/**
+ * @method CATouch
+ * @constructor
+ */
+CATouch : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAEvent
+ */
+ca.CAEvent = {
+
+/**
+ * @method getEventType
+ * @return {cc.EventType}
+ */
+getEventType : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method setEventType
+ * @param {cc.EventType} arg0
+ */
+setEventType : function (
+eventtype 
+)
+{
+},
+
+/**
+ * @method CAEvent
+ * @constructor
+ */
+CAEvent : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAResponder
+ */
+ca.CAResponder = {
+
+/**
+ * @method setReachBoundaryHandOverToSuperview
+ * @param {bool} arg0
+ */
+setReachBoundaryHandOverToSuperview : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setMouseScrollWheelEnabled
+ * @param {bool} arg0
+ */
+setMouseScrollWheelEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setMouseMovedEnabled
+ * @param {bool} arg0
+ */
+setMouseMovedEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isScrollEnabled
+ * @return {bool}
+ */
+isScrollEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isHaveNextResponder
+ * @return {bool}
+ */
+isHaveNextResponder : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setHorizontalScrollEnabled
+ * @param {bool} arg0
+ */
+setHorizontalScrollEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isVerticalScrollEnabled
+ * @return {bool}
+ */
+isVerticalScrollEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setPriorityScroll
+ * @param {bool} arg0
+ */
+setPriorityScroll : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isFirstResponder
+ * @return {bool}
+ */
+isFirstResponder : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isTouchEnabled
+ * @return {bool}
+ */
+isTouchEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setTouchEnabled
+ * @param {bool} arg0
+ */
+setTouchEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setScrollEnabled
+ * @param {bool} arg0
+ */
+setScrollEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isPriorityScroll
+ * @return {bool}
+ */
+isPriorityScroll : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isHorizontalScrollEnabled
+ * @return {bool}
+ */
+isHorizontalScrollEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setVerticalScrollEnabled
+ * @param {bool} arg0
+ */
+setVerticalScrollEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setHaveNextResponder
+ * @param {bool} arg0
+ */
+setHaveNextResponder : function (
+bool 
+)
+{
+},
+
+/**
+ * @method nextResponder
+ * @return {cc.CAResponder}
+ */
+nextResponder : function (
+)
+{
+    return cc.CAResponder;
+},
+
+/**
+ * @method isReachBoundaryRight
+ * @return {bool}
+ */
+isReachBoundaryRight : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isReachBoundaryDown
+ * @return {bool}
+ */
+isReachBoundaryDown : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isTouchEventScrollHandOverToSuperview
+ * @return {bool}
+ */
+isTouchEventScrollHandOverToSuperview : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isReachBoundaryHandOverToSuperview
+ * @return {bool}
+ */
+isReachBoundaryHandOverToSuperview : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isReachBoundaryUp
+ * @return {bool}
+ */
+isReachBoundaryUp : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isReachBoundaryLeft
+ * @return {bool}
+ */
+isReachBoundaryLeft : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getScrollRunning
+ * @return {bool}
+ */
+getScrollRunning : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method isMouseScrollWheelEnabled
+ * @return {bool}
+ */
+isMouseScrollWheelEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method resignFirstResponder
+ * @return {bool}
+ */
+resignFirstResponder : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setTouchEventScrollHandOverToSuperview
+ * @param {bool} arg0
+ */
+setTouchEventScrollHandOverToSuperview : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isMouseMovedEnabled
+ * @return {bool}
+ */
+isMouseMovedEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method becomeFirstResponder
+ * @return {bool}
+ */
+becomeFirstResponder : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method getZLevel
+ * @return {unsigned long}
+ */
+getZLevel : function (
+)
+{
+    return 0;
+},
+
+/**
+ * @method CAResponder
+ * @constructor
+ */
+CAResponder : function (
 )
 {
 },
@@ -2197,6 +2767,181 @@ drect
  * @constructor
  */
 CAScale9ImageView : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAViewAnimationModule
+ */
+ca.CAViewAnimationModule = {
+
+/**
+ * @method setAlreadyRunning
+ * @param {bool} arg0
+ */
+setAlreadyRunning : function (
+bool 
+)
+{
+},
+
+/**
+ * @method isAlreadyRunning
+ * @return {bool}
+ */
+isAlreadyRunning : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method CAViewAnimationModule
+ * @constructor
+ */
+CAViewAnimationModule : function (
+)
+{
+},
+
+};
+
+/**
+ * @class CAViewAnimation
+ */
+ca.CAViewAnimation = {
+
+/**
+ * @method setAnimationsEnabled
+ * @param {bool} arg0
+ */
+setAnimationsEnabled : function (
+bool 
+)
+{
+},
+
+/**
+ * @method beginAnimations
+ * @param {String} arg0
+ * @param {void} arg1
+ */
+beginAnimations : function (
+str, 
+void 
+)
+{
+},
+
+/**
+ * @method areBeginAnimationsWithID
+ * @param {String} arg0
+ * @return {bool}
+ */
+areBeginAnimationsWithID : function (
+str 
+)
+{
+    return false;
+},
+
+/**
+ * @method setAnimationDelay
+ * @param {float} arg0
+ */
+setAnimationDelay : function (
+float 
+)
+{
+},
+
+/**
+ * @method areAnimationsEnabled
+ * @return {bool}
+ */
+areAnimationsEnabled : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method removeAnimationsWithView
+ * @param {cc.CAView} arg0
+ */
+removeAnimationsWithView : function (
+caview 
+)
+{
+},
+
+/**
+ * @method setAnimationDuration
+ * @param {float} arg0
+ */
+setAnimationDuration : function (
+float 
+)
+{
+},
+
+/**
+ * @method removeAnimations
+ * @param {String} arg0
+ */
+removeAnimations : function (
+str 
+)
+{
+},
+
+/**
+ * @method commitAnimations
+ */
+commitAnimations : function (
+)
+{
+},
+
+/**
+ * @method setAnimationRepeatAutoreverses
+ * @param {bool} arg0
+ */
+setAnimationRepeatAutoreverses : function (
+bool 
+)
+{
+},
+
+/**
+ * @method setAnimationCurve
+ * @param {cc.CAViewAnimationCurve} arg0
+ */
+setAnimationCurve : function (
+caviewanimationcurve 
+)
+{
+},
+
+/**
+ * @method areBeginAnimations
+ * @return {bool}
+ */
+areBeginAnimations : function (
+)
+{
+    return false;
+},
+
+/**
+ * @method setAnimationRepeatCount
+ * @param {float} arg0
+ */
+setAnimationRepeatCount : function (
+float 
 )
 {
 },
@@ -8570,11 +9315,11 @@ char
 
 /**
  * @method getFileString
- * @param {char} arg0
+ * @param {String} arg0
  * @return {String}
  */
 getFileString : function (
-char 
+str 
 )
 {
     return ;
@@ -10302,161 +11047,6 @@ caflash
  * @constructor
  */
 CAFlashView : function (
-)
-{
-},
-
-};
-
-/**
- * @class ZipUtils
- */
-ca.ZipUtils = {
-
-/**
- * @method ccInflateGZipFile
- * @param {char} arg0
- * @param {unsigned char} arg1
- * @return {int}
- */
-ccInflateGZipFile : function (
-char, 
-char 
-)
-{
-    return 0;
-},
-
-/**
- * @method ccInflateMemoryWithHint
- * @param {unsigned char} arg0
- * @param {unsigned int} arg1
- * @param {unsigned char} arg2
- * @param {unsigned int} arg3
- * @return {int}
- */
-ccInflateMemoryWithHint : function (
-char, 
-int, 
-char, 
-int 
-)
-{
-    return 0;
-},
-
-/**
- * @method ccSetPvrEncryptionKey
- * @param {unsigned int} arg0
- * @param {unsigned int} arg1
- * @param {unsigned int} arg2
- * @param {unsigned int} arg3
- */
-ccSetPvrEncryptionKey : function (
-int, 
-int, 
-int, 
-int 
-)
-{
-},
-
-/**
- * @method ccInflateMemory
- * @param {unsigned char} arg0
- * @param {unsigned int} arg1
- * @param {unsigned char} arg2
- * @return {int}
- */
-ccInflateMemory : function (
-char, 
-int, 
-char 
-)
-{
-    return 0;
-},
-
-/**
- * @method ccSetPvrEncryptionKeyPart
- * @param {int} arg0
- * @param {unsigned int} arg1
- */
-ccSetPvrEncryptionKeyPart : function (
-int, 
-int 
-)
-{
-},
-
-/**
- * @method ccInflateCCZFile
- * @param {char} arg0
- * @param {unsigned char} arg1
- * @return {int}
- */
-ccInflateCCZFile : function (
-char, 
-char 
-)
-{
-    return 0;
-},
-
-};
-
-/**
- * @class ZipFile
- */
-ca.ZipFile = {
-
-/**
- * @method fileExists
- * @param {String} arg0
- * @return {bool}
- */
-fileExists : function (
-str 
-)
-{
-    return false;
-},
-
-/**
- * @method setFilter
- * @param {String} arg0
- * @return {bool}
- */
-setFilter : function (
-str 
-)
-{
-    return false;
-},
-
-/**
- * @method getFileData
- * @param {String} arg0
- * @param {unsigned long} arg1
- * @return {unsigned char}
- */
-getFileData : function (
-str, 
-long 
-)
-{
-    return 0;
-},
-
-/**
- * @method ZipFile
- * @constructor
- * @param {String} arg0
- * @param {String} arg1
- */
-ZipFile : function (
-str, 
-str 
 )
 {
 },

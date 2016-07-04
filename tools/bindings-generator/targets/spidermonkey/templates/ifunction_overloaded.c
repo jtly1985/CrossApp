@@ -4,7 +4,7 @@ bool ${signature_name}(JSContext *cx, uint32_t argc, jsval *vp)
     bool ok = true;
     ${namespaced_class_name}* cobj = nullptr;
 
-#if not $is_ctor   
+#if not $is_ctor
     JS::CallArgs args = JS::CallArgsFromVp(argc, vp);
     JS::RootedObject obj(cx);
 #end if
@@ -56,7 +56,7 @@ bool ${signature_name}(JSContext *cx, uint32_t argc, jsval *vp)
         #if $is_constructor
             cobj = new (std::nothrow) ${namespaced_class_name}(${arg_list});
             #if not $generator.script_control_cpp
-            cocos2d::Ref *_ccobj = dynamic_cast<cocos2d::Ref *>(cobj);
+            CrossApp::CAObject *_ccobj = dynamic_cast<CrossApp::CAObject *>(cobj);
             if (_ccobj) {
                 _ccobj->autorelease();
             }
